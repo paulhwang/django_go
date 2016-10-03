@@ -1,4 +1,4 @@
-"""django_go URL Configuration
+"""go_server URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/1.9/topics/http/urls/
@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from go_server import urls as go_server_urls
+from go_server import views
+
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    url(r'^django_go/', include(go_server_urls)),
+    url(r'^go_game/', views.go_entry, name='go_entry'),
+    url(r'^test/', views.go_entry, name='go_entry'),
 ]

@@ -1,2 +1,4 @@
 db.sqlite3
 /django_go/__pycache__
+/go_server/__pycache__
+/go_server/migrations/__pycache__
