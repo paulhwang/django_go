@@ -21,5 +21,5 @@ from go_server import views
 
 urlpatterns = [
     url(r'^go_game/', views.go_entry, name='go_entry'),
-    url(r'^test/', views.go_entry, name='go_entry'),
+    url(r'^hello/', views.hello_entry, name='hello_entry'),
 ]
