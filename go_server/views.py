@@ -6,4 +6,4 @@ def hello_entry(request):
     return HttpResponse("Hello there!")
 
 def go_entry(request):
-    return HttpResponse("Go Game!")
+    return render(request, "js_go/phwang.html")
