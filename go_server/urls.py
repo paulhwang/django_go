@@ -20,6 +20,7 @@ from go_server import views
 
 
 urlpatterns = [
-    url(r'^go_game/', views.go_entry, name='go_entry'),
+    url(r'^go_html/', views.go_html, name='go_html'),
+    url(r'^go_msg/', views.go_ajax, name='go_ajax'),
     url(r'^hello/', views.hello_entry, name='hello_entry'),
 ]
