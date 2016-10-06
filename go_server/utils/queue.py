@@ -32,6 +32,9 @@ class QueueClass(object):
     def holderPoolObject(self):
         return self.theHolderPoolObject
 
+    def debug(self, bool, str1, str2):
+        return 0
+
     def logit(self, str1, str2):
         return 0
 
@@ -96,6 +99,17 @@ class QueueClass(object):
 
         self.abendIt()
         return data
+
+    def unQueue(self, func_val, input_val1, input_val2, input_val3):
+        self.abendIt()
+
+        p = self.head()
+        while p != 0:
+            self.debug(false, "unQueue", "in while loop")
+            p = p.next()
+
+        self.abendIt()
+        self.debug(false, "unQueue", "not found")
 
     def abendIt(self):
         i = 0
