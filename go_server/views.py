@@ -26,10 +26,10 @@ def hello_entry(request):
 
 def test():
     q = go_server.utils.queue.malloc()
-    q.enqueueIt()
-    q.enqueueIt()
-    logger.error("queue= %s", q.queueSize())
+    q.enQueue("a")
+    q.enQueue("b")
+    logger.error("queue= %s", q.size())
 
-    q.dequeueIt()
-    logger.error("queue= %s", q.queueSize())
+    s = q.deQueue()
+    logger.error("queue= %s", q.size())
 
