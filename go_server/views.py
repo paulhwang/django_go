@@ -12,6 +12,7 @@ def go_html(request):
     return render(request, "js_go/phwang.html")
 
 ajax_count = 0
+#@csrf_exempt
 def go_ajax(request):
     global ajax_count
     ajax_count += 1
