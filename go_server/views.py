@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import logging
+from go_server.utils import queue
 
 logger = logging.getLogger(__name__)
 
@@ -9,6 +10,7 @@ def go_html(request):
     global html_count
     html_count += 1
     logger.error("go_html %s", html_count)
+    test()
     return render(request, "js_go/phwang.html")
 
 ajax_count = 0
@@ -21,3 +23,13 @@ def go_ajax(request):
 
 def hello_entry(request):
     return HttpResponse("Hello there!")
+
+def test():
+    q = queue.malloc()
+    q.enqueueIt()
+    q.enqueueIt()
+    logger.error("queue= %s", q.queueSize())
+
+    q.dequeueIt()
+    logger.error("queue= %s", q.queueSize())
+
