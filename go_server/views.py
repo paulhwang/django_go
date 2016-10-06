@@ -31,5 +31,7 @@ def test():
     logger.error("queue= %s", q.size())
 
     s = q.deQueue()
-    logger.error("queue= %s", q.size())
+    logger.error("queue= %s %s", q.size(), s)
+    s = q.deQueue()
+    logger.error("queue= %s %s", q.size(), s)
 

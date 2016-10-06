@@ -32,6 +32,9 @@ class QueueClass(object):
     def holderPoolObject(self):
         return self.theHolderPoolObject
 
+    def logit(self, str1, str2):
+        return 0
+
     def abend(self, str1, str2):
         return 0
 
@@ -63,7 +66,36 @@ class QueueClass(object):
         self.abendIt()
 
     def deQueue(self):
-        self.decrementSize()
+        data_entry = 0
+        data = 0
+
+        self.abendIt()
+
+        if self.head() == 0:
+            data_entry = 0
+            data = 0
+        else:
+            if self.head() == self.tail():
+                self.decrementSize()
+                data_entry = self.head()
+                data = data_entry.data()
+                self.setHead(0)
+                self.setTail(0)
+            else:
+                self.decrementSize()
+                data_entry = self.head()
+                data = data_entry.data()
+                self.setHead(self.head().next())
+                self.head().setPrev(0)
+
+        if data_entry:
+            #elf.logit("deQueue", "data=" + data_entry.data)
+            self.holderPoolObject().freeEntry(data_entry)
+        else:
+            self.logit("deQueue", "null")
+
+        self.abendIt()
+        return data
 
     def abendIt(self):
         i = 0
@@ -88,7 +120,7 @@ class HolderPoolClass(object):
     def __init__(self):
         self.theHead = 0
         self.theTail = 0
-        self.heSize = 0
+        self.theSize = 0
 
     def head(self):
         return self.theHead
@@ -126,8 +158,30 @@ class HolderPoolClass(object):
 
         return entry
 
+    def freeEntry(self, entry_val):
+        self.abendIt()
+        if entry_val == 0:
+            return
+
+        self.abendIt()
+        self.incrementSize()
+        entry_val.setNext(self.head())
+        self.setHead(entry_val)
+
+        self.abendIt()
+
     def abendIt(self):
-        return 1
+        i = 0
+        p = self.head()
+        while p != 0:
+            p = p.next()
+            i += 1
+
+        if i != self.size():
+            self.abend("abendIt", "size=" + self.size() + " i=" + i)
+
+        if self.size() > 5:
+            self.abend("abendIt", " size=" + self.size())
 
 class HolderEntryClass(object):
     def __init__(self):
