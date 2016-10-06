@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import logging
-from go_server.utils import queue
+import go_server.utils.queue
 
 logger = logging.getLogger(__name__)
 
@@ -25,7 +25,7 @@ def hello_entry(request):
     return HttpResponse("Hello there!")
 
 def test():
-    q = queue.malloc()
+    q = go_server.utils.queue.malloc()
     q.enqueueIt()
     q.enqueueIt()
     logger.error("queue= %s", q.queueSize())
