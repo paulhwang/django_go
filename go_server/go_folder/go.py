@@ -37,6 +37,16 @@ class GoClass(object):
     def WHITE_STONE(self):
         return 2
 
+    def getOppositeColor(self, color_val):
+        if color_val == self.BLACK_STONE():
+            return self.WHITE_STONE()
+
+        if color_val == self.WHITE_STONE():
+            return self.BLACK_STONE()
+
+        self.abend("getOppositeColor", "color=" + color_val)
+        return self.EMPTY_STONE()
+
     def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
         return  go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 

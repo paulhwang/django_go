@@ -44,6 +44,12 @@ class GoGameClass(object):
     def decrementTotalMoves(self):
         self.theTotalMoves -= 1
 
+    def nextColor(self):
+        return self.theNextColor
+
+    def setNextColor(self, next_color_val):
+        self.theNextColor = next_color_val;
+
     def setPassReceived(self):
         self.thePassReceived = 1
 
@@ -69,7 +75,7 @@ class GoGameClass(object):
         self.clearPassReceived()
         self.insertMoveToMoveList(move_val)
         #self.engineObject().enterWar(move_val)
-        #self.setNextColor(self.GO().getOppositeColor(move_val.myColor()))
+        self.setNextColor(self.goObject().getOppositeColor(move_val.myColor()))
 
     def insertMoveToMoveList(self, move_val):
         #self.setMovesArray(self.totalMoves(), move_val)

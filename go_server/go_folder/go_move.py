@@ -19,6 +19,15 @@ class GoMoveClass(object):
     def goObject(self):
         return self.theGoObject
 
+    def xX(self):
+        return self.theX;
+
+    def yY(self):
+        return self.theY;
+
+    def myColor(self):
+        return self.theMyColor;
+
     def moveObjectDecode(self, str_val):
         self.debug(1, "GoMoveObject", "input=" + str_val)
         self.theX = (ord(str_val[0]) - ord('0')) * 10
