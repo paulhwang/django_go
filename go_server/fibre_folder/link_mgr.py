@@ -29,6 +29,27 @@ class LinkMgrClass(object):
     def decrementPoolSize(self):
         self.thePoolSize -= 1
 
+    def mallocIt(self, my_name_val):
+        entry = 0;
+        if self.poolHead() == 0:
+            entry = self.linkModule().malloc(my_name_val, self.globalLinkId())
+        else:
+            entry = self.poolHead()
+            entry.resetIt(my_name_val, self.globalLinkId())
+            self.setHead(entry.next())
+            self.decrementPoolSize()
+
+        self.incrementGlobalLinkId()
+
+        self.abendIt()
+        return entry
+
+    def freeIt(self, entry_val):
+        self.incrementPoolSize()
+        entry_val.setNext(self.poolHead())
+        self.setHead(entry_val)
+        self.abendIt()
+
     def abendIt(self):
         i = 0
         p = self.poolHead()
