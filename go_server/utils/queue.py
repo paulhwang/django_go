@@ -1,3 +1,5 @@
+import go_server.utils.util
+
 def malloc():
     return QueueClass()
 
@@ -32,16 +34,18 @@ class QueueClass(object):
     def holderPoolObject(self):
         return self.theHolderPoolObject
 
-    def debug(self, bool, str1, str2):
-        return 0
+    def debug(self, bool_val, str1, str2):
+        if bool_val != 0:
+            self.logit(str1, str2)
 
     def logit(self, str1, str2):
-        return 0
+        go_server.utils.util.utilLogit(str1, str2)
 
     def abend(self, str1, str2):
-        return 0
+        go_server.utils.util.utilAbend(str1, str2)
 
     def enQueue(self, data_val):
+        self.debug(1, "enQueue", "start")
         if data_val == 0:
             self.abend("enQueue", "null data_val")
             return
@@ -67,11 +71,13 @@ class QueueClass(object):
             self.setTail(data_entry)
 
         self.abendIt()
+        self.debug(1, "enQueue", "end")
 
     def deQueue(self):
         data_entry = 0
         data = 0
 
+        self.debug(1, "deQueue", "start")
         self.abendIt()
 
         if self.head() == 0:
@@ -98,6 +104,7 @@ class QueueClass(object):
             self.logit("deQueue", "null")
 
         self.abendIt()
+        self.debug(1, "deQueue", "end")
         return data
 
     def unQueue(self, func_val, input_val1, input_val2, input_val3):
