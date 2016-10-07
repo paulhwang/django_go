@@ -10,6 +10,9 @@ class QueueClass(object):
         self.theTail = 0;
         self.theHolderPoolObject = HolderPoolClass()
 
+    def className(self):
+        return "QueueClass"
+
     def size(self):
         return self.theSize
 
@@ -34,18 +37,23 @@ class QueueClass(object):
     def holderPoolObject(self):
         return self.theHolderPoolObject
 
-    def debug(self, bool_val, str1, str2):
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val != 0:
-            self.logit(str1, str2)
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
-    def logit(self, str1, str2):
-        go_server.utils.util.utilLogit(str1, str2)
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilLogit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
-    def abend(self, str1, str2):
-        go_server.utils.util.utilAbend(str1, str2)
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilAbend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def enQueue(self, data_val):
         self.debug(0, "enQueue", "start")
+        #self.debug(1, "enQueue", "start %i", 100)
+        #self.debug(1, "enQueue", "start %i %s", 100, "A")
+        #self.debug(1, "enQueue", "start %i %s %i", 100, "b", 1000)
+        #self.debug(1, "enQueue", "start %i %s %i %i", 100, "b", 1000, 1)
+        #self.debug(1, "enQueue", "start %i %s %i %i %i", 100, "b", 1000, 1, 1)
         if data_val == 0:
             self.abend("enQueue", "null data_val")
             return
