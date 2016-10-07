@@ -11,8 +11,8 @@ class GoClass(object):
     def className(self):
         return "GoClass"
 
-    def fibreObject(self):
-        return theFibreObject
+    def rootObject(self):
+        return theRootObject
 
     def goEngineObject(self):
         return theGoEngineObject
