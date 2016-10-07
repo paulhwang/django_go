@@ -134,7 +134,7 @@ class QueueClass(object):
             i += 1
 
         if i != self.size():
-            i = 999 #self.abend("abendIt", "head: size=%i i=", self.size(), i)
+            i = self.abend("abendIt", "head: size=%i i=", self.size(), i)
 
         i = 0
         p = self.tail()
@@ -143,7 +143,7 @@ class QueueClass(object):
             i += 1
 
         if i != self.size():
-            i = 999 #self.abend("abendIt", "tail: size=%i i=", self.size(), i)
+            i = self.abend("abendIt", "tail: size=%i i=", self.size(), i)
 
 class HolderPoolClass(object):
     def __init__(self):

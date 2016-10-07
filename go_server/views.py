@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import logging
 import go_server.utils.queue
+import go_server.root
 
 logger = logging.getLogger(__name__)
 
@@ -10,6 +11,7 @@ def go_html(request):
     global html_count
     html_count += 1
     logger.error("go_html %s", html_count)
+    run_it()
     test()
     return render(request, "js_go/phwang.html")
 
@@ -35,3 +37,5 @@ def test():
     s = q.deQueue()
     logger.error("queue= %s %s", q.size(), s)
 
+def run_it():
+    root = go_server.root.malloc()
