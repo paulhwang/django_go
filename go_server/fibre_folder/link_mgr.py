@@ -14,6 +14,9 @@ class LinkMgrClass(object):
     def className(self):
         return "LinkMgrClass"
 
+    def fibreObject(self):
+        return self.theFibreObject
+
     def poolHead(self):
         return self.thePoolHead
 
