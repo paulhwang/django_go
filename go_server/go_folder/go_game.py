@@ -23,6 +23,9 @@ class GoGameClass(object):
     def goObject(self):
         return self.theGoObject
 
+    def engineObject(self):
+        return self.goObject().engineObject()
+
     def passReceived(self):
         return self.thePassReceived
 
@@ -43,6 +46,12 @@ class GoGameClass(object):
 
     def decrementTotalMoves(self):
         self.theTotalMoves -= 1
+
+    def movesArray(self, i):
+        return self.theMovesArray[i]
+
+    def setMovesArray(self, i, val):
+        self.theMovesArray[i] = val
 
     def nextColor(self):
         return self.theNextColor
@@ -74,7 +83,7 @@ class GoGameClass(object):
 
         self.clearPassReceived()
         self.insertMoveToMoveList(move_val)
-        #self.engineObject().enterWar(move_val)
+        self.engineObject().enterWar(move_val)
         self.setNextColor(self.goObject().getOppositeColor(move_val.myColor()))
 
     def insertMoveToMoveList(self, move_val):
@@ -87,8 +96,8 @@ class GoGameClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

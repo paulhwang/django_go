@@ -28,6 +28,9 @@ class GoMoveClass(object):
     def myColor(self):
         return self.theMyColor;
 
+    def turnIndex(self):
+        return self.theTurnIndex
+
     def moveObjectDecode(self, str_val):
         self.debug(1, "GoMoveObject", "input=" + str_val)
         self.theX = (ord(str_val[0]) - ord('0')) * 10
@@ -44,9 +47,9 @@ class GoMoveClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
