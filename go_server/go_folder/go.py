@@ -1,4 +1,7 @@
-import go_server.fibre_folder.link_mgr
+import go_server.go_folder.go_engine
+import go_server.go_folder.go_game
+import go_server.go_folder.go_port
+import go_server.go_folder.go_move
 
 def malloc(root_val):
     return GoClass(root_val)
@@ -6,13 +9,39 @@ def malloc(root_val):
 class GoClass(object):
     def __init__(self, root_val):
         self.theRootObject = root_val
-        self.theGoEngineObject = go_server.fibre_folder.link_mgr.malloc(self)
+        self.theEngineObject = go_server.go_folder.go_engine.malloc(self)
+        self.theGameObject = go_server.go_folder.go_game.malloc(self)
+        self.thePortObject = go_server.go_folder.go_port.malloc(self)
 
     def className(self):
         return "GoClass"
 
     def rootObject(self):
-        return theRootObject
+        return self.theRootObject
 
-    def goEngineObject(self):
-        return theGoEngineObject
+    def engineObject(self):
+        return self.theEngineObject
+
+    def gameObject(self):
+        return self.theGameObject
+
+    def portObject(self):
+        return self.thePortObject
+
+    def EMPTY_STONE(self):
+        return 0
+
+    def BLACK_STONE(self):
+        return 1
+
+    def WHITE_STONE(self):
+        return 2
+
+    def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
+        return  go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
+
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.rootObject().logit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.rootObject.abend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

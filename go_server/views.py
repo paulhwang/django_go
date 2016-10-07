@@ -39,3 +39,4 @@ def test():
 
 def run_it():
     root = go_server.root.malloc()
+    root.test()
