@@ -45,7 +45,7 @@ class QueueClass(object):
         go_server.utils.util.utilAbend(str1, str2)
 
     def enQueue(self, data_val):
-        self.debug(1, "enQueue", "start")
+        self.debug(0, "enQueue", "start")
         if data_val == 0:
             self.abend("enQueue", "null data_val")
             return
@@ -71,13 +71,13 @@ class QueueClass(object):
             self.setTail(data_entry)
 
         self.abendIt()
-        self.debug(1, "enQueue", "end")
+        self.debug(0, "enQueue", "end")
 
     def deQueue(self):
         data_entry = 0
         data = 0
 
-        self.debug(1, "deQueue", "start")
+        self.debug(0, "deQueue", "start")
         self.abendIt()
 
         if self.head() == 0:
@@ -104,7 +104,7 @@ class QueueClass(object):
             self.logit("deQueue", "null")
 
         self.abendIt()
-        self.debug(1, "deQueue", "end")
+        self.debug(0, "deQueue", "end")
         return data
 
     def unQueue(self, func_val, input_val1, input_val2, input_val3):
