@@ -3,6 +3,6 @@ db.sqlite3
 /django_go/__pycache__
 /go_server/__pycache__
 /go_server/migrations/__pycache__
-/go_server/utils/__pycache__
+/go_server/util_folder/__pycache__
 /go_server/fibre_folder/__pycache__
 /go_server/go_folder/__pycache__
