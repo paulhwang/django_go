@@ -35,6 +35,12 @@ class BoardClass(object):
     def boardSize(self):
         return self.configObject().boardSize()
 
+    def boardArray(self, x_val, y_val):
+        return self.theBoardArray[x_val][y_val];
+
+    def markedBoardArray(self, x_val, y_val):
+        return self.theMarkedBoardArray[x_val][y_val];
+
     def setBoardArray(self, x_val, y_val, data_val):
         self.theBoardArray[x_val][y_val] = data_val
 
@@ -49,5 +55,23 @@ class BoardClass(object):
                 self.setMarkedBoardArray(i, j, self.goObject().EMPTY_STONE())
                 j += 1
             i += 1
+
+    def addStoneToBoard(self, x_val, y_val, color_val):
+        if self.goObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()) == 0:
+            self.goAbend("addStoneToBoard", "x=" + x_val + " y=" + y_val)
+            return
+        self.setBoardArray(x_val, y_val, color_val)
+
+    def isEmptySpace(self, x_val, y_val):
+        if not self.goObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()):
+            return False
+        if self.boardArray(x_val, y_val) != self.goObject().EMPTY_STONE():
+            return False
+        return True
+
+
+
+
+
 
 

@@ -45,6 +45,18 @@ class GoEngineClass(object):
     def boardObject(self):
         return self.goObject().boardObject()
 
+    def configObject(self):
+        return self.goObject().configObject()
+
+    def gameObject(self):
+        return self.goObject().gameObject()
+
+    def boardSize(self):
+        return self.configObject().boardSize()
+
+    def groupListArray(self, index_val):
+        return self.theGroupListArray[index_val]
+
     def emptyGroupList(self):
         return self.theGroupListArray[0]
 
@@ -66,13 +78,29 @@ class GoEngineClass(object):
     def whiteEmptyGroupList(self):
         return self.theGroupListArray[6]
 
+    def lastDeadStone(self):
+        return self.theLastDeadStone
+
+    def setLastDeadStone(self, x_val, y_val):
+        self.theLastDeadStone = "";
+        if x_val < 10:
+           self.theLastDeadStone = self.theLastDeadStone + 0
+        self.theLastDeadStone = self.theLastDeadStone + x_val
+
+        if y_val < 10:
+            self.theLastDeadStone = self.theLastDeadStone + 0
+        self.theLastDeadStone = self.theLastDeadStone + y_val
+
+    def clearLastDeadStone(self):
+        self.theLastDeadStone = 0
+
     def enterWar(self, move_val):
-        self.logit("goEnterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
+        self.logit("enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
 
         group = self.insertStoneToGroupList(move_val)
         self.boardObject().addStoneToBoard(move_val.xX(), move_val.yY(), move_val.myColor())
         dead_count = self.killOtherColorGroups(move_val, group)
-        self.goLog("goEnterWar", "dead_count=" + dead_count)
+        self.logit("enterWar", "dead_count=%i", dead_count)
 
         if group.groupHasAir() == 0:
             self.removeDeadGroup(group)
@@ -122,6 +150,61 @@ class GoEngineClass(object):
         if dummy_count > 3:
             self.goAbend("insertStoneToGroupList", "dummy_count")
         return group
+
+    def killOtherColorGroups(self, move_val, group_val):
+        self.clearLastDeadStone();
+        count = self.killOtherColorGroup(group_val, move_val.xX() - 1, move_val.yY())
+        count += self.killOtherColorGroup(group_val, move_val.xX() + 1, move_val.yY())
+        count += self.killOtherColorGroup(group_val, move_val.xX(), move_val.yY() - 1)
+        count += self.killOtherColorGroup(group_val, move_val.xX(), move_val.yY() + 1)
+        return count
+
+    def killOtherColorGroup(self, group, x, y):
+        if not self.goObject().isValidCoordinates(x, y, self.boardSize()):
+            return 0
+
+        if self.boardObject().boardArray(x, y) != group.hisColor():
+            return 0
+
+        his_group = self.getGroupByCoordinate(x, y, group.hisColor())
+        if not his_group:
+            self.goAbend("killOtherColorGroup", "x=" + x + " y=" + y);
+            return 0
+
+        if his_group.groupHasAir():
+            return 0
+
+        dead_count = his_group.stoneCount()
+
+        if (group.stoneCount() == 1) and (his_group.stoneCount() == 1):
+            self.markLastDeadInfo(his_group)
+
+        self.removeDeadGroup(his_group)
+        return dead_count
+
+    def stoneHasAir(self, x_val, y_val):
+        if self.boardObject().isEmptySpace(x_val, y_val - 1):
+            return True
+        if self.boardObject().isEmptySpace(x_val, y_val + 1):
+            return True
+        if self.boardObject().isEmptySpace(x_val - 1, y_val):
+            return True
+        if self.boardObject().isEmptySpace(x_val + 1, y_val):
+            return True
+        return False
+
+    def abendEngine(self):
+        stones_count = 0;
+        i = 0;
+        while i < 7:
+            #self.groupListArray(i).abendGroupList()
+            stones_count += self.groupListArray(i).totalStoneCount()
+            i += 1;
+
+        #self.goLog("abendEngine", self.gameObject().gameIsOver())
+        if self.gameObject().gameIsOver():
+            if self.boardSize() * self.boardSize() != stones_count:
+                self.abend("abendEngine", "stones_count=%i", stones_count)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val != 0:

@@ -34,6 +34,9 @@ class GroupClass(object):
     def goObject(self):
         return self.groupListObject().goObject()
 
+    def engineObject(self):
+        return self.groupListObject().engineObject()
+
     def indexNumber(self):
         return self.theIndexNumber;
 
@@ -115,5 +118,21 @@ class GroupClass(object):
         self.incrementStoneCount()
         self.setExistMatrix(x_val, y_val, 1)
         self.setDeadMatrix(x_val, y_val, dead_val)
+
+    def groupHasAir(self):
+        #self.logit("GoGroupObject.groupHasAir", "color=" + self.myColor_() + " count=" + self.stoneCount_());
+        i = self.minX()
+        while i <= self.maxX():
+            j = self.minY()
+            while j <= self.maxY():
+                #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                if self.existMatrix(i, j):
+                    #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                    if self.engineObject().stoneHasAir(i, j):
+                        #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                        return True
+                j += 1
+            i += 1
+        return False
 
 

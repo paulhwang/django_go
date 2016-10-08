@@ -40,6 +40,14 @@ class GoGroupListClass(object):
     def groupCount(self):
         return self.theGroupCount;
 
+    def totalStoneCount(self):
+        count = 0
+        i = 0
+        while i < self.groupCount():
+            count += self.listArray(i).stoneCount()
+            i += 1
+        return count
+
     def listArray(self, index_val):
         return self.theListArray[index_val]
 

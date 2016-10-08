@@ -66,6 +66,12 @@ class GoClass(object):
         self.abend("getOppositeColor", "color=" + color_val)
         return self.EMPTY_STONE()
 
+    def isValidCoordinates(self, x_val, y_val, board_size_val):
+        return self.isValidCoordinate(x_val, board_size_val) and self.isValidCoordinate(y_val, board_size_val)
+
+    def isValidCoordinate(self, coordinate_val, board_size_val):
+        return (0 <= coordinate_val) and (coordinate_val < board_size_val)
+
     def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
         return malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val)
 
