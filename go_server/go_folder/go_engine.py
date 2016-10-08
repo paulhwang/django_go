@@ -1,15 +1,43 @@
+import go_server.go_folder.go_group_list
+
 def malloc(go_val):
     return GoEngineClass(go_val)
 
 class GoEngineClass(object):
     def __init__(self, go_val):
-        self.theGoObject = go_val;
+        self.theGoObject = go_val
+        self.resetEngineObjectData()
+
+    def resetEngineObjectData(self):
+        self.theGroupListArray = [0, 0, 0, 0, 0, 0, 0,]
+        self.theGroupListArray[1] = go_server.go_folder.go_group_list.malloc(self, 1, self.goObject().BLACK_STONE(), 0, 0, 0)
+        self.theGroupListArray[2] = go_server.go_folder.go_group_list.malloc(self, 2, self.goObject().WHITE_STONE(), 0, 0, 0)
+        self.resetMarkedGroupLists()
+        self.resetEmptyGroupLists()
+
+        self.theCaptureCount = 0
+        self.theLastDeadStone = 0
+        self.theBlackCaptureStones = 0
+        self.theWhiteCaptureStones = 0
+
+    def resetMarkedGroupLists(self):
+        self.theGroupListArray[3] = go_server.go_folder.go_group_list.malloc(self, 3, self.goObject().BLACK_STONE(), 1, "black", "gray")
+        self.theGroupListArray[4] = go_server.go_folder.go_group_list.malloc(self, 4, self.goObject().WHITE_STONE(), 1, "white", "gray")
+        self.boardObject().resetMarkedBoardObjectData()
+
+    def resetEmptyGroupLists(self):
+        self.theGroupListArray[0] = go_server.go_folder.go_group_list.malloc(self, 0, self.goObject().EMPTY_STONE(), 0, 0, 0)
+        self.theGroupListArray[5] = go_server.go_folder.go_group_list.malloc(self, 5, self.goObject().EMPTY_STONE(), 0, 0, "black")
+        self.theGroupListArray[6] = go_server.go_folder.go_group_list.malloc(self, 6, self.goObject().EMPTY_STONE(), 0, 0, "white")
 
     def className(self):
         return "GoEngineClass"
 
     def goObject(self):
         return self.theGoObject
+
+    def boardObject(self):
+        return self.goObject().boardObject()
 
     def enterWar(self, move_val):
         self.logit("goEnterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())

@@ -1,3 +1,5 @@
+import go_server.go_folder.go_config
+import go_server.go_folder.go_board
 import go_server.go_folder.go_engine
 import go_server.go_folder.go_game
 import go_server.go_folder.go_port
@@ -9,6 +11,8 @@ def malloc(root_val):
 class GoClass(object):
     def __init__(self, root_val):
         self.theRootObject = root_val
+        self.theConfigObject = go_server.go_folder.go_config.malloc(self)
+        self.theBoardObject = go_server.go_folder.go_board.malloc(self)
         self.theEngineObject = go_server.go_folder.go_engine.malloc(self)
         self.theGameObject = go_server.go_folder.go_game.malloc(self)
         self.thePortObject = go_server.go_folder.go_port.malloc(self)
@@ -18,6 +22,12 @@ class GoClass(object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def configObject(self):
+        return self.theConfigObject
+
+    def boardObject(self):
+        return self.theBoardObject
 
     def engineObject(self):
         return self.theEngineObject
