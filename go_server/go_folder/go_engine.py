@@ -39,6 +39,27 @@ class GoEngineClass(object):
     def boardObject(self):
         return self.goObject().boardObject()
 
+    def emptyGroupList(self):
+        return self.theGroupListArray[0]
+
+    def blackGroupList(self):
+        return self.theGroupListArray[1]
+
+    def whiteGroupList(self):
+        return self.theGroupListArray[2]
+
+    def blackDeadGroupList(self):
+        return self.theGroupListArray[3]
+
+    def whiteDeadGroupList(self):
+        return self.theGroupListArray[4]
+
+    def blackEmptyGroupList(self):
+        return self.theGroupListArray[5]
+
+    def whiteEmptyGroupList(self):
+        return self.theGroupListArray[6]
+
     def enterWar(self, move_val):
         self.logit("goEnterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
 
