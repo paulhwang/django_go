@@ -85,14 +85,14 @@ class GoGroupListClass(object):
         self.setListArray(self.groupCount(), null)
 
     def findCandidateGroup(self, x_val, y_val):
-        #self.logit("GoGroupListObject.findCandidateGroup", "(" + move_val.xX_() + "," + move_val.yY_() + ")")
+        #self.debug(False, "findCandidateGroup", "(" + move_val.xX_() + "," + move_val.yY_() + ")")
         i = 0
         while i < self.groupCount():
-            #self.logit("GoGroupListObject.findCandidateGroup", "(" + x_val + "," + y_val + ")")
+            #self.debug(False, "findCandidateGroup", "(" + x_val + "," + y_val + ")")
             if self.listArray(i).isCandidateGroup(x_val, y_val):
                 return self.listArray(i)
             i += 1
-        #self.logit("GoGroupListObject.findCandidateGroup", "not found")
+        self.debug(False, "findCandidateGroup", "not found")
         return 0
 
     def findOtherCandidateGroup(self, group_val, x_val, y_val):

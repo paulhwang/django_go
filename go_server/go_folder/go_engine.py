@@ -143,7 +143,7 @@ class GoEngineClass(object):
 
         dummy_count = 0
         group2 = 0
-        while true:
+        while True:
             group2 = g_list.findOtherCandidateGroup(group, move_val.xX(), move_val.yY())
             if group2 == 0:
                 break

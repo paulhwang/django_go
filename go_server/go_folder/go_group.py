@@ -128,17 +128,31 @@ class GroupClass(object):
         self.setExistMatrix(x_val, y_val, 1)
         self.setDeadMatrix(x_val, y_val, dead_val)
 
+    def isCandidateGroup(self, x_val, y_val):
+        #self.debug(False, "isCandidateGroup", "(%i,%i)" + x_val, y_val)
+        i = self.minX()
+        while i <=  self.maxX():
+            j = self.minY()
+            while j <= self.maxY():
+                if self.existMatrix(i, j):
+                    #goObject().goLog("isCandidateGroup", "(%i,%i) (%i,%i)", x_val, y_val, i, j)
+                    if self.goObject().isNeighborStone(i, j, x_val, y_val):
+                        return True
+                j += 1
+            i += 1
+        return False
+
     def groupHasAir(self):
-        #self.logit("GoGroupObject.groupHasAir", "color=" + self.myColor_() + " count=" + self.stoneCount_());
+        #self.logit("groupHasAir", "color=" + self.myColor_() + " count=" + self.stoneCount_());
         i = self.minX()
         while i <= self.maxX():
             j = self.minY()
             while j <= self.maxY():
-                #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                #self.logit("groupHasAir", "(" + i + "," + j + ")")
                 if self.existMatrix(i, j):
-                    #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                    #self.logit("groupHasAir", "(" + i + "," + j + ")")
                     if self.engineObject().stoneHasAir(i, j):
-                        #self.logit("GoGroupObject.groupHasAir", "(" + i + "," + j + ")")
+                        #self.logit("groupHasAir", "(" + i + "," + j + ")")
                         return True
                 j += 1
             i += 1

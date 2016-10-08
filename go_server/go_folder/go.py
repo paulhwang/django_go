@@ -66,6 +66,15 @@ class GoClass(object):
         self.abend("getOppositeColor", "color=" + color_val)
         return self.EMPTY_STONE()
 
+    def isNeighborStone(self, x1_val, y1_val, x2_val, y2_val):
+        if x1_val == x2_val:
+            if (y1_val + 1 == y2_val) or (y1_val - 1 == y2_val):
+                return True
+        if y1_val == y2_val:
+            if (x1_val + 1 == x2_val) or (x1_val - 1 == x2_val):
+                return True
+        return False
+
     def isValidCoordinates(self, x_val, y_val, board_size_val):
         return self.isValidCoordinate(x_val, board_size_val) and self.isValidCoordinate(y_val, board_size_val)
 
