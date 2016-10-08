@@ -15,10 +15,10 @@ class GroupClass(object):
         self.theDeadMatrix = self.createMatrix();
 
     def createMatrix(self):
-        matrix =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        matrix =  [0] * 19
         i = 0
         while i < 19:
-            matrix[i] =  [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+            matrix[i] = [0] * 19
             i += 1
         return matrix
 
@@ -28,8 +28,17 @@ class GroupClass(object):
     def groupListObject(self):
         return self.theGroupListObject
 
+    def setGroupListObject(self, group_list_val):
+        self.theGroupListObject = group_list_val
+
     def goObject(self):
         return self.groupListObject().goObject()
+
+    def indexNumber(self):
+        return self.theIndexNumber;
+
+    def setIndexNumber(self, val):
+        self.theIndexNumber = val;
 
     def myColor(self):
         return self.theMyColor;
