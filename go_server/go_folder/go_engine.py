@@ -7,6 +7,9 @@ def malloc_group_list(engine_val, index_val, color_val, dead_val, big_stone_val,
     return go_server.go_folder.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
 class GoEngineClass(object):
+    def debugEngine(self):
+        return True
+
     def __init__(self, go_val):
         self.theGoObject = go_val
         self.resetEngineObjectData()
@@ -182,6 +185,23 @@ class GoEngineClass(object):
         self.removeDeadGroup(his_group)
         return dead_count
 
+    def getGroupByCoordinate(self, x_val, y_val, color_val):
+        self.debug(False, "GoEngineObject.getGroupByCoordinate", color_val);
+        if (color_val == self.goObject().BLACK_STONE()) or (color_val == self.goObject().MARKED_DEAD_BLACK_STONE()):
+            g_list = self.blackGroupList()
+        else:
+            g_list = self.whiteGroupList()
+
+        self.debug(False, "GoEngineObject.getGroupByCoordinate", "groupCount=%i", g_list.groupCount())
+        i = 0
+        while i < g_list.groupCount():
+            self.debug(False, "GoEngineObject.getGroupByCoordinate", "i=%i", i)
+            if g_list.listArray(i).existMatrix(x_val, y_val):
+                self.debug(False, "GoEngineObject.getGroupByCoordinate", "i=%i", i)
+                return g_list.listArray(i)
+            i += 1
+        return null
+
     def stoneHasAir(self, x_val, y_val):
         if self.boardObject().isEmptySpace(x_val, y_val - 1):
             return True
@@ -194,20 +214,23 @@ class GoEngineClass(object):
         return False
 
     def abendEngine(self):
+        if not self.debugEngine():
+            return
+
         stones_count = 0;
         i = 0;
         while i < 7:
-            #self.groupListArray(i).abendGroupList()
+            self.groupListArray(i).abendGroupList()
             stones_count += self.groupListArray(i).totalStoneCount()
             i += 1;
 
-        #self.goLog("abendEngine", self.gameObject().gameIsOver())
+        self.debug(False, "abendEngine", self.gameObject().gameIsOver())
         if self.gameObject().gameIsOver():
             if self.boardSize() * self.boardSize() != stones_count:
                 self.abend("abendEngine", "stones_count=%i", stones_count)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val != 0:
+        if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):

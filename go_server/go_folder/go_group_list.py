@@ -4,6 +4,9 @@ def malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_ston
     return GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
 class GoGroupListClass(object):
+    def debugGroutList(self):
+        return True
+
     def __init__(self, engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
         self.theEngineObject = engine_val
         self.theIndexNumber = index_val
@@ -36,6 +39,12 @@ class GoGroupListClass(object):
 
     def hisColor(self):
         return self.theHisColor;
+
+    def indexNumber(self):
+        return self.theIndexNumber
+
+    def isDead(self):
+        return self.theIsDead;
 
     def groupCount(self):
         return self.theGroupCount;
@@ -94,5 +103,40 @@ class GoGroupListClass(object):
                     return self.listArray(i)
             i += 1
         return 0
+
+    def abendGroupList(self):
+        if not self.debugGroutList():
+            return
+
+        if self.isDead():
+            d = "d* "
+        else:
+            d = "*"
+
+        self.debug(False, "abendGroupList", "%i color=%i count=%i:%i", self.indexNumber(), self.myColor(), self.groupCount(), self.totalStoneCount());
+        i = 0
+        while i < self.groupCount():
+            if not self.listArray(i):
+                self.goAbend("abendGroupList", "null group " + self.groupCount() + " " + i)
+                return
+            if self.listArray(i).groupListObject() != self:
+                self.abend("abendGroupList", "groupListObject")
+                return
+            if self.listArray(i).indexNumber() != i:
+                self.abend("abendGroupList", "index " + self.listArray(i).indexNumber() + "!=" + i)
+                return
+            self.listArray(i).abendGroup()
+            i += 1
+
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if bool_val:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
 
 
