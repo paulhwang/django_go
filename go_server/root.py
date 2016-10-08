@@ -3,12 +3,18 @@ import go_server.fibre_folder.fibre
 import go_server.go_folder.go
 
 def malloc():
-	return RootClass()
+    return RootClass()
+
+def malloc_fibre(root_val):
+    return go_server.fibre_folder.fibre.malloc(root_val)
+
+def malloc_go(root_val):
+    return go_server.go_folder.go.malloc(root_val)
 
 class RootClass(object):
     def __init__(self):
-        self.theFibreObject = go_server.fibre_folder.fibre.malloc(self)
-        self.theGoObject = go_server.go_folder.go.malloc(self)
+        self.theFibreObject = malloc_fibre(self)
+        self.theGoObject = malloc_go(self)
 
     def className(self):
         return "RootClass"
