@@ -1,3 +1,5 @@
+import go_server.go_folder.go_group
+
 def malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
     return GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
@@ -20,6 +22,9 @@ class GoGroupListClass(object):
     def className(self):
         return "GoGroupListClass"
 
+    def malloc_group(self):
+        return go_server.go_folder.go_group.malloc(self)
+
     def engineObject(self):
         return self.theEngineObject
 
@@ -34,6 +39,33 @@ class GoGroupListClass(object):
 
     def groupCount(self):
         return self.theGroupCount;
+
+    def listArray(self, index_val):
+        return self.theListArray[index_val]
+
+    def setListArray(self, index_val, data_val):
+        self.theListArray[index_val] = data_val
+
+    def incrementGroupCount(self):
+        self.theGroupCount += 1
+
+    def decrementGroupCount(self):
+        self.theGroupCount -= 1
+
+    def insertGroupToGroupList(self, group_val):
+        self.setListArray(self.groupCount(), group_val)
+        group_val.setIndexNumber(self.groupCount())
+        self.incrementGroupCount()
+        group_val.setGroupListObject(self)
+
+    def removeGroupFromGroupList(self, group_val):
+        self.decrementGroupCount()
+
+        if group_val.indexNumber() != self.groupCount():
+            self.listArray(self.groupCount()).setIndexNumber(group_val.indexNumber())
+            self.setListArray(group_val.indexNumber(), self.listArray(self.groupCount()))
+
+        self.setListArray(self.groupCount(), null)
 
     def findCandidateGroup(self, x_val, y_val):
         #self.logit("GoGroupListObject.findCandidateGroup", "(" + move_val.xX_() + "," + move_val.yY_() + ")")

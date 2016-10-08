@@ -3,6 +3,9 @@ import go_server.go_folder.go_group_list
 def malloc(go_val):
     return GoEngineClass(go_val)
 
+def malloc_group_list(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
+    return go_server.go_folder.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
+
 class GoEngineClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val
@@ -10,8 +13,8 @@ class GoEngineClass(object):
 
     def resetEngineObjectData(self):
         self.theGroupListArray = [0, 0, 0, 0, 0, 0, 0,]
-        self.theGroupListArray[1] = go_server.go_folder.go_group_list.malloc(self, 1, self.goObject().BLACK_STONE(), 0, 0, 0)
-        self.theGroupListArray[2] = go_server.go_folder.go_group_list.malloc(self, 2, self.goObject().WHITE_STONE(), 0, 0, 0)
+        self.theGroupListArray[1] = malloc_group_list(self, 1, self.goObject().BLACK_STONE(), 0, 0, 0)
+        self.theGroupListArray[2] = malloc_group_list(self, 2, self.goObject().WHITE_STONE(), 0, 0, 0)
         self.resetMarkedGroupLists()
         self.resetEmptyGroupLists()
 
@@ -21,14 +24,17 @@ class GoEngineClass(object):
         self.theWhiteCaptureStones = 0
 
     def resetMarkedGroupLists(self):
-        self.theGroupListArray[3] = go_server.go_folder.go_group_list.malloc(self, 3, self.goObject().BLACK_STONE(), 1, "black", "gray")
-        self.theGroupListArray[4] = go_server.go_folder.go_group_list.malloc(self, 4, self.goObject().WHITE_STONE(), 1, "white", "gray")
+        self.theGroupListArray[3] = malloc_group_list(self, 3, self.goObject().BLACK_STONE(), 1, "black", "gray")
+        self.theGroupListArray[4] = malloc_group_list(self, 4, self.goObject().WHITE_STONE(), 1, "white", "gray")
         self.boardObject().resetMarkedBoardObjectData()
 
     def resetEmptyGroupLists(self):
-        self.theGroupListArray[0] = go_server.go_folder.go_group_list.malloc(self, 0, self.goObject().EMPTY_STONE(), 0, 0, 0)
-        self.theGroupListArray[5] = go_server.go_folder.go_group_list.malloc(self, 5, self.goObject().EMPTY_STONE(), 0, 0, "black")
-        self.theGroupListArray[6] = go_server.go_folder.go_group_list.malloc(self, 6, self.goObject().EMPTY_STONE(), 0, 0, "white")
+        self.theGroupListArray[0] = malloc_group_list(self, 0, self.goObject().EMPTY_STONE(), 0, 0, 0)
+        self.theGroupListArray[5] = malloc_group_list(self, 5, self.goObject().EMPTY_STONE(), 0, 0, "black")
+        self.theGroupListArray[6] = malloc_group_list(self, 6, self.goObject().EMPTY_STONE(), 0, 0, "white")
+
+    def malloc_group_list(self):
+        return go_server.go_folder.go_group_lsit.malloc(self)
 
     def className(self):
         return "GoEngineClass"
@@ -95,13 +101,13 @@ class GoEngineClass(object):
 
         group = g_list.findCandidateGroup(move_val.xX(), move_val.yY())
         if group == 0:
-            group = self.groupModule().malloc(g_list)
-            group.insertStoneToGroup(move_val.xX(), move_val.yY(), false)
+            group = g_list.malloc_group()
+            group.insertStoneToGroup(move_val.xX(), move_val.yY(), 0)
             g_list.insertGroupToGroupList(group)
             #g_list.printGroupList()
             return group
 
-        group.insertStoneToGroup(move_val.xX(), move_val.yY(), false)
+        group.insertStoneToGroup(move_val.xX(), move_val.yY(), 0)
         #g_list.printGroupList()
 
         dummy_count = 0

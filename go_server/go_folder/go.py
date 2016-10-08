@@ -8,14 +8,32 @@ import go_server.go_folder.go_move
 def malloc(root_val):
     return GoClass(root_val)
 
+def malloc_config(go_val):
+    return go_server.go_folder.go_config.malloc(go_val)
+
+def malloc_board(go_val):
+    return go_server.go_folder.go_board.malloc(go_val)
+
+def malloc_engine(go_val):
+    return go_server.go_folder.go_engine.malloc(go_val)
+
+def malloc_game(go_val):
+    return go_server.go_folder.go_game.malloc(go_val)
+
+def malloc_port(go_val):
+    return go_server.go_folder.go_port.malloc(go_val)
+
+def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
+    return go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
+
 class GoClass(object):
     def __init__(self, root_val):
         self.theRootObject = root_val
-        self.theConfigObject = go_server.go_folder.go_config.malloc(self)
-        self.theBoardObject = go_server.go_folder.go_board.malloc(self)
-        self.theEngineObject = go_server.go_folder.go_engine.malloc(self)
-        self.theGameObject = go_server.go_folder.go_game.malloc(self)
-        self.thePortObject = go_server.go_folder.go_port.malloc(self)
+        self.theConfigObject = malloc_config(self)
+        self.theBoardObject = malloc_board(self)
+        self.theEngineObject = malloc_engine(self)
+        self.theGameObject = malloc_game(self)
+        self.thePortObject = malloc_port(self)
 
     def className(self):
         return "GoClass"
@@ -49,7 +67,7 @@ class GoClass(object):
         return self.EMPTY_STONE()
 
     def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
-        return  go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
+        return malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.rootObject().logit(self.className() + "." + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
