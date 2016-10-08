@@ -4,12 +4,12 @@ def malloc(go_val):
 class BoardClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val
-        self.theBoardArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-        self.theMarkedBoardArray = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+        self.theBoardArray = [0] * 19
+        self.theMarkedBoardArray = [0] * 19
         i = 0
         while i < 19:
-            self.theBoardArray[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
-            self.theMarkedBoardArray[i] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]
+            self.theBoardArray[i] = [0] * 19
+            self.theMarkedBoardArray[i] = [0] * 19
             i += 1
         self.resetBoardObjectData()
 

@@ -12,7 +12,7 @@ class GoEngineClass(object):
         self.resetEngineObjectData()
 
     def resetEngineObjectData(self):
-        self.theGroupListArray = [0, 0, 0, 0, 0, 0, 0,]
+        self.theGroupListArray = [0] * 7
         self.theGroupListArray[1] = malloc_group_list(self, 1, self.goObject().BLACK_STONE(), 0, 0, 0)
         self.theGroupListArray[2] = malloc_group_list(self, 2, self.goObject().WHITE_STONE(), 0, 0, 0)
         self.resetMarkedGroupLists()

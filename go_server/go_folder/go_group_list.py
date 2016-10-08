@@ -17,7 +17,7 @@ class GoGroupListClass(object):
         self.theSmallStoneColor = small_stone_val
         self.theGroupCount = 0
         self.theIsMarkedDead = 0
-        self.theListArray = []
+        self.theListArray = [0] * 361
 
     def className(self):
         return "GoGroupListClass"
