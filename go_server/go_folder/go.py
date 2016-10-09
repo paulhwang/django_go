@@ -3,6 +3,7 @@ import go_server.go_folder.go_board
 import go_server.go_folder.go_engine
 import go_server.go_folder.go_game
 import go_server.go_folder.go_port
+import go_server.go_folder.go_handler
 import go_server.go_folder.go_move
 
 def malloc(root_val):
@@ -23,6 +24,9 @@ def malloc_game(go_val):
 def malloc_port(go_val):
     return go_server.go_folder.go_port.malloc(go_val)
 
+def malloc_handler(go_val):
+    return go_server.go_folder.go_handler.malloc(go_val)
+
 def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
     return go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
@@ -34,6 +38,7 @@ class GoClass(object):
         self.theEngineObject = malloc_engine(self)
         self.theGameObject = malloc_game(self)
         self.thePortObject = malloc_port(self)
+        self.theHandlerObject = malloc_handler(self)
 
     def className(self):
         return "GoClass"
@@ -55,6 +60,9 @@ class GoClass(object):
 
     def portObject(self):
         return self.thePortObject
+
+    def handlerObject(self):
+        return self.theHandlerObject
 
     def getOppositeColor(self, color_val):
         if color_val == self.BLACK_STONE():
