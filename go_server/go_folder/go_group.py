@@ -142,6 +142,38 @@ class GroupClass(object):
             i += 1
         return False
 
+    def mergeWithOtherGroup(self, group2):
+        self.logit("mergeWithOtherGroup", "");
+        #self.debugGroupObject();
+        i = group2.minX();
+        while i <= group2.maxX():
+            j = group2.minY();
+            while j <= group2.maxY():
+                if group2.existMatrix(i, j):
+                    self.logit("mergeWithOtherGroup", "i=%i j=%i", i, j);
+                    if self.existMatrix(i, j):
+                        Go.goAbend("goMergeWithOtherGroup", "already exist");
+                    self.setExistMatrix(i, j, group2.existMatrix(i, j));
+                    self.incrementStoneCount();
+
+                    group2.setExistMatrix(i, j, False);
+                    group2.decrementStoneCount();
+                j += 1;
+            i += 1;
+        #self.debugGroupObject();
+
+        if self.maxX() < group2.maxX():
+            self.setMaxX(group2.maxX());
+        if self.minX() > group2.minX():
+            self.setMinX(group2.minX());
+        if self.maxY() < group2.maxY():
+            self.setMaxY(group2.maxY());
+        if self.minY() > group2.minY():
+            self.setMinY(group2.minY());
+
+        if group2.groupListObject().listArray(group2.indexNumber()) != group2:
+            self.abend("merge_with_other_group", "group2");
+
     def groupHasAir(self):
         #self.logit("groupHasAir", "color=" + self.myColor_() + " count=" + self.stoneCount_());
         i = self.minX()

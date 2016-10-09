@@ -105,10 +105,10 @@ class GoClass(object):
     def MARK_EMPTY_STONE_DIFF(self):
         return 6
 
-    def THE_MARKED_DEAD_BLACK_STONE(self):
+    def MARKED_DEAD_BLACK_STONE(self):
         return self.BLACK_STONE() + self.MARK_DEAD_STONE_DIFF()
 
-    def THE_MARKED_DEAD_WHITE_STONE(self):
+    def MARKED_DEAD_WHITE_STONE(self):
         return self.WHITE_STONE() + self.MARK_DEAD_STONE_DIFF()
 
 

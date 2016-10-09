@@ -82,7 +82,7 @@ class GoGroupListClass(object):
             self.listArray(self.groupCount()).setIndexNumber(group_val.indexNumber())
             self.setListArray(group_val.indexNumber(), self.listArray(self.groupCount()))
 
-        self.setListArray(self.groupCount(), null)
+        self.setListArray(self.groupCount(), None)
 
     def findCandidateGroup(self, x_val, y_val):
         #self.debug(False, "findCandidateGroup", "(" + move_val.xX_() + "," + move_val.yY_() + ")")
