@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import logging
-import go_server.util_folder.queue
+import go_server.util_modules.queue
 import go_server.root
 
 logger = logging.getLogger(__name__)
@@ -39,4 +39,4 @@ def test():
 
 def run_it():
     root = go_server.root.malloc()
-    root.test()
+    root.test1()

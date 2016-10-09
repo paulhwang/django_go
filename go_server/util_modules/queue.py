@@ -1,4 +1,4 @@
-import go_server.util_folder.util
+import go_server.util_modules.util
 
 def malloc():
     return QueueClass()

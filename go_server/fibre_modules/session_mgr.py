@@ -1,4 +1,4 @@
-import go_server.util_folder.queue
+import go_server.util_modules.queue
 
 def malloc(fibre_val):
     return SessionMgrClass(fibre_val)
@@ -6,8 +6,8 @@ def malloc(fibre_val):
 class SessionMgrClass(object):
     def __init__(self, fibre_val):
         self.theFibreObject = fibre_val
-        self.theSessionQueue = go_server.util_folder.queue.malloc()
-        self.thePreSessionQueue = go_server.util_folder.queue.malloc()
+        self.theSessionQueue = go_server.util_modules.queue.malloc()
+        self.thePreSessionQueue = go_server.util_modules.queue.malloc()
         self.theGlobalSessionId = 1000
         self.thePoolHead = 0
         self.thePoolSize = 0

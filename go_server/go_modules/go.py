@@ -1,34 +1,34 @@
-import go_server.go_folder.go_config
-import go_server.go_folder.go_board
-import go_server.go_folder.go_engine
-import go_server.go_folder.go_game
-import go_server.go_folder.go_port
-import go_server.go_folder.go_handler
-import go_server.go_folder.go_move
+import go_server.go_modules.go_config
+import go_server.go_modules.go_board
+import go_server.go_modules.go_engine
+import go_server.go_modules.go_game
+import go_server.go_modules.go_port
+import go_server.go_modules.go_handler
+import go_server.go_modules.go_move
 
 def malloc(root_val):
     return GoClass(root_val)
 
 def malloc_config(go_val):
-    return go_server.go_folder.go_config.malloc(go_val)
+    return go_server.go_modules.go_config.malloc(go_val)
 
 def malloc_board(go_val):
-    return go_server.go_folder.go_board.malloc(go_val)
+    return go_server.go_modules.go_board.malloc(go_val)
 
 def malloc_engine(go_val):
-    return go_server.go_folder.go_engine.malloc(go_val)
+    return go_server.go_modules.go_engine.malloc(go_val)
 
 def malloc_game(go_val):
-    return go_server.go_folder.go_game.malloc(go_val)
+    return go_server.go_modules.go_game.malloc(go_val)
 
 def malloc_port(go_val):
-    return go_server.go_folder.go_port.malloc(go_val)
+    return go_server.go_modules.go_port.malloc(go_val)
 
 def malloc_handler(go_val):
-    return go_server.go_folder.go_handler.malloc(go_val)
+    return go_server.go_modules.go_handler.malloc(go_val)
 
 def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
-    return go_server.go_folder.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
+    return go_server.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoClass(object):
     def __init__(self, root_val):

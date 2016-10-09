@@ -1,15 +1,15 @@
-import go_server.util_folder.util
-import go_server.fibre_folder.fibre
-import go_server.go_folder.go
+import go_server.util_modules.util
+import go_server.fibre_modules.fibre
+import go_server.go_modules.go
 
 def malloc():
     return RootClass()
 
 def malloc_fibre(root_val):
-    return go_server.fibre_folder.fibre.malloc(root_val)
+    return go_server.fibre_modules.fibre.malloc(root_val)
 
 def malloc_go(root_val):
-    return go_server.go_folder.go.malloc(root_val)
+    return go_server.go_modules.go.malloc(root_val)
 
 class RootClass(object):
     def __init__(self):
@@ -59,7 +59,7 @@ class RootClass(object):
         self.goObject().portObject().receiveStringData("05091026")
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.util_folder.util.utilLogit(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.util_modules.util.utilLogit(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.util_folder.util.utilAbend(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.util_modules.util.utilAbend(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
