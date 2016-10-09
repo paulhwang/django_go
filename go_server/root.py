@@ -26,6 +26,9 @@ class RootClass(object):
         return self.theGoObject
 
     def test(self):
+        self.goObject().portObject().receiveStringData("03062001")
+
+    def test1(self):
         self.goObject().portObject().receiveStringData("03051000")
         self.goObject().portObject().receiveStringData("03062001")
         self.goObject().portObject().receiveStringData("03071004")

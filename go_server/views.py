@@ -12,7 +12,7 @@ def go_html(request):
     html_count += 1
     logger.error("go_html %s", html_count)
     run_it()
-    test()
+    #test()
     return render(request, "js_go/phwang.html")
 
 ajax_count = 0
