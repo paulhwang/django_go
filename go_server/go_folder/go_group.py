@@ -208,7 +208,7 @@ class GroupClass(object):
         if not self.debugGroup():
             return
 
-        self.logit("abendGroup", "color=%i count=%i index=%i", self.myColor(), self.stoneCount(), self.indexNumber())
+        self.debug(False, "abendGroup", "color=%i count=%i index=%i", self.myColor(), self.stoneCount(), self.indexNumber())
         count = 0
 
         i = 0

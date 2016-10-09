@@ -4,6 +4,13 @@ def malloc(go_val):
 class GoPortClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val;
+        self.GO_PROTOCOL_CODE_SIZE = 7;
+        self.GO_PROTOCOL_CODE_PROPOSE = "Propose";
+        self.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
+        self.GO_PROTOCOL_CODE_CONFIRM = "Confirm";
+        self.GO_PROTOCOL_CODE_MOVE_DATA = "Move   ";
+        self.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
+        self.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
 
     def className(self):
         return "GoPortClass"
@@ -17,8 +24,11 @@ class GoPortClass(object):
     def gameObject(self):
         return self.goObject().gameObject()
 
+    def boardObject(self):
+        return self.goObject().boardObject()
+
     def thansmitBoardData(self):
-        #board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
+        board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
         self.debug(True, "transmitBoardData", "data=%s", "board_data");
         #json_data = JSON.stringify({
         #               board_data: board_data,

@@ -69,6 +69,28 @@ class BoardClass(object):
             return False
         return True
 
+    def encodeBoard(self):
+        buf = ""
+        i = 0
+        while i < self.boardSize():
+            j = 0
+            while j < self.boardSize():
+                buf = buf + str(self.theBoardArray[i][j])
+                j += 1
+            i += 1
+        self.logit("encodeBoard", "data=" + buf)
+        return buf
+
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if bool_val:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
 
 
 

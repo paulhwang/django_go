@@ -120,7 +120,7 @@ class GoGroupListClass(object):
         i = 0
         while i < self.groupCount():
             if not self.listArray(i):
-                self.goAbend("abendGroupList", "null group " + self.groupCount() + " " + i)
+                self.abend("abendGroupList", "null group %i %i", self.groupCount(), i)
                 return
             if self.listArray(i).groupListObject() != self:
                 self.abend("abendGroupList", "groupListObject")
