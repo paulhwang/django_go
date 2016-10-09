@@ -1,10 +1,10 @@
-import go_server.go_modules.go_group_list
+import go_server.project_modules.go_modules.go_group_list
 
 def malloc(go_val):
     return GoEngineClass(go_val)
 
 def malloc_group_list(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
-    return go_server.go_modules.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
+    return go_server.project_modules.go_modules.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
 class GoEngineClass(object):
     def debugEngine(self):

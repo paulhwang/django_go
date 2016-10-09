@@ -1,4 +1,4 @@
-import go_server.util_modules.queue
+import go_server.project_modules.util_modules.queue
 
 def malloc(fibre_val):
     return LinkMgrClass(fibre_val)
@@ -9,7 +9,7 @@ class LinkMgrClass(object):
         self.theGlobalLinkId = 10;
         self.thePoolHead = 0;
         self.thePoolSize = 0;
-        self.theLinkQueue = go_server.util_modules.queue.malloc();
+        self.theLinkQueue = go_server.project_modules.util_modules.queue.malloc();
 
     def className(self):
         return "LinkMgrClass"

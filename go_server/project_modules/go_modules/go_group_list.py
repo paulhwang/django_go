@@ -1,4 +1,4 @@
-import go_server.go_modules.go_group
+import go_server.project_modules.go_modules.go_group
 
 def malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
     return GoGroupListClass(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
@@ -26,7 +26,7 @@ class GoGroupListClass(object):
         return "GoGroupListClass"
 
     def malloc_group(self):
-        return go_server.go_modules.go_group.malloc(self)
+        return go_server.project_modules.go_modules.go_group.malloc(self)
 
     def engineObject(self):
         return self.theEngineObject
