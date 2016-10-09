@@ -40,6 +40,9 @@ class GroupClass(object):
     def goObject(self):
         return self.engineObject().goObject()
 
+    def boardObject(self):
+        return self.goObject().boardObject()
+
     def configObject(self):
         return self.goObject().configObject()
 
@@ -189,6 +192,17 @@ class GroupClass(object):
                 j += 1
             i += 1
         return False
+
+    def removeDeadStoneFromBoard(self):
+        i = self.minX();
+        while i <= self.maxX():
+            j = self.minY();
+            while j <= self.maxY():
+                if self.existMatrix(i, j):
+                    self.boardObject().setBoardArray(i, j, self.goObject().EMPTY_STONE());
+                    self.debug(True, "removeDeadStoneFromBoard", "(%i,%i)", i, j);
+                j += 1;
+            i += 1;
 
     def abendGroup(self):
         if not self.debugGroup():

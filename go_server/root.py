@@ -53,6 +53,8 @@ class RootClass(object):
         self.goObject().portObject().forNow("11111024")
         self.goObject().portObject().forNow("16142025")
 
+        self.goObject().portObject().forNow("05091026")
+
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         go_server.util_folder.util.utilLogit(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

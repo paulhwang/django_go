@@ -104,6 +104,9 @@ class GoGroupListClass(object):
             i += 1
         return 0
 
+    def removeOneDeadGroup(self, group_val):
+        self.removeGroupFromGroupList(group_val);
+
     def abendGroupList(self):
         if not self.debugGroutList():
             return

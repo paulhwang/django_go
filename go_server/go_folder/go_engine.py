@@ -81,21 +81,55 @@ class GoEngineClass(object):
     def whiteEmptyGroupList(self):
         return self.theGroupListArray[6]
 
+    def captureCount(self):
+        return self.theCaptureCount
+
+    def setCaptureCount(self):
+        self.theCaptureCount = ""
+        if self.blackCaptureStones() < 100:
+           self.theCaptureCount = self.theCaptureCount + '0'
+        if self.blackCaptureStones() < 10:
+           self.theCaptureCount = self.theCaptureCount + '0'
+        self.theCaptureCount = self.theCaptureCount + str(self.blackCaptureStones())
+
+        if self.whiteCaptureStones() < 100:
+            self.theCaptureCount = self.theCaptureCount + '0'
+        if self.whiteCaptureStones() < 10:
+            self.theCaptureCount = self.theCaptureCount + '0'
+        self.theCaptureCount = self.theCaptureCount + str(self.whiteCaptureStones())
+
+    def clearCaptureCount(self):
+        self.theCaptureCount = None
+
     def lastDeadStone(self):
         return self.theLastDeadStone
 
     def setLastDeadStone(self, x_val, y_val):
-        self.theLastDeadStone = "";
+        self.theLastDeadStone = ""
         if x_val < 10:
-           self.theLastDeadStone = self.theLastDeadStone + 0
-        self.theLastDeadStone = self.theLastDeadStone + x_val
+           self.theLastDeadStone = self.theLastDeadStone + '0'
+        self.theLastDeadStone = self.theLastDeadStone + str(x_val)
 
         if y_val < 10:
-            self.theLastDeadStone = self.theLastDeadStone + 0
-        self.theLastDeadStone = self.theLastDeadStone + y_val
+            self.theLastDeadStone = self.theLastDeadStone + '0'
+        self.theLastDeadStone = self.theLastDeadStone + str(y_val)
 
     def clearLastDeadStone(self):
         self.theLastDeadStone = 0
+
+    def blackCaptureStones(self):
+        return self.theBlackCaptureStones
+
+    def whiteCaptureStones(self):
+        return self.theWhiteCaptureStones
+
+    def addBlackCaptureStones(self, count_val):
+        self.theBlackCaptureStones += count_val
+        self.setCaptureCount()
+
+    def addWhiteCaptureStones(self, count_val):
+        self.theWhiteCaptureStones += count_val
+        self.setCaptureCount()
 
     def enterWar(self, move_val):
         self.logit("enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
@@ -109,13 +143,13 @@ class GoEngineClass(object):
             self.removeDeadGroup(group)
 
         if dead_count != 0:
-            if move_val.myColor() == self.GO().BLACK_STONE():
+            if move_val.myColor() == self.goObject().BLACK_STONE():
                 self.addBlackCaptureStones(dead_count)
             else:
-                if move_val.myColor() == self.GO().WHITE_STONE():
+                if move_val.myColor() == self.goObject().WHITE_STONE():
                     self.addWhiteCaptureStones(dead_count)
                 else:
-                    self.goAbend("enterWar", "color=" + move_val.myColor())
+                    self.abend("enterWar", "color=%i", move_val.myColor())
 
         self.abendEngine()
 
@@ -184,6 +218,23 @@ class GoEngineClass(object):
 
         self.removeDeadGroup(his_group)
         return dead_count
+
+    def removeDeadGroup(self, group):
+        group.removeDeadStoneFromBoard();
+        if group.myColor() == self.goObject().BLACK_STONE():
+            self.blackGroupList().removeOneDeadGroup(group);
+        else:
+            self.whiteGroupList().removeOneDeadGroup(group);
+
+    def markLastDeadInfo(self, group_val):
+        self.setLastDeadStone(group_val.maxX(), group_val.maxY());
+
+        if group_val.maxX() != group_val.minX():
+            self.goAbend("markLastDeadInfo", "x: " + group_val.maxX() + "!=" + group_val.minX() + " count=" + group_val.stoneCount());
+        if group_val.maxY() != group_val.minY():
+            self.goAbend("markLastDeadInfo", "y: " + group_val.maxY() + "!=" + group_val.minY() + " count=" + group_val.stoneCount());
+        if not group_val.existMatrix(group_val.maxX(), group_val.maxY()):
+            self.goAbend("markLastDeadInfo", "exist_matrix");
 
     def getGroupByCoordinate(self, x_val, y_val, color_val):
         self.debug(False, "GoEngineObject.getGroupByCoordinate", color_val);
