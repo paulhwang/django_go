@@ -33,6 +33,11 @@ class GoPortClass(object):
         #self.transmitData(json_data);
 
     def receiveStringData(self, str_val):
+        self.logit("receiveStringData", str_val)
+        if str_val == None:
+            self.abend("receiveStringData", "null input");
+            return
+
         self.handlerObject().aMoveIsPlayed(str_val)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
