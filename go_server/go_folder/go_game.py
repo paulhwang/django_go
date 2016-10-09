@@ -9,13 +9,13 @@ class GoGameClass(object):
     def resetGameObjectData(self):
         self.theMaxMove = 0
         self.theTotalMoves = 0
-        self.theMovesArray = []
+        self.theMovesArray = [None] * 400
         self.resetGameObjectPartialData()
 
     def resetGameObjectPartialData(self):
         self.theNextColor = self.goObject().BLACK_STONE()
-        self.thePassReceived = 0
-        self.theGameIsOver = 0
+        self.thePassReceived = False
+        self.theGameIsOver = False
 
     def className(self):
         return "GoGameClass"
@@ -60,22 +60,22 @@ class GoGameClass(object):
         self.theNextColor = next_color_val;
 
     def setPassReceived(self):
-        self.thePassReceived = 1
+        self.thePassReceived = True
 
     def clearPassReceived(self):
-        self.thePassReceived = 0
+        self.thePassReceived = False
 
     def gameIsOver(self):
         return self.theGameIsOver
 
     def setGameIsOver(self):
-        self.theGameIsOver = 1
+        self.theGameIsOver = True
 
     def clearGameIsOver(self):
-        self.theGameIsOver = 0
+        self.theGameIsOver = False
 
     def addNewMoveAndFight(self, move_val):
-        self.debug(1, "addNewMoveAndFight", "")
+        self.debug(True, "addNewMoveAndFight", "")
 
         if self.gameIsOver():
             self.goLog("addNewMoveAndFight", "two pass have entered")
@@ -87,12 +87,12 @@ class GoGameClass(object):
         self.setNextColor(self.goObject().getOppositeColor(move_val.myColor()))
 
     def insertMoveToMoveList(self, move_val):
-        #self.setMovesArray(self.totalMoves(), move_val)
+        self.setMovesArray(self.totalMoves(), move_val)
         self.incrementTotalMoves()
         self.setMaxMove(self.totalMoves())
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val != 0:
+        if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
