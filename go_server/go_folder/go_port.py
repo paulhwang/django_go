@@ -29,7 +29,7 @@ class GoPortClass(object):
 
     def thansmitBoardData(self):
         board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
-        self.debug(True, "transmitBoardData", "data=%s", "board_data");
+        self.debug(True, "transmitBoardData", "data=%s", board_data);
         #json_data = JSON.stringify({
         #               board_data: board_data,
         #               next_color: self.gameObject().nextColor(),
@@ -43,7 +43,7 @@ class GoPortClass(object):
         #self.transmitData(json_data);
 
     def receiveStringData(self, str_val):
-        self.logit("receiveStringData", str_val)
+        self.debug(False, "receiveStringData", str_val)
         if str_val == None:
             self.abend("receiveStringData", "null input");
             return

@@ -75,10 +75,10 @@ class GoGameClass(object):
         self.theGameIsOver = False
 
     def addNewMoveAndFight(self, move_val):
-        self.debug(True, "addNewMoveAndFight", "")
+        self.debug(False, "addNewMoveAndFight", "")
 
         if self.gameIsOver():
-            self.goLog("addNewMoveAndFight", "two pass have entered")
+            self.debug(True, "addNewMoveAndFight", "two pass have entered")
             return
 
         self.clearPassReceived()

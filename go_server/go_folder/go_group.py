@@ -146,16 +146,16 @@ class GroupClass(object):
         return False
 
     def mergeWithOtherGroup(self, group2):
-        self.logit("mergeWithOtherGroup", "");
+        self.debug(False, "mergeWithOtherGroup", "");
         #self.debugGroupObject();
         i = group2.minX();
         while i <= group2.maxX():
             j = group2.minY();
             while j <= group2.maxY():
                 if group2.existMatrix(i, j):
-                    self.logit("mergeWithOtherGroup", "i=%i j=%i", i, j);
+                    self.debug(False, "mergeWithOtherGroup", "i=%i j=%i", i, j);
                     if self.existMatrix(i, j):
-                        Go.goAbend("goMergeWithOtherGroup", "already exist");
+                        Go.abend("goMergeWithOtherGroup", "already exist");
                     self.setExistMatrix(i, j, group2.existMatrix(i, j));
                     self.incrementStoneCount();
 
@@ -200,7 +200,7 @@ class GroupClass(object):
             while j <= self.maxY():
                 if self.existMatrix(i, j):
                     self.boardObject().setBoardArray(i, j, self.goObject().EMPTY_STONE());
-                    self.debug(True, "removeDeadStoneFromBoard", "(%i,%i)", i, j);
+                    self.debug(False, "removeDeadStoneFromBoard", "(%i,%i)", i, j);
                 j += 1;
             i += 1;
 
@@ -223,7 +223,7 @@ class GroupClass(object):
         #self.logit("abendGroup", self.stoneCount_() + "==" + count)
         if self.stoneCount() != count:
             self.printGroup()
-            self.goAbend("abendGroup", self.stoneCount() + "!=" + count)
+            self.abend("abendGroup", self.stoneCount() + "!=" + count)
         #self.printGroup()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):

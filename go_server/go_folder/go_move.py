@@ -32,7 +32,7 @@ class GoMoveClass(object):
         return self.theTurnIndex
 
     def moveObjectDecode(self, str_val):
-        self.debug(1, "GoMoveObject", "input=" + str_val)
+        self.debug(False, "GoMoveObject", "input=" + str_val)
         self.theX = (ord(str_val[0]) - ord('0')) * 10
         self.theX += ord(str_val[1]) - ord('0')
         self.theY = (ord(str_val[2]) - ord('0')) * 10
@@ -43,7 +43,7 @@ class GoMoveClass(object):
         self.theTurnIndex += ord(str_val[7]) - ord('0')
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val != 0:
+        if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):

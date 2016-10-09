@@ -78,7 +78,7 @@ class BoardClass(object):
                 buf = buf + str(self.theBoardArray[i][j])
                 j += 1
             i += 1
-        self.logit("encodeBoard", "data=" + buf)
+        self.debug(False, "encodeBoard", "data=%s", buf)
         return buf
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):

@@ -132,12 +132,12 @@ class GoEngineClass(object):
         self.setCaptureCount()
 
     def enterWar(self, move_val):
-        self.logit("enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
+        self.debug(False, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
 
         group = self.insertStoneToGroupList(move_val)
         self.boardObject().addStoneToBoard(move_val.xX(), move_val.yY(), move_val.myColor())
         dead_count = self.killOtherColorGroups(move_val, group)
-        self.logit("enterWar", "dead_count=%i", dead_count)
+        self.debug(False, "enterWar", "dead_count=%i", dead_count)
 
         if group.groupHasAir() == 0:
             self.removeDeadGroup(group)
