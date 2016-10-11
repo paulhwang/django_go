@@ -11,8 +11,8 @@ def go_html(request):
     global html_count
     html_count += 1
     logger.error("go_html %s", html_count)
-    run_it()
-    test()
+    #run_it()
+    #test()
     return render(request, "js_go/phwang.html")
 
 ajax_count = 0
