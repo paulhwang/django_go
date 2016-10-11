@@ -1,8 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import logging
 import go_server.project_modules.util_modules.queue
 import go_server.project_modules.root
+from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger(__name__)
 
@@ -16,12 +17,13 @@ def go_html(request):
     return render(request, "js_go/phwang.html")
 
 ajax_count = 0
-#@csrf_exempt
+@csrf_exempt
 def go_ajax(request):
     global ajax_count
     ajax_count += 1
     logger.error("ajax_count %s", ajax_count)
-    return render(request, "js_go/phwang.html")
+    return JsonResponse({'status':'0'})
+    #return render(request, "js_go/phwang.html")
 
 def hello_entry(request):
     return HttpResponse("Hello there!")
