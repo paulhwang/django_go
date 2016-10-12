@@ -1,5 +1,6 @@
 /go_server/templates/js_go
 db.sqlite3
+/go_server/static/js_go
 /django_go/__pycache__
 /go_server/__pycache__
 /go_server/migrations/__pycache__
