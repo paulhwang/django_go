@@ -14,7 +14,7 @@ def go_html(request):
     logger.error("go_html %s", html_count)
     #run_it()
     #test()
-    return render(request, "js_go/phwang.html")
+    return render(request, "go_django.html")
 
 ajax_count = 0
 @csrf_exempt
