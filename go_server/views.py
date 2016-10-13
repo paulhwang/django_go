@@ -6,6 +6,7 @@ import go_server.project_modules.root
 from django.views.decorators.csrf import csrf_exempt
 
 logger = logging.getLogger(__name__)
+root = go_server.project_modules.root.malloc()
 
 html_count = 0
 def go_html(request):
@@ -22,6 +23,7 @@ def go_ajax(request):
     global ajax_count
     ajax_count += 1
     logger.error("ajax_count %s", ajax_count)
+    #logger.error("request %s", request)
     return JsonResponse({'status':'0'})
     #return render(request, "js_go/phwang.html")
 
