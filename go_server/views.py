@@ -24,7 +24,8 @@ def go_ajax(request):
     ajax_count += 1
     logger.error("ajax_count %s", ajax_count)
     #logger.error("request %s", request)
-    return JsonResponse({'status':'0'})
+    return root.portObject().ajaxObject().processInput(request)
+    #return JsonResponse({'status':'0'})
     #return render(request, "js_go/phwang.html")
 
 def hello_entry(request):

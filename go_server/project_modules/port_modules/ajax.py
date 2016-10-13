@@ -1,3 +1,5 @@
+from django.http import JsonResponse
+
 def malloc(port_val):
     return AjaxClass(port_val)
 
@@ -10,3 +12,6 @@ class AjaxClass(object):
 
     def portObject(self):
         return self.thePortObject
+
+    def processInput(self, request_val):
+        return JsonResponse({'status':'0'})

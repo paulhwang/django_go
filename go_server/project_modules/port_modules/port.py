@@ -17,5 +17,5 @@ class PortClass(object):
     def rootObject(self):
         return self.theRootObject
 
-    def portObject(self):
-        return self.thePortObject
+    def ajaxObject(self):
+        return self.theAjaxObject
