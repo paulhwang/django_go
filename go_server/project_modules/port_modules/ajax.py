@@ -14,13 +14,11 @@ class AjaxClass(object):
         return self.thePortObject
 
     def processInput(self, request_val):
-        self.debug(True, "processInput", "method=%s", request_val.method)
-        self.debug(True, "processInput", "is_ajax=%i", request_val.is_ajax())
-        self.debug(True, "processInput", "GET=%s", request_val.GET)
-        self.debug(True, "processInput", "POST=%s", request_val.POST)
+        if not request_val.is_ajax():
+            return
 
         if request_val.method == "POST":
-            self.processPost(request_val)
+            return self.processPost(request_val)
 
         if request_val.method == "GET":
             return self.processGet(request_val)
@@ -33,9 +31,7 @@ class AjaxClass(object):
         return JsonResponse({'status':'0'})
 
     def processGet(self, request_val):
-        self.debug(True, "processGet", "command=%s", request_val.GET.get("command"))
-        self.debug(True, "processGet", "body=%s", request_val.body)
-        #self.debug(True, "processGet", "content=%s", request_val.content_params)
+        self.debug(True, "processGet", "HTTP_GOREQUEST=%s", request_val.META.get("HTTP_GOREQUEST"))
         return JsonResponse({'status':'0'})
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
