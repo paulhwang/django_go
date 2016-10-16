@@ -1,5 +1,10 @@
+import go_server.project_modules.fibre_modules.link
+
 def malloc(fibre_val):
     return LinkMgrClass(fibre_val)
+
+def malloc_link(link_mgr_val, my_name_val, link_id_val):
+    return go_server.project_modules.fibre_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
 
 class LinkMgrClass(object):
     def __init__(self, fibre_val):
@@ -7,6 +12,9 @@ class LinkMgrClass(object):
         self.theGlobalLinkId = 10
         self.theLinkQueue = self.utilObject().mallocQueue()
         self.thePoolQueue = self.utilObject().mallocQueue()
+
+    def linkModuleMalloc(self, my_name_val, link_id_val):
+        return malloc_link(self, my_name_val, link_id_val)
 
     def className(self):
         return "LinkMgrClass"
@@ -20,8 +28,17 @@ class LinkMgrClass(object):
     def utilObject(self):
         return self.rootObject().utilObject()
 
+    def linkQueue(self):
+        return self.theLinkQueue
+
     def poolQueue(self):
         return self.thePoolQueue
+
+    def globalLinkId(self):
+        return self.theGlobalLinkId
+
+    def incrementGlobalLinkId(self):
+        self.theGlobalLinkId += 1
 
     def searchLink(self, my_name_val, link_id_val):
         self.debug(True, "searchIt", "my_name=%s link_id=%s", my_name_val, link_id_val)
@@ -34,7 +51,7 @@ class LinkMgrClass(object):
         link = self.searchLink(my_name_val, link_id_val)
         if not link:
             link = self.mallocLink(my_name_val)
-            self.debug(False, "searchAndCreate", "malloc link: name=" + link.myName() + "=link_id=" + link.link_id)
+            self.debug(True, "searchAndCreate", "malloc link: name=%s link_id=%i", link.myName(), link.linkId())
             self.linkQueue().enQueue(link)
         return link
 
