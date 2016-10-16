@@ -6,6 +6,9 @@ import go_server.project_modules.go_modules.go
 def malloc():
     return RootClass()
 
+def malloc_util(root_val):
+    return go_server.project_modules.util_modules.util.malloc(root_val)
+
 def malloc_fibre(root_val):
     return go_server.project_modules.fibre_modules.fibre.malloc(root_val)
 
@@ -17,12 +20,16 @@ def malloc_go(root_val):
 
 class RootClass(object):
     def __init__(self):
+        self.theUtilObject = malloc_util(self)
         self.theFibreObject = malloc_fibre(self)
         self.thePortObject = malloc_port(self)
         self.theGoObject = malloc_go(self)
 
     def className(self):
         return "RootClass"
+
+    def utilObject(self):
+        return self.theUtilObject
 
     def fibreObject(self):
         return self.theFibreObject

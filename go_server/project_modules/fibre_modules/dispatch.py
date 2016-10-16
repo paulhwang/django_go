@@ -54,15 +54,14 @@ class DispatchClass(object):
             self.abend("setupLink", "null go_request")
             return None
 
-        link = self.linkMgrObject().searchAndCreate(go_request.my_name, 0)
+        link = self.linkMgrObject().searchAndCreate(go_request.get("my_name"), 0)
         if not link:
             self.abend("setupLink", "null link")
             return None
-        else:
-            link.resetKeepAliveTimer()
+        link.resetKeepAliveTimer()
 
         link_id_str = "" + link.linkId()
-        self.logit("setupLink", "name=" + go_request.my_name + " link_id=" + link.linkId())
+        self.debug(True, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
         return link_id_str
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
