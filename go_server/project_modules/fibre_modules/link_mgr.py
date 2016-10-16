@@ -1,5 +1,3 @@
-import go_server.project_modules.util_modules.queue
-
 def malloc(fibre_val):
     return LinkMgrClass(fibre_val)
 
@@ -7,14 +5,20 @@ class LinkMgrClass(object):
     def __init__(self, fibre_val):
         self.theFibreObject = fibre_val
         self.theGlobalLinkId = 10
-        self.theLinkQueue = go_server.project_modules.util_modules.queue.malloc()
-        self.thePoolQueue = go_server.project_modules.util_modules.queue.malloc()
+        self.theLinkQueue = self.utilObject().mallocQueue()
+        self.thePoolQueue = self.utilObject().mallocQueue()
 
     def className(self):
         return "LinkMgrClass"
 
     def fibreObject(self):
         return self.theFibreObject
+
+    def rootObject(self):
+        return self.fibreObject().rootObject()
+
+    def utilObject(self):
+        return self.rootObject().utilObject()
 
     def poolQueue(self):
         return self.thePoolQueue

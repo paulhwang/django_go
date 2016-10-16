@@ -1,13 +1,11 @@
-import go_server.project_modules.util_modules.queue
-
 def malloc(fibre_val):
     return SessionMgrClass(fibre_val)
 
 class SessionMgrClass(object):
     def __init__(self, fibre_val):
         self.theFibreObject = fibre_val
-        self.theSessionQueue = go_server.project_modules.util_modules.queue.malloc()
-        self.thePreSessionQueue = go_server.project_modules.util_modules.queue.malloc()
+        self.theSessionQueue = self.utilObject().mallocQueue()
+        self.thePreSessionQueue = self.utilObject().mallocQueue()
         self.theGlobalSessionId = 1000
         self.thePoolHead = 0
         self.thePoolSize = 0
@@ -17,6 +15,12 @@ class SessionMgrClass(object):
 
     def fibreObject(self):
         return self.theFibreObject
+
+    def rootObject(self):
+        return self.fibreObject().rootObject()
+
+    def utilObject(self):
+        return self.rootObject().utilObject()
 
     def sessionQueue(self):
         return self.theSessionQueue;

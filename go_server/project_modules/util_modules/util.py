@@ -1,3 +1,6 @@
+import go_server.project_modules.util_modules.queue
+import go_server.project_modules.util_modules.ring
+
 def malloc(root_val):
     return UtilClass(root_val)
 
@@ -10,6 +13,12 @@ class UtilClass(object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def mallocQueue(self):
+        return go_server.project_modules.util_modules.queue.malloc(self)
+
+    def mallocRing(self):
+        return go_server.project_modules.util_modules.ring.malloc(self)
 
     def utilLogit(str12, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if  str3 == "":

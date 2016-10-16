@@ -1,10 +1,11 @@
 import go_server.project_modules.util_modules.util
 
-def malloc():
-    return QueueClass()
+def malloc(util_val):
+    return QueueClass(util_val)
 
 class QueueClass(object):
-    def __init__(self):
+    def __init__(self, util_val):
+        self.theUtiObject = util_val
         self.theSize = 0;
         self.theHead = 0;
         self.theTail = 0;
@@ -12,6 +13,9 @@ class QueueClass(object):
 
     def className(self):
         return "QueueClass"
+
+    def utiObject(self):
+        return theUtiObject
 
     def size(self):
         return self.theSize
@@ -36,16 +40,6 @@ class QueueClass(object):
 
     def holderPoolObject(self):
         return self.theHolderPoolObject
-
-    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val != 0:
-            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.utils.util.utilLogit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.utils.util.utilAbend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def enQueue(self, data_val):
         self.debug(0, "enQueue", "start")
@@ -145,6 +139,16 @@ class QueueClass(object):
         if i != self.size():
             i = self.abend("abendIt", "tail: size=%i i=", self.size(), i)
 
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if bool_val != 0:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilLogit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilAbend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
 class HolderPoolClass(object):
     def __init__(self):
         self.theHead = 0
@@ -211,6 +215,16 @@ class HolderPoolClass(object):
 
         if self.size() > 5:
             self.abend("abendIt", " size=" + self.size())
+
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if bool_val != 0:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilLogit(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.utils.util.utilAbend(self.className() + "." + str1 + "() " + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 class HolderEntryClass(object):
     def __init__(self):
