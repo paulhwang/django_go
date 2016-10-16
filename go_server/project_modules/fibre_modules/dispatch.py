@@ -60,7 +60,7 @@ class DispatchClass(object):
             return None
         link.resetKeepAliveTimer()
 
-        link_id_str = "" + link.linkId()
+        link_id_str = str(link.linkId())
         self.debug(True, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
         return link_id_str
 

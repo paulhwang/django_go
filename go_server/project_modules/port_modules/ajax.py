@@ -64,9 +64,9 @@ class AjaxClass(object):
             self.debug(True, "processGet", "command=%s", go_request["command"])
 
         data = self.dispatchObject().dispatchRequest(go_request)
-        json_str = JSON.stringify({
-                        command: go_request.command,
-                        ajax_id: go_request.ajax_id,
+        json_str = json.dumps({
+                        command: go_request["command"],
+                        ajax_id: go_request["ajax_id"],
                         data: data,
                         res_data: data,
                     })
