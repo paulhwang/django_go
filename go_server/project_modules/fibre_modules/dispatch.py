@@ -119,17 +119,26 @@ class DispatchClass(object):
         if go_request.get("data") != None:
             session.clusterObject().processSetupTopicData(go_request.get("data"))
 
-        session_id_str = "" + session.hisSession().sessionId()
+        session_id_str = str(session.hisSession().sessionId())
         data = json.dumps({
-                        order: "setup_session",
-                        session_id: session_id_str,
-                        his_name: go_request.my_name,
-                        my_name: go_request.his_name,
-                        extra_data: go_request.data,
+                        "order": "setup_session",
+                        "session_id": session_id_str,
+                        "his_name": go_request.get("my_name"),
+                        "my_name": go_request.get("his_name"),
+                        "extra_data": go_request.get("data"),
                     });
         his_link.receiveQueue().enQueue(data);
         self.sessionMgrObject().preSessionQueue().enQueue(data)
         return self.setupSessionReply(session, go_request);
+
+    def setupSessionReply(self, session_val, go_request):
+        session_id_str = str(session_val.sessionId())
+        data = json.dumps({
+                        "session_id": session_id_str,
+                        "extra_data": go_request.get("data"),
+                    })
+        self.debug(True, "setupSessionReply", "(%i,%i,%i) %s=>%s", go_request.get("link_id"), session_val.sessionId(), session_val.hisSession().sessionId(), go_request.get("my_name"), go_request.get("his_name"))
+        return data
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
