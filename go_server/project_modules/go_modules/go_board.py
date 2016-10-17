@@ -58,7 +58,7 @@ class BoardClass(object):
 
     def addStoneToBoard(self, x_val, y_val, color_val):
         if self.goObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()) == 0:
-            self.goAbend("addStoneToBoard", "x=" + x_val + " y=" + y_val)
+            self.abend("addStoneToBoard", "x=%i y=%i", x_val, y_val)
             return
         self.setBoardArray(x_val, y_val, color_val)
 

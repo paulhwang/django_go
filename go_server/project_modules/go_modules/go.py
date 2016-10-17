@@ -27,8 +27,8 @@ def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
     return go_server.project_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoClass(object):
-    def __init__(self, root_val):
-        self.theRootObject = root_val
+    def __init__(self, cluster_object_val):
+        self.theClusterObject = cluster_object_val
         self.theConfigObject = malloc_config(self)
         self.theBoardObject = malloc_board(self)
         self.theEngineObject = malloc_engine(self)
@@ -38,8 +38,17 @@ class GoClass(object):
     def className(self):
         return "GoClass"
 
+    def clusterObject(self):
+        return self.theClusterObject
+
+    def clusterMgrObject(self):
+        return self.clusterObject().clusterMgrObject()
+
+    def fibreObject(self):
+        return self.clusterMgrObject().fibreObject()
+
     def rootObject(self):
-        return self.theRootObject
+        return self.fibreObject().rootObject()
 
     def configObject(self):
         return self.theConfigObject
@@ -63,7 +72,7 @@ class GoClass(object):
         if color_val == self.WHITE_STONE():
             return self.BLACK_STONE()
 
-        self.abend("getOppositeColor", "color=" + color_val)
+        self.abend("getOppositeColor", "color=%i", color_val)
         return self.EMPTY_STONE()
 
     def isNeighborStone(self, x1_val, y1_val, x2_val, y2_val):
@@ -88,7 +97,7 @@ class GoClass(object):
         self.rootObject().logit(self.className() + "." + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject.abend(self.className() + "." + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.className() + "." + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def EMPTY_STONE(self):
         return 0

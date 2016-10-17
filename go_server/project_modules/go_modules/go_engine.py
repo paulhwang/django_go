@@ -132,9 +132,13 @@ class GoEngineClass(object):
         self.setCaptureCount()
 
     def enterWar(self, move_val):
-        self.debug(False, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
+        self.debug(True, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
 
         group = self.insertStoneToGroupList(move_val)
+        if not group:
+            self.abend("enterWar", "null group")
+            return
+            
         self.boardObject().addStoneToBoard(move_val.xX(), move_val.yY(), move_val.myColor())
         dead_count = self.killOtherColorGroups(move_val, group)
         self.debug(False, "enterWar", "dead_count=%i", dead_count)
@@ -162,7 +166,8 @@ class GoEngineClass(object):
             if move_val.myColor() == self.goObject().WHITE_STONE():
                 g_list = self.whiteGroupList()
             else:
-                self.goAbend("insertStoneToGroupList", "color=" + move_val.myColor())
+                self.abend("insertStoneToGroupList", "color=%i", move_val.myColor())
+                return None
 
         group = g_list.findCandidateGroup(move_val.xX(), move_val.yY())
         if group == 0:

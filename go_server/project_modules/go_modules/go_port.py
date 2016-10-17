@@ -43,7 +43,7 @@ class GoPortClass(object):
         #self.transmitData(json_data);
 
     def receiveStringData(self, str_val):
-        self.debug(False, "receiveStringData", str_val)
+        self.debug(True, "receiveStringData", str_val)
         if str_val == None:
             self.abend("receiveStringData", "null input");
             return
@@ -51,7 +51,7 @@ class GoPortClass(object):
         self.aMoveIsPlayed(str_val)
 
     def aMoveIsPlayed(self, str_val):
-        #self.debug(False, "aMoveIsPlayed", str_val);
+        self.debug(True, "aMoveIsPlayed", str_val);
         if self.gameObject().gameIsOver():
             index = 0
             x = (str_val.charAt(0) - ord('0')) * 10
