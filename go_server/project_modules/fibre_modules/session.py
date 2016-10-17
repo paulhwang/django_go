@@ -36,9 +36,15 @@ class SessionClass(object):
     def hisName(self):
         return self.theHisName
 
-    def setHisName(val):
+    def setHisName(self, val):
         self.theHisName = val
  
+    def hisSession(self):
+        return self.theHisSession;
+
+    def setHisSession(self, val):
+        self.theHisSession = val;
+
     def resetIt(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
         self.theSessionMgrObject = session_mgr_val
         self.theSessionId = session_id_val

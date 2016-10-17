@@ -109,15 +109,15 @@ class DispatchClass(object):
                 self.abend("setupSession", "null session")
                 return None
 
-        his_link = self.linkMgrObject().searchLink(go_request.his_name, 0)
+        his_link = self.linkMgrObject().searchLink(go_request.get("his_name"), 0)
         if not his_link:
-            res.send(self.jsonStingifyData(go_request.command, go_request.ajax_id, null))
+            res.send(self.jsonStingifyData(go_request.get("command"), go_request.get("ajax_id"), None))
             return None
 
-        self.debug(True, "setupSession", "(" + go_request.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name + " data=" + go_request.data)
+        self.debug(True, "setupSession", "(%i:%i,%i) %s=>%s data=%s", go_request.get("link_id"), session.sessionId(), session.hisSession().sessionId(), go_request.get("my_name"), go_request.get("his_name"), go_request.get("data"))
 
-        if go_request.data != None:
-            session.clusterObject().processSetupLinkData(go_request.data)
+        if go_request.get("data") != None:
+            session.clusterObject().processSetupTopicData(go_request.get("data"))
 
         session_id_str = "" + session.hisSession().sessionId()
         data = JSON.stringify({
