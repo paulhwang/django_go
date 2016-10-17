@@ -34,6 +34,12 @@ class LinkClass(object):
     def setKeepAliveTimer(self, val):
         self.theKeepAliveTimer = val
 
+    def receiveQueue(self):
+        return self.theReceiveQueue;
+
+    def receiveRing(self):
+        return self.theReceiveRing;
+
     def resetIt(self, my_name_val, link_id_val):
         self.theMyName = my_name_val
         self.theLinkId = link_id_val

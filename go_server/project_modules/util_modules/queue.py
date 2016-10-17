@@ -121,6 +121,17 @@ class QueueClass(object):
         self.abendIt()
         self.debug(false, "unQueue", "not found")
 
+    def searchIt(self, func_val, input_val1, input_val2, input_val3):
+        p = self.head();
+        while p:
+            self.debug(False, "searchIt", "in while loop")
+            if func_val(p.data(), input_val1, input_val2, input_val3):
+                self.debug(False, "searchIt", "found")
+                return p.data()
+            p = p.next()
+        self.debug(False, "searchIt", "not found")
+        return None
+
     def abendIt(self):
         i = 0
         p = self.head()

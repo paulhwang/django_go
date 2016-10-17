@@ -1,3 +1,5 @@
+import json
+
 def malloc(fibre_val):
     return DispatchClass(fibre_val)
 
@@ -69,7 +71,7 @@ class DispatchClass(object):
         if not link:
             self.abend("getLink", "null link: link_id=%i my_name=%s", go_request.get("link_id"), go_request.get("my_name"))
             return None
-        if link.link_id == 0:
+        if link.linkId() == 0:
             self.abend("getLink", "link_id = 0")
             return None
         return link
@@ -94,7 +96,7 @@ class DispatchClass(object):
         link.resetKeepAliveTimer()
 
         name_array = self.linkMgrObject().getNameList()
-        name_array_str = JSON.stringify(name_array)
+        name_array_str = json.dumps(name_array)
         self.debug(True, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
         return name_array_str
 
