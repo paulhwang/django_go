@@ -1,14 +1,21 @@
+import go_server.project_modules.fibre_modules.session
+
 def malloc(fibre_val):
     return SessionMgrClass(fibre_val)
+
+def malloc_session(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
+    return go_server.project_modules.fibre_modules.session.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
 
 class SessionMgrClass(object):
     def __init__(self, fibre_val):
         self.theFibreObject = fibre_val
         self.theSessionQueue = self.utilObject().mallocQueue()
         self.thePreSessionQueue = self.utilObject().mallocQueue()
+        self.thePoolQueue = self.utilObject().mallocQueue()
         self.theGlobalSessionId = 1000
-        self.thePoolHead = 0
-        self.thePoolSize = 0
+
+    def sessionModuleMalloc(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
+        return malloc_session(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
 
     def className(self):
         return "SessionMgrClass"
@@ -19,6 +26,9 @@ class SessionMgrClass(object):
     def rootObject(self):
         return self.fibreObject().rootObject()
 
+    def clusterMgrObject(self):
+        return self.fibreObject().clusterMgrObject()
+
     def utilObject(self):
         return self.rootObject().utilObject()
 
@@ -28,23 +38,14 @@ class SessionMgrClass(object):
     def preSessionQueue(self):
         return self.thePreSessionQueue;
 
+    def poolQueue(self):
+        return self.thePoolQueue
+
     def globalSessionId(self):
         return self.theGlobalSessionId;
 
-    def poolHead(self):
-        return self.thePoolHead
-
-    def setPoolHead(self, val):
-        self.thePoolHead = val
-
-    def poolSize(self):
-        return self.thePoolSize
-
-    def incrementPoolSize(self):
-        self.thePoolSize += 1
-
-    def decrementPoolSize(self):
-        self.thePoolSize -= 1
+    def incrementGlobalSessionId(self):
+        self.theGlobalSessionId += 1
 
     def searchSession(self, my_name_val, his_name_val, session_id_val):
         return self.sessionQueue().searchIt(compareSessionData, my_name_val, his_name_val, session_id_val)
@@ -52,7 +53,7 @@ class SessionMgrClass(object):
     def searchAndCreate(self, my_name_val, his_name_val, session_id_val):
         session = self.searchSession(my_name_val, his_name_val, session_id_val)
         if not session:
-            cluster = self.clusterModuleMalloc()
+            cluster = self.clusterMgrObject().mallocCluster()
             session = self.mallocSession(my_name_val, his_name_val, cluster)
             self.sessionQueue().enQueue(session)
 

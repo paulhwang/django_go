@@ -38,6 +38,9 @@ class FibreClass(object):
     def sessionMgrObject(self):
         return self.theSessionMgrObject
 
+    def clusterMgrObject(self):
+        return self.theClusterMgrObject
+
     def dispatchObject(self):
         return self.theDispatchObject
 

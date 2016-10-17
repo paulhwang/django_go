@@ -11,11 +11,20 @@ class ClusterMgrClass(object):
         self.theFibreObject = fibre_val;
         self.theClusterObject = malloc_cluster(self)
 
+    def mallocCluster(self):
+        return malloc_cluster(self)
+
     def className(self):
         return "ClusterMgrClass"
 
     def fibreObject(self):
         return self.theFibreObject
+
+    def rootObject(self):
+        return self.fibreObject().rootObject()
+
+    def utilObject(self):
+        return self.rootObject().utilObject()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
