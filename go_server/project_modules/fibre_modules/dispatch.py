@@ -61,8 +61,42 @@ class DispatchClass(object):
         link.resetKeepAliveTimer()
 
         link_id_str = str(link.linkId())
-        self.debug(True, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
+        self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
         return link_id_str
+
+    def getLink(self, go_request):
+        link = self.linkMgrObject().searchLink(go_request.get("my_name"), go_request.get("link_id"))
+        if not link:
+            self.abend("getLink", "null link: link_id=%i my_name=%s", go_request.get("link_id"), go_request.get("my_name"))
+            return None
+        if link.link_id == 0:
+            self.abend("getLink", "link_id = 0")
+            return None
+        return link
+
+    def getLinkData(self, go_request):
+        self.debug(False, "getLinkData", "link_id=%i my_name=%s ajax_id=%i", go_request.get("link_id"), go_request.get("my_name"), go_request.get("ajax_id"))
+
+        link = self.getLink(go_request)
+        if not link:
+            return None
+        link.resetKeepAliveTimer()
+
+        data = link.receiveQueue().deQueue()
+        if data:
+            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.link_id, go_request.my_name, data);
+        return data
+
+    def getNameList(self, go_request):
+        link = self.getLink(go_request)
+        if not link:
+            return None
+        link.resetKeepAliveTimer()
+
+        name_array = self.linkMgrObject().getNameList()
+        name_array_str = JSON.stringify(name_array)
+        self.debug(True, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
+        return name_array_str
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
