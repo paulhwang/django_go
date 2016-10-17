@@ -98,6 +98,37 @@ class DispatchClass(object):
         self.debug(True, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
         return name_array_str
 
+    def setupSession (self, go_request):
+        session = self.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.link_id)
+        if not session:
+            session = self.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0)
+            if not session:
+                res.send(self.jsonStingifyData(go_request.command, go_request.ajax_id, null))
+                self.abend("setupSession", "null session")
+                return None
+
+        his_link = self.linkMgrObject().searchLink(go_request.his_name, 0)
+        if not his_link:
+            res.send(self.jsonStingifyData(go_request.command, go_request.ajax_id, null))
+            return None
+
+        self.debug(True, "setupSession", "(" + go_request.link_id + "," + session.sessionId() + "," + session.hisSession().sessionId() + ") " + go_request.my_name + "=>" + go_request.his_name + " data=" + go_request.data)
+
+        if go_request.data != None:
+            session.clusterObject().processSetupLinkData(go_request.data)
+
+        session_id_str = "" + session.hisSession().sessionId()
+        data = JSON.stringify({
+                        order: "setup_session",
+                        session_id: session_id_str,
+                        his_name: go_request.my_name,
+                        my_name: go_request.his_name,
+                        extra_data: go_request.data,
+                    });
+        his_link.receiveQueue().enQueue(data);
+        self.sessionMgrObject().preSessionQueue().enQueue(data)
+        return self.setupSessionReply(session, go_request);
+
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
