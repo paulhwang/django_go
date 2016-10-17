@@ -86,7 +86,7 @@ class DispatchClass(object):
 
         data = link.receiveQueue().deQueue()
         if data:
-            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.link_id, go_request.my_name, data);
+            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data);
         return data
 
     def getNameList(self, go_request):
@@ -139,6 +139,28 @@ class DispatchClass(object):
                     })
         self.debug(True, "setupSessionReply", "(%i,%i,%i) %s=>%s", go_request.get("link_id"), session_val.sessionId(), session_val.hisSession().sessionId(), go_request.get("my_name"), go_request.get("his_name"))
         return data
+
+    def getSessionData(self, go_request):
+        self.debug(False, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
+        link = self.getLink(go_request)
+        if not link:
+            return None
+        link.resetKeepAliveTimer()
+
+        session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("session_id"))
+        if not session:
+            self.abend("getSessionData", "null session session_id=%s", go_request.get("session_id"))
+            return None
+
+        res_data = session.dequeueTransmitData()
+        if not res_data:
+            self.debug(False, "getSessionData", "no data")
+            return None
+        self.logit("getSessionData", "res_data=" + res_data)
+
+        self.debug(False, "getSessionData", "ajax_id=%i", go_request.get("ajax_id"))
+        self.logit("getSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
+        return res_data
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

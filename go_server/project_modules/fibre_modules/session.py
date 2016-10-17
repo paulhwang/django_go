@@ -45,6 +45,15 @@ class SessionClass(object):
     def setHisSession(self, val):
         self.theHisSession = val;
 
+    def receiveQueue(self):
+        return self.theReceiveQueue;
+
+    def transmitQueue(self):
+        return self.theTransmitQueue;
+
+    def receiveRing(self):
+        return self.theReceiveRing;
+
     def resetIt(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
         self.theSessionMgrObject = session_mgr_val
         self.theSessionId = session_id_val
@@ -58,6 +67,11 @@ class SessionClass(object):
         self.theReceiveRing = self.utilObject().mallocRing()
         self.theClusterObject = cluster_val
         self.clusterObject().addAdditionalSession(self)
+
+    def dequeueTransmitData(self):
+        data = self.transmitQueue().deQueue()
+        self.debug(False, "dequeueTransmitData", data)
+        return data
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
