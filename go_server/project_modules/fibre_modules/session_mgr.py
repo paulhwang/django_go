@@ -14,8 +14,8 @@ class SessionMgrClass(object):
         self.thePoolQueue = self.utilObject().mallocQueue()
         self.theGlobalSessionId = 1000
 
-    def sessionModuleMalloc(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
-        return malloc_session(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
+    def sessionModuleMalloc(self, my_name_val, his_name_val, session_id_val, cluster_val):
+        return malloc_session(self, my_name_val, his_name_val, session_id_val, cluster_val)
 
     def className(self):
         return "SessionMgrClass"
@@ -70,7 +70,7 @@ class SessionMgrClass(object):
     def mallocSession(self, my_name_val, his_name_val, cluster_val):
         entry = self.poolQueue().deQueue();
         if not entry:
-            entry = self.sessionModuleMalloc(self, my_name_val, his_name_val, self.globalSessionId(), cluster_val)
+            entry = self.sessionModuleMalloc(my_name_val, his_name_val, self.globalSessionId(), cluster_val)
         else:
             entry.resetIt(my_name_val, his_name_val, self.globalSessionId(), cluster_val)
         self.incrementGlobalSessionId()
