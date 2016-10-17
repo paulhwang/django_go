@@ -120,7 +120,7 @@ class DispatchClass(object):
             session.clusterObject().processSetupTopicData(go_request.get("data"))
 
         session_id_str = "" + session.hisSession().sessionId()
-        data = JSON.stringify({
+        data = json.dumps({
                         order: "setup_session",
                         session_id: session_id_str,
                         his_name: go_request.my_name,

@@ -1,4 +1,5 @@
 import go_server.project_modules.go_modules.go
+import json
 
 def malloc(cluster_mgr_val):
     return ClusterClass(cluster_mgr_val)
@@ -8,7 +9,7 @@ class ClusterClass(object):
         self.theClusterMgrObject = cluster_mgr_val;
         self.theSessionArray = [2]
         self.theSessionArrayLength = 0
-        self.theGoContainerObject = self.goObjectMalloc()
+        self.theGoObject = self.goObjectMalloc()
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
         self.theNext = None
@@ -21,6 +22,9 @@ class ClusterClass(object):
 
     def clusterMgrObject(self):
         return self.theClusterMgrObject
+
+    def goObject(self):
+        return self.theGoObject
 
     def fibreObject(self):
         return self.clusterMgrObject().fibreObject()
@@ -46,9 +50,9 @@ class ClusterClass(object):
 
     def processSetupTopicData(self, json_data_val):
         self.debug(True, "processSetupTopicData", "data=%s", json_data_val)
-        json = JSON.parse(json_data_val)
-        if json.command == "config":
-            self.goContainerObject().configObject().createConfig(json.data)
+        topic_data = json.loads(json_data_val)
+        if topic_data.get("command") == "config":
+            self.goObject().configObject().createConfig(topic_data.get("data"))
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
