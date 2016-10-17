@@ -101,9 +101,9 @@ class DispatchClass(object):
         return name_array_str
 
     def setupSession (self, go_request):
-        session = self.sessionMgrObject().searchIt(go_request.my_name, go_request.his_name, go_request.link_id)
+        session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("link_id"))
         if not session:
-            session = self.sessionMgrObject().searchAndCreate(go_request.my_name, go_request.his_name, 0)
+            session = self.sessionMgrObject().searchAndCreate(go_request.get("my_name"), go_request.get("his_name"), 0)
             if not session:
                 res.send(self.jsonStingifyData(go_request.command, go_request.ajax_id, null))
                 self.abend("setupSession", "null session")
