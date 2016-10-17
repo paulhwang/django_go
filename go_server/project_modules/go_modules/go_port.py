@@ -48,7 +48,18 @@ class GoPortClass(object):
             self.abend("receiveStringData", "null input");
             return
 
-        self.aMoveIsPlayed(str_val)
+        code = str_val.slice(0, self.GO_PROTOCOL_CODE_SIZE)
+        data = str_val.slice(self.GO_PROTOCOL_CODE_SIZE)
+        self.debug(False, "receiveStringData", code);
+        self.debug(False, "receiveStringData", data);
+
+        if code == self.GO_PROTOCOL_CODE_MOVE_DATA:
+            self.aMoveIsPlayed(data)
+            return
+
+        if code == self.GO_PROTOCOL_CODE_SPECIAL_MOVE:
+            self.aSpecialMoveIsPlayed(data)
+            return
 
     def aMoveIsPlayed(self, str_val):
         self.debug(True, "aMoveIsPlayed", str_val);
