@@ -48,10 +48,10 @@ class GoPortClass(object):
             self.abend("receiveStringData", "null input");
             return
 
-        code = str_val.slice(0, self.GO_PROTOCOL_CODE_SIZE)
-        data = str_val.slice(self.GO_PROTOCOL_CODE_SIZE)
-        self.debug(False, "receiveStringData", code);
-        self.debug(False, "receiveStringData", data);
+        code = str_val[:self.GO_PROTOCOL_CODE_SIZE]
+        data = str_val[self.GO_PROTOCOL_CODE_SIZE:]
+        self.debug(False, "receiveStringData", "code=%s", code)
+        self.debug(False, "receiveStringData", "data=%s", data)
 
         if code == self.GO_PROTOCOL_CODE_MOVE_DATA:
             self.aMoveIsPlayed(data)
@@ -62,7 +62,7 @@ class GoPortClass(object):
             return
 
     def aMoveIsPlayed(self, str_val):
-        self.debug(True, "aMoveIsPlayed", str_val);
+        self.debug(False, "aMoveIsPlayed", str_val);
         if self.gameObject().gameIsOver():
             index = 0
             x = (str_val.charAt(0) - ord('0')) * 10
