@@ -57,7 +57,7 @@ class LinkMgrClass(object):
         return link
 
     def getNameList(self):
-        name_array = [""]
+        name_array = [None] * self.linkQueue().size()
         i = 0
         queue_element = self.linkQueue().tail()
         while queue_element:
