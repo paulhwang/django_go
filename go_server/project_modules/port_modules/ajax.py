@@ -18,7 +18,7 @@ class AjaxClass(object):
         return self.portObject().rootObject()
 
     def fibreObject(self):
-        return self.rootObject().fibreObject()
+        return self.rootObject().farbricObject()
 
     def dispatchObject(self):
         return self.fibreObject().dispatchObject()

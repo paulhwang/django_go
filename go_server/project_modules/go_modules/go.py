@@ -44,11 +44,11 @@ class GoClass(object):
     def clusterMgrObject(self):
         return self.clusterObject().clusterMgrObject()
 
-    def fibreObject(self):
-        return self.clusterMgrObject().fibreObject()
+    def farbricObject(self):
+        return self.clusterMgrObject().farbricObject()
 
     def rootObject(self):
-        return self.fibreObject().rootObject()
+        return self.farbricObject().rootObject()
 
     def configObject(self):
         return self.theConfigObject

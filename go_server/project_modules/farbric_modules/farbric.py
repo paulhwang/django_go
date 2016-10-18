@@ -1,22 +1,22 @@
-import go_server.project_modules.fibre_modules.link_mgr
-import go_server.project_modules.fibre_modules.session_mgr
-import go_server.project_modules.fibre_modules.cluster_mgr
-import go_server.project_modules.fibre_modules.dispatch
+import go_server.project_modules.farbric_modules.link_mgr
+import go_server.project_modules.farbric_modules.session_mgr
+import go_server.project_modules.farbric_modules.cluster_mgr
+import go_server.project_modules.farbric_modules.dispatch
 
 def malloc(root_val):
     return FibreClass(root_val)
 
 def malloc_link_mgr(root_val):
-    return go_server.project_modules.fibre_modules.link_mgr.malloc(root_val)
+    return go_server.project_modules.farbric_modules.link_mgr.malloc(root_val)
 
 def malloc_session_mgr(root_val):
-    return go_server.project_modules.fibre_modules.session_mgr.malloc(root_val)
+    return go_server.project_modules.farbric_modules.session_mgr.malloc(root_val)
 
 def malloc_cluster_mgr(root_val):
-    return go_server.project_modules.fibre_modules.cluster_mgr.malloc(root_val)
+    return go_server.project_modules.farbric_modules.cluster_mgr.malloc(root_val)
 
 def malloc_dispatch(root_val):
-    return go_server.project_modules.fibre_modules.dispatch.malloc(root_val)
+    return go_server.project_modules.farbric_modules.dispatch.malloc(root_val)
 
 class FibreClass(object):
     def __init__(self, root_val):

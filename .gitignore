@@ -6,5 +6,5 @@ db.sqlite3
 /go_server/project_modules/__pycache__
 /go_server/project_modules/util_modules/__pycache__
 /go_server/project_modules/port_modules/__pycache__
-/go_server/project_modules/fibre_modules/__pycache__
+/go_server/project_modules/farbric_modules/__pycache__
 /go_server/project_modules/go_modules/__pycache__

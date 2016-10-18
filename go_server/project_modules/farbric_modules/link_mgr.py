@@ -1,14 +1,14 @@
-import go_server.project_modules.fibre_modules.link
+import go_server.project_modules.farbric_modules.link
 
-def malloc(fibre_val):
-    return LinkMgrClass(fibre_val)
+def malloc(fabric_val):
+    return LinkMgrClass(fabric_val)
 
 def malloc_link(link_mgr_val, my_name_val, link_id_val):
-    return go_server.project_modules.fibre_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
+    return go_server.project_modules.farbric_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
 
 class LinkMgrClass(object):
-    def __init__(self, fibre_val):
-        self.theFibreObject = fibre_val
+    def __init__(self, fabric_val):
+        self.theFarbricObject = fabric_val
         self.theGlobalLinkId = 10
         self.theLinkQueue = self.utilObject().mallocQueue()
         self.thePoolQueue = self.utilObject().mallocQueue()
@@ -19,11 +19,11 @@ class LinkMgrClass(object):
     def className(self):
         return "LinkMgrClass"
 
-    def fibreObject(self):
-        return self.theFibreObject
+    def farbricObject(self):
+        return self.theFarbricObject
 
     def rootObject(self):
-        return self.fibreObject().rootObject()
+        return self.farbricObject().rootObject()
 
     def utilObject(self):
         return self.rootObject().utilObject()
@@ -84,10 +84,10 @@ class LinkMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 def compareFunction(link_val, my_name_val, link_id_val, dummy_val):
     if my_name_val != link_val.myName():

@@ -1,14 +1,14 @@
-import go_server.project_modules.fibre_modules.cluster
+import go_server.project_modules.farbric_modules.cluster
 
-def malloc(fibre_val):
-    return ClusterMgrClass(fibre_val)
+def malloc(fabric_val):
+    return ClusterMgrClass(fabric_val)
 
 def malloc_cluster(cluster_mgr_val):
-    return go_server.project_modules.fibre_modules.cluster.malloc(cluster_mgr_val)
+    return go_server.project_modules.farbric_modules.cluster.malloc(cluster_mgr_val)
 
 class ClusterMgrClass(object):
-    def __init__(self, fibre_val):
-        self.theFibreObject = fibre_val;
+    def __init__(self, fabric_val):
+        self.theFarbricObject = fabric_val;
         self.theClusterObject = malloc_cluster(self)
 
     def mallocCluster(self):
@@ -17,11 +17,11 @@ class ClusterMgrClass(object):
     def className(self):
         return "ClusterMgrClass"
 
-    def fibreObject(self):
-        return self.theFibreObject
+    def farbricObject(self):
+        return self.theFarbricObject
 
     def rootObject(self):
-        return self.fibreObject().rootObject()
+        return self.farbricObject().rootObject()
 
     def utilObject(self):
         return self.rootObject().utilObject()
@@ -31,7 +31,7 @@ class ClusterMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

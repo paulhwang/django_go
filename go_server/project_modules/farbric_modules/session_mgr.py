@@ -1,14 +1,14 @@
-import go_server.project_modules.fibre_modules.session
+import go_server.project_modules.farbric_modules.session
 
-def malloc(fibre_val):
-    return SessionMgrClass(fibre_val)
+def malloc(fabric_val):
+    return SessionMgrClass(fabric_val)
 
 def malloc_session(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
-    return go_server.project_modules.fibre_modules.session.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
+    return go_server.project_modules.farbric_modules.session.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
 
 class SessionMgrClass(object):
-    def __init__(self, fibre_val):
-        self.theFibreObject = fibre_val
+    def __init__(self, fabric_val):
+        self.theFarbricObject = fabric_val
         self.theSessionQueue = self.utilObject().mallocQueue()
         self.thePreSessionQueue = self.utilObject().mallocQueue()
         self.thePoolQueue = self.utilObject().mallocQueue()
@@ -20,14 +20,14 @@ class SessionMgrClass(object):
     def className(self):
         return "SessionMgrClass"
 
-    def fibreObject(self):
-        return self.theFibreObject
+    def farbricObject(self):
+        return self.theFarbricObject
 
     def rootObject(self):
-        return self.fibreObject().rootObject()
+        return self.farbricObject().rootObject()
 
     def clusterMgrObject(self):
-        return self.fibreObject().clusterMgrObject()
+        return self.farbricObject().clusterMgrObject()
 
     def utilObject(self):
         return self.rootObject().utilObject()
@@ -84,10 +84,10 @@ class SessionMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fibreObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 def compareSessionData(session_val, my_name_val, his_name_val, session_id_val):
     if my_name_val != session_val.myName():
