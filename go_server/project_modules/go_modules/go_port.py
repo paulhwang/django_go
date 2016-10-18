@@ -89,6 +89,10 @@ class GoPortClass(object):
             self.gameObject().addNewMoveAndFight(move)
             self.thansmitBoardData()
 
+    def aSpecialMoveIsPlayed(self, str_val):
+        self.debug(False, "aSpecialMoveIsPlayed", str_val)
+        self.gameObject().receiveSpecialMoveFromOpponent(str_val)
+
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
