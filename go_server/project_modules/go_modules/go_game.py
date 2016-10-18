@@ -26,6 +26,15 @@ class GoGameClass(object):
     def engineObject(self):
         return self.goObject().engineObject()
 
+    def configObject(self):
+        return self.goObject().configObject()
+
+    def boardObject(self):
+        return self.goObject().boardObject()
+
+    def portObject(self):
+        return self.goObject().portObject()
+
     def passReceived(self):
         return self.thePassReceived
 
@@ -153,6 +162,77 @@ class GoGameClass(object):
         if data_val == self.PLAY_ANOTHER_GAME_MOVE():
             self.processPlayAnotherGameMove()
             return
+
+    def processDoubleBackwardMove(self):
+        self.debug(False, "goProcessBackwardMoveFromUi", "")
+        self.clearPassReceived()
+        if self.totalMoves() <= self.configObject().handicapPoint():
+            return
+        self.setTotalMoves(self.configObject().handicapPoint())
+        self.processTheWholeMoveList()
+
+    def processBackwardMove(self):
+        self.debug(True, "processBackwardMove", "")
+        self.clearPassReceived();
+        if self.totalMoves() <= self.configObject().handicapPoint():
+            return
+        self.decrementTotalMoves()
+        self.processTheWholeMoveList()
+
+    def processForwardMove(self):
+        self.clearPassReceived()
+        if self.totalMoves() > self.maxMove():
+            self.abend("processForwardMove", "totalMoves=" + self.totalMoves_() + " maxMove=" + self.naxMove_())
+            return
+        if self.totalMoves() == self.maxMove():
+            return
+        self.incrementTotalMoves()
+        self.processTheWholeMoveList()
+
+    def processDoubleForwardMove(self):
+        self.clearPassReceived()
+        if self.totalMoves() > self.maxMove():
+            self.abend("processDoubleForwardMove", "totalMoves=" + self.totalMoves() + " maxMove=" + self.maxMove_())
+            return
+        if self.totalMoves() == self.maxMove():
+            return
+        self.setTotalMoves(self.maxMove())
+        self.processTheWholeMoveList()
+
+    def processPassMove(self):
+        self.debug(True, "processPassMove", "")
+
+        if not self.passReceived():
+            self.setPassReceived()
+            self.setNextColor(self.GO().getOppositeColor(self.nextColor()))
+            return
+
+        self.setGameIsOver()
+
+        self.engineObject().resetMarkedGroupLists()
+        self.displayResult();
+        self.debug(True, "processPassMove", "game is over")
+        self.engineObject().computeScore()
+        self.engineObject().printScore()
+        self.engineObject().abendEngine()
+
+    def processTheWholeMoveList(self):
+        self.boardObject().resetBoardObjectData()
+        self.engineObject().resetEngineObjectData()
+        self.resetGameObjectPartialData()
+
+        self.debug(True, "processTheWholeMoveLst", "totalMoves=%i", self.totalMoves())
+        i = 0
+        while i < self.totalMoves():
+            move = self.movesArray(i)
+            self.engineObject().enterWar(move)
+            self.setNextColor(self.goObject().getOppositeColor(move.myColor()))
+            i += 1
+
+    def resetGameObjectPartialData(self):
+        self.theNextColor = self.goObject().BLACK_STONE()
+        self.thePassReceived = False
+        self.theGameIsOver = False
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
