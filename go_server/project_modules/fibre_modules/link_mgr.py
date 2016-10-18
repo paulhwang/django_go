@@ -41,7 +41,7 @@ class LinkMgrClass(object):
         self.theGlobalLinkId += 1
 
     def searchLink(self, my_name_val, link_id_val):
-        self.debug(True, "searchLink", "my_name=%s link_id=%s", my_name_val, link_id_val)
+        self.debug(False, "searchLink", "my_name=%s link_id=%s", my_name_val, link_id_val)
         return self.linkQueue().searchIt(compareFunction, my_name_val, link_id_val, None)
         #return self.linkQueue().searchIt(function (link_val, my_name_val, link_id_val) {
         #    return ((my_name_val === link_val.myName()) &&

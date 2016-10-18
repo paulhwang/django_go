@@ -104,7 +104,7 @@ class QueueClass(object):
             #elf.logit("deQueue", "data=" + data_entry.data)
             self.holderPoolObject().freeEntry(data_entry)
         else:
-            self.debug(True, "deQueue", "null")
+            self.debug(False, "deQueue", "null")
 
         self.abendIt()
         self.debug(False, "deQueue", "end")
