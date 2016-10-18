@@ -4,9 +4,9 @@ def malloc(util_val):
 class QueueClass(object):
     def __init__(self, util_val):
         self.theUtilObject = util_val
-        self.theSize = 0;
-        self.theHead = 0;
-        self.theTail = 0;
+        self.theSize = 0
+        self.theHead = None
+        self.theTail = None
         self.theHolderPoolObject = HolderPoolClass(self)
 
     def className(self):
@@ -49,20 +49,20 @@ class QueueClass(object):
         #self.debug(1, "enQueue", "start %i %s %i", 100, "b", 1000)
         #self.debug(1, "enQueue", "start %i %s %i %i", 100, "b", 1000, 1)
         #self.debug(1, "enQueue", "start %i %s %i %i %i", 100, "b", 1000, 1, 1)
-        if data_val == 0:
+        if not data_val:
             self.abend("enQueue", "null data_val")
             return
 
         self.abendIt()
 
         data_entry = self.holderPoolObject().mallocEntry(data_val)
-        if data_entry == 0:
+        if not data_entry:
             self.abend("enQueue", "null data_entry")
             return
 
         self.incrementSize()
 
-        if self.head() == 0:
+        if not self.head():
             data_entry.setPrev(0)
             data_entry.setNext(0)
             self.setHead(data_entry)
@@ -77,15 +77,15 @@ class QueueClass(object):
         self.debug(0, "enQueue", "end")
 
     def deQueue(self):
-        data_entry = 0
-        data = 0
+        data_entry = None
+        data = None
 
         self.debug(0, "deQueue", "start")
         self.abendIt()
 
-        if self.head() == 0:
-            data_entry = 0
-            data = 0
+        if not self.head():
+            data_entry = None
+            data = None
         else:
             if self.head() == self.tail():
                 self.decrementSize()
@@ -104,17 +104,17 @@ class QueueClass(object):
             #elf.logit("deQueue", "data=" + data_entry.data)
             self.holderPoolObject().freeEntry(data_entry)
         else:
-            self.logit("deQueue", "null")
+            self.debug(True, "deQueue", "null")
 
         self.abendIt()
-        self.debug(0, "deQueue", "end")
+        self.debug(False, "deQueue", "end")
         return data
 
     def unQueue(self, func_val, input_val1, input_val2, input_val3):
         self.abendIt()
 
         p = self.head()
-        while p != 0:
+        while p:
             self.debug(false, "unQueue", "in while loop")
             p = p.next()
 
@@ -135,7 +135,7 @@ class QueueClass(object):
     def abendIt(self):
         i = 0
         p = self.head()
-        while p != 0:
+        while p:
             p = p.next()
             i += 1
 
@@ -144,7 +144,7 @@ class QueueClass(object):
 
         i = 0
         p = self.tail()
-        while p != 0:
+        while p:
             p = p.prev()
             i += 1
 
@@ -164,8 +164,8 @@ class QueueClass(object):
 class HolderPoolClass(object):
     def __init__(self, queue_val):
         self.theQueueObject = queue_val
-        self.theHead = 0
-        self.theTail = 0
+        self.theHead = None
+        self.theTail = None
         self.theSize = 0
 
     def queueObject(self):
@@ -197,7 +197,7 @@ class HolderPoolClass(object):
 
         self.abendIt()
 
-        if self.head() == 0:
+        if not self.head():
             entry = HolderEntryClass()
         else:
             entry = self.head()
@@ -215,7 +215,7 @@ class HolderPoolClass(object):
 
     def freeEntry(self, entry_val):
         self.abendIt()
-        if entry_val == 0:
+        if not entry_val:
             return
 
         self.abendIt()
@@ -228,7 +228,7 @@ class HolderPoolClass(object):
     def abendIt(self):
         i = 0
         p = self.head()
-        while p != 0:
+        while p:
             p = p.next()
             i += 1
 
@@ -250,9 +250,9 @@ class HolderPoolClass(object):
 
 class HolderEntryClass(object):
     def __init__(self):
-        self.theData = 0;
-        self.thePrev = 0;
-        self.theNext = 0;
+        self.theData = None
+        self.thePrev = None
+        self.theNext = None
 
     def data(self):
         return self.theData

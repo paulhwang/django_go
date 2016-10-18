@@ -60,7 +60,10 @@ class ClusterClass(object):
 
     def dequeueTransmitData(self):
         data = self.transmitQueue().deQueue()
-        self.debug(True, "dequeueTransmitData", data)
+        if data:
+            self.debug(True, "dequeueTransmitData", "data=%s", data)
+        else:
+            self.debug(True, "dequeueTransmitData", "queue is empty")
         return data
 
     def enqueueReceiveData(self, data_val):
@@ -69,7 +72,10 @@ class ClusterClass(object):
 
     def dequeueReceiveData(self):
         data = self.receiveQueue().deQueue()
-        self.debug(True, "dequeueReceiveData", data)
+        if data:
+            self.debug(True, "dequeueReceiveData", "data=%s", data)
+        else:
+            self.debug(True, "dequeueReceiveData", "queue is empty")
         return data
 
     def processTransmitData(self):
