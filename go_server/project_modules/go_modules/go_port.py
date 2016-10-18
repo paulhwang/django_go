@@ -1,3 +1,5 @@
+import json
+
 def malloc(go_val):
     return GoPortClass(go_val)
 
@@ -18,8 +20,11 @@ class GoPortClass(object):
     def goObject(self):
         return self.theGoObject
 
-    def handlerObject(self):
-        return self.goObject().handlerObject()
+    def clusterObject(self):
+        return self.goObject().clusterObject()
+
+    def engineObject(self):
+        return self.goObject().engineObject()
 
     def gameObject(self):
         return self.goObject().gameObject()
@@ -30,17 +35,21 @@ class GoPortClass(object):
     def thansmitBoardData(self):
         board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
         self.debug(True, "transmitBoardData", "data=%s", board_data);
-        #json_data = JSON.stringify({
-        #               board_data: board_data,
-        #               next_color: self.gameObject().nextColor(),
-        #               last_dead_stone: self.engineObject().lastDeadStone(),
-        #               capture_count: self.engineObject().captureCount(),
-        #               game_is_over: self.gameObject().gameIsOver(),
-        #               black_score: self.engineObject().blackScoreString(),
-        #               white_score: self.engineObject().whiteScoreString(),
-        #               final_score: self.engineObject().finalScoreString(),
-        #           });
-        #self.transmitData(json_data);
+        json_data = json.dumps({
+                       "board_data": board_data,
+                       "next_color": self.gameObject().nextColor(),
+                       "last_dead_stone": self.engineObject().lastDeadStone(),
+                       "capture_count": self.engineObject().captureCount(),
+                       "game_is_over": self.gameObject().gameIsOver(),
+                       "black_score": self.engineObject().blackScoreString(),
+                       "white_score": self.engineObject().whiteScoreString(),
+                       "final_score": self.engineObject().finalScoreString(),
+                   });
+        self.transmitData(json_data);
+
+    def transmitData(self, data_val):
+        self.clusterObject().enqueueTransmitData(data_val)
+        self.clusterObject().processTransmitData()
 
     def receiveStringData(self, str_val):
         self.debug(True, "receiveStringData", str_val)

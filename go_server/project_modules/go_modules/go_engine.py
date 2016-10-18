@@ -117,6 +117,12 @@ class GoEngineClass(object):
     def clearLastDeadStone(self):
         self.theLastDeadStone = 0
 
+    def blackLandScore(self):
+        return self.blackEmptyGroupList().totalStoneCount()
+
+    def whiteLandScore(self):
+        return self.whiteEmptyGroupList().totalStoneCount()
+
     def blackCaptureStones(self):
         return self.theBlackCaptureStones
 
@@ -130,6 +136,41 @@ class GoEngineClass(object):
     def addWhiteCaptureStones(self, count_val):
         self.theWhiteCaptureStones += count_val
         self.setCaptureCount()
+
+    def blackScore(self):
+        return self.blackLandScore() + self.blackCaptureStones()
+        + self.whiteDeadGroupList().totalStoneCount() * 2
+
+    def whiteScore(self):
+        return self.whiteLandScore() + self.whiteCaptureStones()
+        + self.blackDeadGroupList().totalStoneCount() * 2 + self.configObject().realKomiPoint()
+
+    def finalScoreString(self):
+        if self.whiteScore() > self.blackScore():
+            return "white wins by "# + (self.whiteScore() - self.blackScore())
+        else:
+            return "Black wins by "# + (self.blackScore() - self.whiteScore())
+
+    def blackScoreString(self):
+        return "BLACK TBD"
+        if not self.gameObject().gameIsOver():
+            return "Black: " + self.blackCaptureStones()
+        else:
+            return "Black: " + self.blackScore() + " ("
+            + self.blackCaptureStones() + " + "
+            + self.blackLandScore() + " + "
+            + self.whiteDeadGroupList().totalStoneCount() + " x 2)"
+
+    def whiteScoreString(self):
+        return "WHITE TBD"
+        if not self.gameObject().gameIsOver():
+            return "White: " + self.whiteCaptureStones()
+        else:
+            return "White: " + self.whiteScore() + " ("
+            + self.whiteCaptureStones() + " + "
+            + self.whiteLandScore() + " + "
+            + self.blackDeadGroupList().totalStoneCount() + " x 2"
+            + self.configObject().realKomiPoint() + ")"
 
     def enterWar(self, move_val):
         self.debug(True, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())

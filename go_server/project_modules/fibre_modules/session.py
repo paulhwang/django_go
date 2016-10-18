@@ -68,6 +68,10 @@ class SessionClass(object):
         self.theClusterObject = cluster_val
         self.clusterObject().addAdditionalSession(self)
 
+    def enqueueTransmitData(self, data_val):
+        self.debug(True, "enqueueTransmitData", data_val)
+        self.transmitQueue().enQueue(data_val)
+
     def dequeueTransmitData(self):
         data = self.transmitQueue().deQueue()
         self.debug(False, "dequeueTransmitData", data)

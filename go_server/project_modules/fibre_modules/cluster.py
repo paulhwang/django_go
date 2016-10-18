@@ -54,6 +54,15 @@ class ClusterClass(object):
         self.theSessionArray[self.sessionArrayLength()] = session_val
         self.incrementSessionArrayLength()
 
+    def enqueueTransmitData(self, data_val):
+        self.debug(True, "enqueueTransmitData", data_val)
+        self.transmitQueue().enQueue(data_val)
+
+    def dequeueTransmitData(self):
+        data = self.transmitQueue().deQueue()
+        self.debug(True, "dequeueTransmitData", data)
+        return data
+
     def enqueueReceiveData(self, data_val):
         self.debug(True, "enqueueReceiveData", data_val)
         self.receiveQueue().enQueue(data_val)
@@ -62,6 +71,16 @@ class ClusterClass(object):
         data = self.receiveQueue().deQueue()
         self.debug(True, "dequeueReceiveData", data)
         return data
+
+    def processTransmitData(self):
+        while True:
+            data = self.dequeueTransmitData()
+            if not data:
+                return
+            i = 0
+            while i < self.sessionArrayLength():
+                self.sessionArray(i).enqueueTransmitData(data)
+                i += 1
 
     def processSetupTopicData(self, json_data_val):
         self.debug(True, "processSetupTopicData", "data=%s", json_data_val)
