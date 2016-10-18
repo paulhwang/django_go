@@ -204,7 +204,7 @@ class GoGameClass(object):
 
         if not self.passReceived():
             self.setPassReceived()
-            self.setNextColor(self.GO().getOppositeColor(self.nextColor()))
+            self.setNextColor(self.goObject().getOppositeColor(self.nextColor()))
             return
 
         self.setGameIsOver()
@@ -212,9 +212,13 @@ class GoGameClass(object):
         self.engineObject().resetMarkedGroupLists()
         self.displayResult();
         self.debug(True, "processPassMove", "game is over")
-        self.engineObject().computeScore()
-        self.engineObject().printScore()
-        self.engineObject().abendEngine()
+        ##############self.engineObject().computeScore()
+        #################self.engineObject().printScore()
+        #################self.engineObject().abendEngine()
+
+    def displayResult(self):
+        self.debug(True, "displayResult", "Black: %i (%i + %i + %i*2)" %(self.engineObject().blackScore(), self.engineObject().blackCaptureStones(), self.engineObject().blackLandScore(), self.engineObject().whiteDeadGroupList().totalStoneCount()))
+        self.debug(True, "displayResult", "White: %i (%i + %i + %i*2)" %(self.engineObject().whiteScore(), self.engineObject().whiteCaptureStones(), self.engineObject().whiteLandScore(), self.engineObject().blackDeadGroupList().totalStoneCount()))
 
     def processTheWholeMoveList(self):
         self.boardObject().resetBoardObjectData()

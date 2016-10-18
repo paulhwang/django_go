@@ -57,6 +57,11 @@ class ConfigClass(object):
     def setKomiPoint(self, val):
         self.theKomiPoint = val
 
+    def realKomiPoint(self):
+        if not self.theKomiPoint:
+            return 0
+        return self.theKomiPoint######## + 0.5
+
     def createConfig(self, json_data_val):
         self.debug(True, "creataConfig", "data=%s", json_data_val)
         config_data = json.loads(json_data_val)
