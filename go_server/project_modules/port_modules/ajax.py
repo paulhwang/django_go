@@ -17,11 +17,11 @@ class AjaxClass(object):
     def rootObject(self):
         return self.portObject().rootObject()
 
-    def fibreObject(self):
+    def farbricObject(self):
         return self.rootObject().farbricObject()
 
-    def dispatchObject(self):
-        return self.fibreObject().dispatchObject()
+    def switchObject(self):
+        return self.farbricObject().switchObject()
 
     def processInput(self, request_val):
         if not request_val.is_ajax():
@@ -63,7 +63,7 @@ class AjaxClass(object):
         if go_request["command"] != "keep_alive" and go_request["command"] != "get_name_list" and go_request["command"] != "get_link_data" and go_request["command"] != "get_session_data":
             self.debug(True, "processGet", "command=%s", go_request["command"])
 
-        data = self.dispatchObject().dispatchRequest(go_request)
+        data = self.switchObject().switchRequest(go_request)
         json_str = json.dumps({
                         "command": go_request["command"],
                         "ajax_id": go_request["ajax_id"],

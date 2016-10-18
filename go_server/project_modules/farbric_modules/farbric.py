@@ -1,7 +1,7 @@
 import go_server.project_modules.farbric_modules.link_mgr
 import go_server.project_modules.farbric_modules.session_mgr
 import go_server.project_modules.farbric_modules.cluster_mgr
-import go_server.project_modules.farbric_modules.dispatch
+import go_server.project_modules.farbric_modules.switch
 
 def malloc(root_val):
     return FibreClass(root_val)
@@ -15,8 +15,8 @@ def malloc_session_mgr(root_val):
 def malloc_cluster_mgr(root_val):
     return go_server.project_modules.farbric_modules.cluster_mgr.malloc(root_val)
 
-def malloc_dispatch(root_val):
-    return go_server.project_modules.farbric_modules.dispatch.malloc(root_val)
+def malloc_switch(root_val):
+    return go_server.project_modules.farbric_modules.switch.malloc(root_val)
 
 class FibreClass(object):
     def __init__(self, root_val):
@@ -24,7 +24,7 @@ class FibreClass(object):
         self.theLinkMgrObject = malloc_link_mgr(self)
         self.theSessionMgrObject = malloc_session_mgr(self)
         self.theClusterMgrObject = malloc_cluster_mgr(self)
-        self.theDispatchObject = malloc_dispatch(self)
+        self.theSwitchObject = malloc_switch(self)
 
     def className(self):
         return "FibreClass"
@@ -41,8 +41,8 @@ class FibreClass(object):
     def clusterMgrObject(self):
         return self.theClusterMgrObject
 
-    def dispatchObject(self):
-        return self.theDispatchObject
+    def switchObject(self):
+        return self.theSwitchObject
 
     def utilObject(self):
         return self.rootObject().utilObject()

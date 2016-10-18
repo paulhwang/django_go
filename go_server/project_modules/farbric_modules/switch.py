@@ -1,14 +1,14 @@
 import json
 
 def malloc(fabric_val):
-    return DispatchClass(fabric_val)
+    return SwitchClass(fabric_val)
 
-class DispatchClass(object):
+class SwitchClass(object):
     def __init__(self, fabric_val):
         self.theFarbricObject = fabric_val;
 
     def className(self):
-        return "DispatchClass"
+        return "SwitchClass"
 
     def farbricObject(self):
         return self.theFarbricObject
@@ -19,7 +19,7 @@ class DispatchClass(object):
     def sessionMgrObject(self):
         return self.farbricObject().sessionMgrObject()
 
-    def dispatchRequest(self, go_request):
+    def switchRequest(self, go_request):
         self.debug(False, "dispatchRequest", "command=%s", go_request["command"])
 
         if go_request["command"] == "setup_link":
