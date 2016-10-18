@@ -74,7 +74,7 @@ class RootClass(object):
         self.goObject().portObject().receiveStringData("05091026")
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.project_modules.util_modules.util.utilLogit(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.project_modules.util_modules.util.utilLogit("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.project_modules.util_modules.util.utilAbend(self.className() + "." + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.project_modules.util_modules.util.utilAbend("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

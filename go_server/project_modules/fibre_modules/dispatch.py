@@ -156,10 +156,9 @@ class DispatchClass(object):
         if not res_data:
             self.debug(False, "getSessionData", "no data")
             return None
-        self.logit("getSessionData", "res_data=" + res_data)
 
         self.debug(False, "getSessionData", "ajax_id=%i", go_request.get("ajax_id"))
-        self.logit("getSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
+        self.debug(True, "getSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
         return res_data
 
     def putSessionData(self, go_request):
