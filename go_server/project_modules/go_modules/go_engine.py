@@ -152,25 +152,16 @@ class GoEngineClass(object):
             return "Black wins by "# + (self.blackScore() - self.whiteScore())
 
     def blackScoreString(self):
-        return "BLACK TBD"
         if not self.gameObject().gameIsOver():
-            return "Black: " + self.blackCaptureStones()
+            return "Black: %s" %(self.blackCaptureStones())
         else:
-            return "Black: " + self.blackScore() + " ("
-            + self.blackCaptureStones() + " + "
-            + self.blackLandScore() + " + "
-            + self.whiteDeadGroupList().totalStoneCount() + " x 2)"
+            return "Black: %s (%i + %i + %i + %i*2)" %(self.blackScore(), self.blackCaptureStones(), self.blackLandScore(), self.whiteDeadGroupList().totalStoneCount())
 
     def whiteScoreString(self):
-        return "WHITE TBD"
         if not self.gameObject().gameIsOver():
-            return "White: " + self.whiteCaptureStones()
+            return "White: %s" %(self.whiteCaptureStones())
         else:
-            return "White: " + self.whiteScore() + " ("
-            + self.whiteCaptureStones() + " + "
-            + self.whiteLandScore() + " + "
-            + self.blackDeadGroupList().totalStoneCount() + " x 2"
-            + self.configObject().realKomiPoint() + ")"
+            return "White: %s (%i + %i + %i + %i*2 + %i)", self.whiteScore(), self.whiteCaptureStones(), self.whiteLandScore(), self.blackDeadGroupList().totalStoneCount(), self.configObject().realKomiPoint()
 
     def enterWar(self, move_val):
         self.debug(True, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
