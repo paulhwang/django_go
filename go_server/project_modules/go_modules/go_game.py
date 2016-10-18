@@ -91,39 +91,66 @@ class GoGameClass(object):
         self.incrementTotalMoves()
         self.setMaxMove(self.totalMoves())
 
+    def FORWARD_MOVE(self):
+        return "FORWARD"
+
+    def BACKWARD_MOVE(self):
+        return "BACKWARD"
+
+    def DOUBLE_FORWARD_MOVE(self):
+        return "DOUBLE_FORWARD"
+
+    def DOUBLE_BACKWARD_MOVE(self):
+        return "DOUBLE_BACKWARD"
+
+    def PASS_MOVE(self):
+        return "PASS"
+
+    def RESIGN_MOVE(self):
+        return "RESIGN"
+
+    def BACK_TO_PLAY_MOVE(self):
+        return "BACK_TO_PLAY"
+
+    def CONFIRM_MOVE(self):
+        return "CONFIRM"
+
+    def PLAY_ANOTHER_GAME_MOVE(self):
+        return "PLAY_ANOTHER_GAME"
+
     def receiveSpecialMoveFromOpponent(self, data_val):
         self.debug(True, "receiveSpecialMoveFromOpponent", data_val)
-        if data_val == self.GO().FORWARD_MOVE():
+        if data_val == self.FORWARD_MOVE():
             self.processForwardMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().DOUBLE_FORWARD_MOVE():
+        if data_val == self.DOUBLE_FORWARD_MOVE():
             self.processDoubleForwardMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().BACKWARD_MOVE():
+        if data_val == self.BACKWARD_MOVE():
             self.processBackwardMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().DOUBLE_BACKWARD_MOVE():
+        if data_val == self.DOUBLE_BACKWARD_MOVE():
             self.processDoubleBackwardMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().PASS_MOVE():
+        if data_val == self.PASS_MOVE():
             self.processPassMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().RESIGN_MOVE():
+        if data_val == self.RESIGN_MOVE():
             self.processResignMove()
             return
-        if data_val == self.GO().BACK_TO_PLAY_MOVE():
+        if data_val == self.BACK_TO_PLAY_MOVE():
             self.processBackToPlayMove()
             return
-        if data_val == self.GO().CONFIRM_MOVE():
+        if data_val == self.CONFIRM_MOVE():
             self.processConfirmMove()
             self.portObject().thansmitBoardData()
             return
-        if data_val == self.GO().PLAY_ANOTHER_GAME_MOVE():
+        if data_val == self.PLAY_ANOTHER_GAME_MOVE():
             self.processPlayAnotherGameMove()
             return
 
