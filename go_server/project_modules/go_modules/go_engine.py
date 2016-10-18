@@ -21,8 +21,8 @@ class GoEngineClass(object):
         self.resetMarkedGroupLists()
         self.resetEmptyGroupLists()
 
-        self.theCaptureCount = 0
-        self.theLastDeadStone = 0
+        self.theCaptureCount = None
+        self.theLastDeadStone = None
         self.theBlackCaptureStones = 0
         self.theWhiteCaptureStones = 0
 
@@ -115,7 +115,7 @@ class GoEngineClass(object):
         self.theLastDeadStone = self.theLastDeadStone + str(y_val)
 
     def clearLastDeadStone(self):
-        self.theLastDeadStone = 0
+        self.theLastDeadStone = None
 
     def blackLandScore(self):
         return self.blackEmptyGroupList().totalStoneCount()
