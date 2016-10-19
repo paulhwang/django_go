@@ -1,10 +1,10 @@
-import go_server.project_modules.port_modules.ajax
+import go_server.phwang_modules.port_modules.ajax
 
 def malloc(phwang_val):
     return PortClass(phwang_val)
 
 def malloc_ajax(port_val):
-    return go_server.project_modules.port_modules.ajax.malloc(port_val)
+    return go_server.phwang_modules.port_modules.ajax.malloc(port_val)
 
 class PortClass(object):
     def __init__(self, phwang_val):

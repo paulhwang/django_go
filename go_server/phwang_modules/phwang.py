@@ -1,18 +1,18 @@
-import go_server.project_modules.util_modules.util
-import go_server.project_modules.farbric_modules.farbric
-import go_server.project_modules.port_modules.port
+import go_server.phwang_modules.util_modules.util
+import go_server.phwang_modules.farbric_modules.farbric
+import go_server.phwang_modules.port_modules.port
 
 def malloc():
     return PhwangClass()
 
 def malloc_util(phwang_val):
-    return go_server.project_modules.util_modules.util.malloc(phwang_val)
+    return go_server.phwang_modules.util_modules.util.malloc(phwang_val)
 
 def malloc_farbric(phwang_val):
-    return go_server.project_modules.farbric_modules.farbric.malloc(phwang_val)
+    return go_server.phwang_modules.farbric_modules.farbric.malloc(phwang_val)
 
 def malloc_port(phwang_val):
-    return go_server.project_modules.port_modules.port.malloc(phwang_val)
+    return go_server.phwang_modules.port_modules.port.malloc(phwang_val)
 
 class PhwangClass(object):
     def __init__(self):
@@ -69,7 +69,7 @@ class PhwangClass(object):
         self.goObject().portObject().receiveStringData("05091026")
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.project_modules.util_modules.util.utilLogit("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.phwang_modules.util_modules.util.utilLogit("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.project_modules.util_modules.util.utilAbend("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        go_server.phwang_modules.util_modules.util.utilAbend("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

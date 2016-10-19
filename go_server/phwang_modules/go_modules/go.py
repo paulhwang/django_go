@@ -1,30 +1,30 @@
-import go_server.project_modules.go_modules.go_config
-import go_server.project_modules.go_modules.go_board
-import go_server.project_modules.go_modules.go_engine
-import go_server.project_modules.go_modules.go_game
-import go_server.project_modules.go_modules.go_port
-import go_server.project_modules.go_modules.go_move
+import go_server.phwang_modules.go_modules.go_config
+import go_server.phwang_modules.go_modules.go_board
+import go_server.phwang_modules.go_modules.go_engine
+import go_server.phwang_modules.go_modules.go_game
+import go_server.phwang_modules.go_modules.go_port
+import go_server.phwang_modules.go_modules.go_move
 
 def malloc(cluster_object_val):
     return GoClass(cluster_object_val)
 
 def malloc_config(go_val):
-    return go_server.project_modules.go_modules.go_config.malloc(go_val)
+    return go_server.phwang_modules.go_modules.go_config.malloc(go_val)
 
 def malloc_board(go_val):
-    return go_server.project_modules.go_modules.go_board.malloc(go_val)
+    return go_server.phwang_modules.go_modules.go_board.malloc(go_val)
 
 def malloc_engine(go_val):
-    return go_server.project_modules.go_modules.go_engine.malloc(go_val)
+    return go_server.phwang_modules.go_modules.go_engine.malloc(go_val)
 
 def malloc_game(go_val):
-    return go_server.project_modules.go_modules.go_game.malloc(go_val)
+    return go_server.phwang_modules.go_modules.go_game.malloc(go_val)
 
 def malloc_port(go_val):
-    return go_server.project_modules.go_modules.go_port.malloc(go_val)
+    return go_server.phwang_modules.go_modules.go_port.malloc(go_val)
 
 def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
-    return go_server.project_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
+    return go_server.phwang_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoClass(object):
     def __init__(self, cluster_object_val):

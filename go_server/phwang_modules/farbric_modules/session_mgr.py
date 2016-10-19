@@ -1,10 +1,10 @@
-import go_server.project_modules.farbric_modules.session
+import go_server.phwang_modules.farbric_modules.session
 
 def malloc(fabric_val):
     return SessionMgrClass(fabric_val)
 
 def malloc_session(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
-    return go_server.project_modules.farbric_modules.session.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
+    return go_server.phwang_modules.farbric_modules.session.malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
 
 class SessionMgrClass(object):
     def __init__(self, fabric_val):

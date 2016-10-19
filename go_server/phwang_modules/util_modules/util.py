@@ -1,5 +1,5 @@
-import go_server.project_modules.util_modules.queue
-import go_server.project_modules.util_modules.ring
+import go_server.phwang_modules.util_modules.queue
+import go_server.phwang_modules.util_modules.ring
 
 def malloc(phwang_val):
     return UtilClass(phwang_val)
@@ -15,10 +15,10 @@ class UtilClass(object):
         return self.thePhwangObject
 
     def mallocQueue(self):
-        return go_server.project_modules.util_modules.queue.malloc(self)
+        return go_server.phwang_modules.util_modules.queue.malloc(self)
 
     def mallocRing(self):
-        return go_server.project_modules.util_modules.ring.malloc(self)
+        return go_server.phwang_modules.util_modules.ring.malloc(self)
 
     def utilLogit(str12, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if  str3 == "":
