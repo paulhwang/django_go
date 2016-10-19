@@ -23,14 +23,14 @@ class SessionMgrClass(object):
     def farbricObject(self):
         return self.theFarbricObject
 
-    def rootObject(self):
-        return self.farbricObject().rootObject()
+    def phwangObject(self):
+        return self.farbricObject().phwangObject()
 
     def clusterMgrObject(self):
         return self.farbricObject().clusterMgrObject()
 
     def utilObject(self):
-        return self.rootObject().utilObject()
+        return self.phwangObject().utilObject()
 
     def sessionQueue(self):
         return self.theSessionQueue;

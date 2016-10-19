@@ -6,13 +6,13 @@ def malloc(phwang_val):
 
 class UtilClass(object):
     def __init__(self, phwang_val):
-        self.theRootObject = phwang_val
+        self.thePhwangObject = phwang_val
 
     def className(self):
         return "UtilClass"
 
-    def rootObject(self):
-        return self.theRootObject
+    def phwangObject(self):
+        return self.thePhwangObject
 
     def mallocQueue(self):
         return go_server.project_modules.util_modules.queue.malloc(self)

@@ -14,11 +14,11 @@ class AjaxClass(object):
     def portObject(self):
         return self.thePortObject
 
-    def rootObject(self):
-        return self.portObject().rootObject()
+    def phwangObject(self):
+        return self.portObject().phwangObject()
 
     def farbricObject(self):
-        return self.rootObject().farbricObject()
+        return self.phwangObject().farbricObject()
 
     def switchObject(self):
         return self.farbricObject().switchObject()

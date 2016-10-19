@@ -20,11 +20,11 @@ class ClusterMgrClass(object):
     def farbricObject(self):
         return self.theFarbricObject
 
-    def rootObject(self):
-        return self.farbricObject().rootObject()
+    def phwangObject(self):
+        return self.farbricObject().phwangObject()
 
     def utilObject(self):
-        return self.rootObject().utilObject()
+        return self.phwangObject().utilObject()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

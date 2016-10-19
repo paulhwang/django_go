@@ -20,7 +20,7 @@ def malloc_switch(phwang_val):
 
 class FibreClass(object):
     def __init__(self, phwang_val):
-        self.theRootObject = phwang_val
+        self.thePhwangObject = phwang_val
         self.theLinkMgrObject = malloc_link_mgr(self)
         self.theSessionMgrObject = malloc_session_mgr(self)
         self.theClusterMgrObject = malloc_cluster_mgr(self)
@@ -29,8 +29,8 @@ class FibreClass(object):
     def className(self):
         return "FibreClass"
 
-    def rootObject(self):
-        return self.theRootObject
+    def phwangObject(self):
+        return self.thePhwangObject
 
     def linkMgrObject(self):
         return self.theLinkMgrObject
@@ -45,15 +45,15 @@ class FibreClass(object):
         return self.theSwitchObject
 
     def utilObject(self):
-        return self.rootObject().utilObject()
+        return self.phwangObject().utilObject()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

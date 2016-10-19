@@ -22,11 +22,11 @@ class LinkMgrClass(object):
     def farbricObject(self):
         return self.theFarbricObject
 
-    def rootObject(self):
-        return self.farbricObject().rootObject()
+    def phwangObject(self):
+        return self.farbricObject().phwangObject()
 
     def utilObject(self):
-        return self.rootObject().utilObject()
+        return self.phwangObject().utilObject()
 
     def linkQueue(self):
         return self.theLinkQueue
