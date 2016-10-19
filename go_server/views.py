@@ -1,17 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import go_server.project_modules.util_modules.queue
-import go_server.project_modules.root
+import go_server.project_modules.phwang
 from django.views.decorators.csrf import csrf_exempt
 
-root = go_server.project_modules.root.malloc()
+phwang = go_server.project_modules.phwang.malloc()
 
 def go_html(request):
     return render(request, "go_django.html")
 
 @csrf_exempt
 def go_ajax(request):
-    return root.portObject().ajaxObject().processInput(request)
+    return phwang.portObject().ajaxObject().processInput(request)
 
 def hello_entry(request):
     return HttpResponse("Hello there!")
