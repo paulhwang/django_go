@@ -3,6 +3,41 @@ import json
 def malloc(fabric_val):
     return SwitchClass(fabric_val)
 
+def setupLink_(switch_val, go_request):
+    return switch_val.setupLink(go_request)
+
+def getLinkData_(switch_val, go_request):
+    return switch_val.getLinkData(go_request)
+
+def putLinkData_(switch_val, go_request):
+    return switch_val.put_link_data(go_request)
+
+def getNameList_(switch_val, go_request):
+    return switch_val.getNameList(go_request)
+
+def setupSession_(switch_val, go_request):
+    return switch_val.setupSession(go_request)
+
+def getSessionData_(switch_val, go_request):
+    return switch_val.getSessionData(go_request)
+
+def putSessionData_(switch_val, go_request):
+    return switch_val.putSessionData(go_request)
+
+def keepAlive_(switch_val, go_request):
+    return switch_val.keepAlive_(go_request)
+
+switch_table = {
+    "setup_link": setupLink_,
+    "get_link_data": getLinkData_,
+    "put_link_data": putLinkData_,
+    "get_name_list": getNameList_,
+    "setup_session": setupSession_,
+    "get_session_data": getSessionData_,
+    "put_session_data": putSessionData_,
+    "keep_alive": keepAlive_,
+}
+
 class SwitchClass(object):
     def __init__(self, fabric_val):
         self.theFarbricObject = fabric_val;
@@ -22,18 +57,23 @@ class SwitchClass(object):
     def switchRequest(self, go_request):
         self.debug(False, "dispatchRequest", "command=%s", go_request["command"])
 
+        func = switch_table[go_request.get("command")]
+        if func:
+            return func(self, go_request)
+        else:
+            self.abend("dispatchRequest", "bad command=" + go_request.command)
+            return None
+
         if go_request["command"] == "setup_link":
             return self.setupLink(go_request)
 
         if go_request["command"] == "keep_alive":
-            self.abend("dispatchRequest", "keep_alive gorequest=")
             return self.keepAlive(go_request)
 
         if go_request["command"] == "get_link_data":
             return self.getLinkData(go_request)
 
         if go_request["command"] == "put_link_data":
-            self.abend("dispatchRequest", "put_link_data")
             return self.putLinkData(go_request)
 
         if go_request["command"] == "get_name_list":
@@ -49,6 +89,7 @@ class SwitchClass(object):
             return self.putSessionData(go_request)
 
         self.abend("dispatchRequest", "command=%s", go_request["command"])
+        return None
 
 
     def setupLink(self, go_request):
@@ -88,6 +129,10 @@ class SwitchClass(object):
         if data:
             self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data);
         return data
+
+    def putLinkData(self, go_request):
+        self.abend("putLinkData", "putLinkData is not implemented")
+        return None
 
     def getNameList(self, go_request):
         link = self.getLink(go_request)
@@ -194,6 +239,11 @@ class SwitchClass(object):
 
         self.debug(True, "putSessionData", "queue_size=%i", my_session.receiveQueue().size())
         return None
+
+    def keepAlive(self, go_request):
+        self.abend("keepAlive", "keepAlive is not implemented")
+        return None
+
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
