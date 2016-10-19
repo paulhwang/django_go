@@ -1,7 +1,6 @@
 import go_server.project_modules.util_modules.util
 import go_server.project_modules.farbric_modules.farbric
 import go_server.project_modules.port_modules.port
-import go_server.project_modules.go_modules.go
 
 def malloc():
     return PhwangClass()
@@ -15,15 +14,11 @@ def malloc_farbric(phwang_val):
 def malloc_port(phwang_val):
     return go_server.project_modules.port_modules.port.malloc(phwang_val)
 
-def malloc_go(phwang_val):
-    return go_server.project_modules.go_modules.go.malloc(phwang_val)
-
 class PhwangClass(object):
     def __init__(self):
         self.theUtilObject = malloc_util(self)
         self.theFarbricObject = malloc_farbric(self)
         self.thePortObject = malloc_port(self)
-        self.theGoObject = malloc_go(self)
 
     def className(self):
         return "PhwangClass"

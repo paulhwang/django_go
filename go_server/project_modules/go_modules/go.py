@@ -5,8 +5,8 @@ import go_server.project_modules.go_modules.go_game
 import go_server.project_modules.go_modules.go_port
 import go_server.project_modules.go_modules.go_move
 
-def malloc(root_val):
-    return GoClass(root_val)
+def malloc(cluster_object_val):
+    return GoClass(cluster_object_val)
 
 def malloc_config(go_val):
     return go_server.project_modules.go_modules.go_config.malloc(go_val)

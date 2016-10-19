@@ -1,12 +1,12 @@
 import go_server.project_modules.util_modules.queue
 import go_server.project_modules.util_modules.ring
 
-def malloc(root_val):
-    return UtilClass(root_val)
+def malloc(phwang_val):
+    return UtilClass(phwang_val)
 
 class UtilClass(object):
-    def __init__(self, root_val):
-        self.theRootObject = root_val
+    def __init__(self, phwang_val):
+        self.theRootObject = phwang_val
 
     def className(self):
         return "UtilClass"
