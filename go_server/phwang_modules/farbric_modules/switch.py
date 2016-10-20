@@ -135,15 +135,23 @@ class SwitchClass(object):
         self.debug(True, "setupSessionReply", "(%i,%i,%i) %s=>%s", go_request.get("link_id"), session_val.sessionId(), session_val.hisSession().sessionId(), go_request.get("my_name"), go_request.get("his_name"))
         return data
 
-    def getSessionData(self, go_request):
-        self.debug(False, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
+    def getSessionObject(self, go_request):
         link = self.getLinkObject(go_request)
         if not link:
             return None
 
         session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("session_id"))
         if not session:
-            self.abend("getSessionData", "null session session_id=%s", go_request.get("session_id"))
+            self.abend("getSessionObject", "null session session_id=%s", go_request.get("session_id"))
+            return None
+
+        return session
+
+    def getSessionData(self, go_request):
+        self.debug(False, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
+
+        session = self.getSessionObject(go_request)
+        if not session:
             return None
 
         res_data = session.dequeueTransmitData()
@@ -160,13 +168,8 @@ class SwitchClass(object):
         #self.debug(True, "putSessionData ", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "putSessionData ", "(%i,%i) %s=>%s (%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), go_request.get("data"))
 
-        link = self.getLinkObject(go_request)
-        if not link:
-            return None
-
-        my_session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("session_id"))
+        my_session = self.getSessionObject(go_request)
         if not my_session:
-            self.abend("putSessionData", "null my_session" + " session_id=" + go_request.session_id + " my_name=" + go_request.my_name + " his_name=" + go_request.his_name);
             return None
 
         self.debug(True, "putSessionData", "(%i,%i) %s=>%s {%s} %i=>%i", go_request.get("link_id"), go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"), go_request.get("data"), go_request.get("xmt_seq"), my_session.up_seq)
