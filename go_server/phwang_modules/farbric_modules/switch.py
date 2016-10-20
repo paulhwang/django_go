@@ -3,45 +3,9 @@ import json
 def malloc(fabric_val):
     return SwitchClass(fabric_val)
 
-def setupLink_(switch_val, go_request):
-    return switch_val.setupLink(go_request)
-
-def getLinkData_(switch_val, go_request):
-    return switch_val.getLinkData(go_request)
-
-def putLinkData_(switch_val, go_request):
-    return switch_val.put_link_data(go_request)
-
-def getNameList_(switch_val, go_request):
-    return switch_val.getNameList(go_request)
-
-def setupSession_(switch_val, go_request):
-    return switch_val.setupSession(go_request)
-
-def getSessionData_(switch_val, go_request):
-    return switch_val.getSessionData(go_request)
-
-def putSessionData_(switch_val, go_request):
-    return switch_val.putSessionData(go_request)
-
-def keepAlive_(switch_val, go_request):
-    return switch_val.keepAlive_(go_request)
-
-switch_table_ = {
-    "setup_link": setupLink_,
-    "get_link_data": getLinkData_,
-    "put_link_data": putLinkData_,
-    "get_name_list": getNameList_,
-    "setup_session": setupSession_,
-    "get_session_data": getSessionData_,
-    "put_session_data": putSessionData_,
-    "keep_alive": keepAlive_,
-}
-
 class SwitchClass(object):
     def __init__(self, fabric_val):
         self.theFarbricObject = fabric_val;
-
         self.switch_table = {
             "setup_link": self.setupLink,
             "get_link_data": self.getLinkData,
@@ -71,13 +35,6 @@ class SwitchClass(object):
         func = self.switch_table[go_request.get("command")]
         if func:
             return func(go_request)
-        else:
-            self.abend("dispatchRequest", "bad command=" + go_request.command)
-            return None
-
-        func = switch_table_[go_request.get("command")]
-        if func:
-            return func(self, go_request)
         else:
             self.abend("dispatchRequest", "bad command=" + go_request.command)
             return None
