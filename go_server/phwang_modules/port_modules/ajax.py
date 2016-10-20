@@ -57,11 +57,9 @@ class AjaxClass(object):
         if not go_request:
             self.abend("processGet", "null go_request")
             return
-        self.debug(False, "processGet", "go_request=%s", go_request)
-        self.debug(False, "processGet", "command=%s", go_request["command"])
 
         if go_request["command"] != "keep_alive" and go_request["command"] != "get_name_list" and go_request["command"] != "get_link_data" and go_request["command"] != "get_session_data":
-            self.debug(True, "processGet", "command=%s", go_request["command"])
+            self.debug(False, "processGet", "command=%s", go_request["command"])
 
         data = self.switchObject().switchRequest(go_request)
         json_str = json.dumps({

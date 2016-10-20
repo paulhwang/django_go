@@ -57,13 +57,13 @@ class SwitchClass(object):
         self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
         return link_id_str
 
-    def getLink(self, go_request):
+    def getLinkObject(self, go_request):
         link = self.linkMgrObject().searchLink(go_request.get("my_name"), go_request.get("link_id"))
         if not link:
-            self.abend("getLink", "null link: link_id=%i my_name=%s", go_request.get("link_id"), go_request.get("my_name"))
+            self.abend("getLinkObject", "null link: link_id=%i my_name=%s", go_request.get("link_id"), go_request.get("my_name"))
             return None
         if link.linkId() == 0:
-            self.abend("getLink", "link_id = 0")
+            self.abend("getLinkObject", "link_id = 0")
             return None
 
         link.resetKeepAliveTimer()
@@ -72,7 +72,7 @@ class SwitchClass(object):
     def getLinkData(self, go_request):
         self.debug(False, "getLinkData", "link_id=%i my_name=%s ajax_id=%i", go_request.get("link_id"), go_request.get("my_name"), go_request.get("ajax_id"))
 
-        link = self.getLink(go_request)
+        link = self.getLinkObject(go_request)
         if not link:
             return None
 
@@ -86,13 +86,13 @@ class SwitchClass(object):
         return None
 
     def getNameList(self, go_request):
-        link = self.getLink(go_request)
+        link = self.getLinkObject(go_request)
         if not link:
             return None
 
         name_array = self.linkMgrObject().getNameList()
         name_array_str = json.dumps(name_array)
-        self.debug(True, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
+        self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
         return name_array_str
 
     def setupSession (self, go_request):
@@ -137,7 +137,7 @@ class SwitchClass(object):
 
     def getSessionData(self, go_request):
         self.debug(False, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
-        link = self.getLink(go_request)
+        link = self.getLinkObject(go_request)
         if not link:
             return None
 
@@ -160,7 +160,7 @@ class SwitchClass(object):
         #self.debug(True, "putSessionData ", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "putSessionData ", "(%i,%i) %s=>%s (%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), go_request.get("data"))
 
-        link = self.getLink(go_request)
+        link = self.getLinkObject(go_request)
         if not link:
             return None
 
