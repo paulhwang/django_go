@@ -27,7 +27,7 @@ def putSessionData_(switch_val, go_request):
 def keepAlive_(switch_val, go_request):
     return switch_val.keepAlive_(go_request)
 
-switch_table = {
+switch_table_ = {
     "setup_link": setupLink_,
     "get_link_data": getLinkData_,
     "put_link_data": putLinkData_,
@@ -41,6 +41,17 @@ switch_table = {
 class SwitchClass(object):
     def __init__(self, fabric_val):
         self.theFarbricObject = fabric_val;
+
+        self.switch_table = {
+            "setup_link": self.setupLink,
+            "get_link_data": self.getLinkData,
+            "put_link_data": self.putLinkData,
+            "get_name_list": self.getNameList,
+            "setup_session": self.setupSession,
+            "get_session_data": self.getSessionData,
+            "put_session_data": self.putSessionData,
+            "keep_alive": self.keepAlive,
+        }
 
     def className(self):
         return "SwitchClass"
@@ -57,7 +68,14 @@ class SwitchClass(object):
     def switchRequest(self, go_request):
         self.debug(False, "dispatchRequest", "command=%s", go_request["command"])
 
-        func = switch_table[go_request.get("command")]
+        func = self.switch_table[go_request.get("command")]
+        if func:
+            return func(go_request)
+        else:
+            self.abend("dispatchRequest", "bad command=" + go_request.command)
+            return None
+
+        func = switch_table_[go_request.get("command")]
         if func:
             return func(self, go_request)
         else:
