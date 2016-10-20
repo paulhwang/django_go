@@ -168,27 +168,27 @@ class SwitchClass(object):
         #self.debug(True, "putSessionData ", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "putSessionData ", "(%i,%i) %s=>%s (%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), go_request.get("data"))
 
-        my_session = self.getSessionObject(go_request)
-        if not my_session:
+        session = self.getSessionObject(go_request)
+        if not session:
             return None
 
-        self.debug(True, "putSessionData", "(%i,%i) %s=>%s {%s} %i=>%i", go_request.get("link_id"), go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"), go_request.get("data"), go_request.get("xmt_seq"), my_session.up_seq)
+        self.debug(True, "putSessionData", "(%i,%i) %s=>%s {%s} %i=>%i", go_request.get("link_id"), go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"), go_request.get("data"), go_request.get("xmt_seq"), session.up_seq)
 
-        if go_request.get("xmt_seq") == my_session.up_seq:
-            my_session.clusterObject().enqueAndPocessReceiveData(go_request.get("data"))
-            my_session.up_seq += 1
+        if go_request.get("xmt_seq") == session.up_seq:
+            session.clusterObject().enqueAndPocessReceiveData(go_request.get("data"))
+            session.up_seq += 1
         else:
-            if go_request.get("xmt_seq") < my_session.up_seq:
+            if go_request.get("xmt_seq") < session.up_seq:
                 if go_request.xmt_seq == 0:
-                    my_session.clusterObject().enqueAndPocessReceiveData(go_request.get("data"))
-                    my_session.up_seq = 1;
+                    session.clusterObject().enqueAndPocessReceiveData(go_request.get("data"))
+                    session.up_seq = 1;
                     self.debug(True, "putSessionData", go_request.data + " post " + go_request.xmt_seq + " reset");
                 else:
                     self.debug(True, "putSessionData", "(" + link_id + "," + session_id + ") "  + go_request.my_name + "=>" + go_request.his_name + " {" + go_request.data + "} " + go_request.xmt_seq + " dropped");
             else:
                 self.logit("***abend: putSessionData", "%s post seq=%i dropped", go_request.get("data"), xmt_seq);
 
-        self.debug(True, "putSessionData", "queue_size=%i", my_session.receiveQueue().size())
+        self.debug(True, "putSessionData", "queue_size=%i", session.receiveQueue().size())
         return None
 
     def keepAlive(self, go_request):
