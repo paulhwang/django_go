@@ -16,8 +16,8 @@ class RingClass(object):
     def utilObject(self):
         return self.theUtilObject
 
-    def rootObject(self):
-        return self.utilObject().rootObject()
+    def phwangObject(self):
+        return self.utilObject().phwangObject()
 
     def input(self):
         return self.theInput
@@ -99,6 +99,7 @@ class RingClass(object):
 
         self.setLeft(self.left() + self.size())
         self.setSize(self.size() * 2)
+        self.theArray = [None] * self.size()
 
         self.abendIt()
 
@@ -114,7 +115,8 @@ class RingClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+

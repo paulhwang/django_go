@@ -16,8 +16,8 @@ class QueueClass(object):
     def utilObject(self):
         return self.theUtilObject
 
-    def rootObject(self):
-        return self.utilObject().rootObject()
+    def phwangObject(self):
+        return self.utilObject().phwangObject()
 
     def ring(self):
         return self.theRing
@@ -162,10 +162,11 @@ class QueueClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
 
 class HolderPoolClass(object):
     def __init__(self, queue_val):
@@ -180,8 +181,8 @@ class HolderPoolClass(object):
     def utilObject(self):
         return self.queueObject().utilObject()
 
-    def rootObject(self):
-        return self.utilObject().rootObject()
+    def phwangObject(self):
+        return self.utilObject().phwangObject()
 
     def head(self):
         return self.theHead
@@ -249,10 +250,11 @@ class HolderPoolClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
 
 class HolderEntryClass(object):
     def __init__(self):
