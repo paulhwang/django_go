@@ -82,8 +82,21 @@ class RingClass(object):
         self.decrementLeft()
         self.abendIt()
 
+    def deQueue(self):
+        if self.left() == self.size():
+            return None
+
+        data = self.array(self.output())
+        self.incrementOutput()
+        if self.output() == self.size():
+            self.setOutput(0)
+
+        self.incrementLeft()
+        self.abendIt()
+        return data
+
     def enlargeSize(self):
-        self.logit("enlargeSize", "size=%i=>%i", self.size(), self.size() * 2)
+        self.debug(True, "enlargeSize", "size=%i=>%i", self.size(), self.size() * 2)
 
         old_array = self.theArray;
         self.theArray = [None] * (self.size() * 2)
