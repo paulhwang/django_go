@@ -83,7 +83,10 @@ class RingClass(object):
         self.abendIt()
 
     def enlargeSize(self):
-        self.logit("enlargeSize", "size=%i", self.size())
+        self.logit("enlargeSize", "size=%i=>%i", self.size(), self.size() * 2)
+
+        old_array = self.theArray;
+        self.theArray = [None] * (self.size() * 2)
 
         i = self.size()
         while i < self.size() * 2:
@@ -99,7 +102,6 @@ class RingClass(object):
 
         self.setLeft(self.left() + self.size())
         self.setSize(self.size() * 2)
-        self.theArray = [None] * self.size()
 
         self.abendIt()
 

@@ -57,7 +57,7 @@ class QueueClass(object):
             self.abend("enQueue", "null data_val")
             return
 
-        #self.ring().enQueue(data_val)
+        self.ring().enQueue(data_val)
 
         self.abendIt()
 
