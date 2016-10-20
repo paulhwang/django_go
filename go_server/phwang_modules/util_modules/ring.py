@@ -101,9 +101,9 @@ class RingClass(object):
         old_array = self.theArray;
         self.theArray = [None] * (self.size() * 2)
 
-        i = self.size()
-        while i < self.size() * 2:
-            self.setArray(i, None)
+        i = 0
+        while i < self.size():
+            self.setArray(i, old_array[i])
             i += 1
 
         if self.input() < self.output():
