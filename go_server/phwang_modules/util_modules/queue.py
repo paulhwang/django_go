@@ -107,13 +107,15 @@ class QueueClass(object):
                 self.head().setPrev(0)
 
         if data_entry:
-            #elf.logit("deQueue", "data=" + data_entry.data)
+            self.debug(True, "deQueue", "data=%s", data_entry.data)
             self.holderPoolObject().freeEntry(data_entry)
-        else:
-            self.debug(False, "deQueue", "null")
 
         self.abendIt()
-        self.debug(False, "deQueue", "end")
+
+        data1 = self.ring().deQueue()
+        if data != data1:
+            self.abend("deQueue", "ring not match")
+
         return data
 
     def unQueue(self, func_val, input_val1, input_val2, input_val3):
