@@ -65,6 +65,8 @@ class SwitchClass(object):
         if link.linkId() == 0:
             self.abend("getLink", "link_id = 0")
             return None
+
+        link.resetKeepAliveTimer()
         return link
 
     def getLinkData(self, go_request):
@@ -73,7 +75,6 @@ class SwitchClass(object):
         link = self.getLink(go_request)
         if not link:
             return None
-        link.resetKeepAliveTimer()
 
         data = link.receiveQueue().deQueue()
         if data:
@@ -88,7 +89,6 @@ class SwitchClass(object):
         link = self.getLink(go_request)
         if not link:
             return None
-        link.resetKeepAliveTimer()
 
         name_array = self.linkMgrObject().getNameList()
         name_array_str = json.dumps(name_array)
@@ -140,7 +140,6 @@ class SwitchClass(object):
         link = self.getLink(go_request)
         if not link:
             return None
-        link.resetKeepAliveTimer()
 
         session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("session_id"))
         if not session:
@@ -164,7 +163,6 @@ class SwitchClass(object):
         link = self.getLink(go_request)
         if not link:
             return None
-        link.resetKeepAliveTimer()
 
         my_session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("session_id"))
         if not my_session:
