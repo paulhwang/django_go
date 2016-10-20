@@ -8,6 +8,7 @@ class QueueClass(object):
         self.theHead = None
         self.theTail = None
         self.theHolderPoolObject = HolderPoolClass(self)
+        self.theRing = self.utilObject().mallocRing()
 
     def className(self):
         return "QueueClass"
@@ -17,6 +18,9 @@ class QueueClass(object):
 
     def rootObject(self):
         return self.utilObject().rootObject()
+
+    def ring(self):
+        return self.theRing
 
     def size(self):
         return self.theSize
@@ -52,6 +56,8 @@ class QueueClass(object):
         if not data_val:
             self.abend("enQueue", "null data_val")
             return
+
+        #self.ring().enQueue(data_val)
 
         self.abendIt()
 
