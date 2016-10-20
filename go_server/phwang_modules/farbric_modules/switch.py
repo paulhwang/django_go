@@ -3,54 +3,10 @@ import json
 def malloc(fabric_val):
     return SwitchClass(fabric_val)
 
-def setupLink_(switch_val, go_request):
-    return switch_val.setupLink(go_request)
-
-def getLinkData_(switch_val, go_request):
-    return switch_val.getLinkData(go_request)
-
-def putLinkData_(switch_val, go_request):
-    return switch_val.put_link_data(go_request)
-
-def getNameList_(switch_val, go_request):
-    return switch_val.getNameList(go_request)
-
-def setupSession_(switch_val, go_request):
-    return switch_val.setupSession(go_request)
-
-def getSessionData_(switch_val, go_request):
-    return switch_val.getSessionData(go_request)
-
-def putSessionData_(switch_val, go_request):
-    return switch_val.putSessionData(go_request)
-
-def keepAlive_(switch_val, go_request):
-    return switch_val.keepAlive_(go_request)
-
-switch_table_ = {
-    "setup_link": setupLink_,
-    "get_link_data": getLinkData_,
-    "put_link_data": putLinkData_,
-    "get_name_list": getNameList_,
-    "setup_session": setupSession_,
-    "get_session_data": getSessionData_,
-    "put_session_data": putSessionData_,
-    "keep_alive": keepAlive_,
-}
-
 class SwitchClass(object):
     def __init__(self, fabric_val):
-        self.theFarbricObject = fabric_val;
-        self.switch_table = {
-            "setup_link": self.setupLink,
-            "get_link_data": self.getLinkData,
-            "put_link_data": self.putLinkData,
-            "get_name_list": self.getNameList,
-            "setup_session": self.setupSession,
-            "get_session_data": self.getSessionData,
-            "put_session_data": self.putSessionData,
-            "keep_alive": self.keepAlive,
-        }
+        self.theFarbricObject = fabric_val
+        self.initSwitchTable()
 
     def className(self):
         return "SwitchClass"
@@ -64,7 +20,23 @@ class SwitchClass(object):
     def sessionMgrObject(self):
         return self.farbricObject().sessionMgrObject()
 
+    def initSwitchTable(self):
+        self.switch_table = {
+            "setup_link": self.setupLink,
+            "get_link_data": self.getLinkData,
+            "put_link_data": self.putLinkData,
+            "get_name_list": self.getNameList,
+            "setup_session": self.setupSession,
+            "get_session_data": self.getSessionData,
+            "put_session_data": self.putSessionData,
+            "keep_alive": self.keepAlive,
+        }
+
     def switchRequest(self, go_request):
+        if not go_request:
+            self.abend("switchRequest", "null go_request")
+            return None
+
         self.debug(False, "dispatchRequest", "command=%s", go_request["command"])
 
         func = self.switch_table[go_request.get("command")]
@@ -74,46 +46,7 @@ class SwitchClass(object):
             self.abend("dispatchRequest", "bad command=" + go_request.command)
             return None
 
-        func = switch_table_[go_request.get("command")]
-        if func:
-            return func(self, go_request)
-        else:
-            self.abend("dispatchRequest", "bad command=" + go_request.command)
-            return None
-
-        if go_request["command"] == "setup_link":
-            return self.setupLink(go_request)
-
-        if go_request["command"] == "keep_alive":
-            return self.keepAlive(go_request)
-
-        if go_request["command"] == "get_link_data":
-            return self.getLinkData(go_request)
-
-        if go_request["command"] == "put_link_data":
-            return self.putLinkData(go_request)
-
-        if go_request["command"] == "get_name_list":
-            return self.getNameList(go_request)
-
-        if go_request["command"] == "setup_session":
-            return self.setupSession(go_request)
-
-        if go_request["command"] == "get_session_data":
-            return self.getSessionData(go_request)
-
-        if go_request["command"] == "put_session_data":
-            return self.putSessionData(go_request)
-
-        self.abend("dispatchRequest", "command=%s", go_request["command"])
-        return None
-
-
     def setupLink(self, go_request):
-        if not go_request:
-            self.abend("setupLink", "null go_request")
-            return None
-
         link = self.linkMgrObject().searchAndCreate(go_request.get("my_name"), 0)
         if not link:
             self.abend("setupLink", "null link")
