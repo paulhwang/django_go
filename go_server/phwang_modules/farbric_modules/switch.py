@@ -126,13 +126,12 @@ class SwitchClass(object):
         return self.setupSessionReply(session, go_request);
 
     def setupSessionReply(self, session_val, go_request):
-        session_id_str = str(session_val.sessionId())
-        data = json.dumps({
-                        "session_id": session_id_str,
+        json_data = json.dumps({
+                        "session_id": session_val.sessionId(),
                         "extra_data": go_request.get("data"),
                     })
         self.debug(True, "setupSessionReply", "(%i,%i,%i) %s=>%s", go_request.get("link_id"), session_val.sessionId(), session_val.hisSession().sessionId(), go_request.get("my_name"), go_request.get("his_name"))
-        return data
+        return json_data
 
     def getSessionObject(self, go_request):
         link = self.getLinkObject(go_request)
