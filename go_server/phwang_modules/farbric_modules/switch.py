@@ -37,13 +37,13 @@ class SwitchClass(object):
             self.abend("switchRequest", "null go_request")
             return None
 
-        self.debug(False, "dispatchRequest", "command=%s", go_request["command"])
+        self.debug(False, "switchRequest", "command=%s", go_request["command"])
 
         func = self.switch_table[go_request.get("command")]
         if func:
             return func(go_request)
         else:
-            self.abend("dispatchRequest", "bad command=" + go_request.command)
+            self.abend("switchRequest", "bad command=" + go_request.command)
             return None
 
     def setupLink(self, go_request):
@@ -53,9 +53,9 @@ class SwitchClass(object):
             return None
         link.resetKeepAliveTimer()
 
-        link_id_str = str(link.linkId())
+        json_data = json.dumps({"link_id": link.linkId()});
         self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
-        return link_id_str
+        return json_data
 
     def getLinkObject(self, go_request):
         link = self.linkMgrObject().searchLink(go_request.get("my_name"), go_request.get("link_id"))
@@ -78,8 +78,8 @@ class SwitchClass(object):
 
         data = link.receiveQueue().deQueue()
         if data:
-            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data);
-        return data
+            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
+        return json.dumps(data)
 
     def putLinkData(self, go_request):
         self.abend("putLinkData", "putLinkData is not implemented")
@@ -90,10 +90,9 @@ class SwitchClass(object):
         if not link:
             return None
 
-        name_array = self.linkMgrObject().getNameList()
-        name_array_str = json.dumps(name_array)
-        self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), name_array_str);
-        return name_array_str
+        json_data = json.dumps(self.linkMgrObject().getNameList())
+        self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), json_data)
+        return json_data
 
     def setupSession (self, go_request):
         session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("link_id"))
