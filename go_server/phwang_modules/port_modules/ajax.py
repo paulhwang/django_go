@@ -62,20 +62,10 @@ class AjaxClass(object):
             self.debug(False, "processGet", "command=%s", go_request["command"])
 
         data = self.switchObject().switchRequest(go_request)
-        json_str = json.dumps({
-                        "command": go_request["command"],
-                        "ajax_id": go_request["ajax_id"],
-                        "data": data,
-                        "res_data": data,
-                    })
-        #res.type('application/json')
-        #res.send(json_str)
-        #return JsonResponse({'status':'0'})
         return JsonResponse({
                         "command": go_request["command"],
                         "ajax_id": go_request["ajax_id"],
                         "data": data,
-                        "res_data": data,
                     })
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
