@@ -47,7 +47,7 @@ class SwitchClass(object):
             return None
 
     def setupLink(self, go_request):
-        link = self.linkMgrObject().searchAndCreate(go_request.get("my_name"), 0)
+        link = self.linkMgrObject().searchAndCreate(go_request.get("my_name"))
         if not link:
             self.abend("setupLink", "null link")
             return None
@@ -55,7 +55,8 @@ class SwitchClass(object):
 
         json_data = json.dumps({"link_id": link.linkId()});
         self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
-        return json_data
+        return json.dumps({"link_id": link.linkId(),
+                          });
 
     def getLinkObject(self, go_request):
         link = self.linkMgrObject().searchLinkByNameAndLinkId(go_request.get("my_name"), go_request.get("link_id"))

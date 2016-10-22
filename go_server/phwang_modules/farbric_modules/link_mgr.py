@@ -52,7 +52,7 @@ class LinkMgrClass(object):
         self.debug(False, "searchLinkByNameAndLinkId", "my_name=%s link_id=%s", my_name_val, link_id_val)
         return self.linkQueue().searchIt(compareNameAndLinkIdFunction_, my_name_val, link_id_val, None)
 
-    def searchAndCreate(self, my_name_val, link_id_val):
+    def searchAndCreate(self, my_name_val):
         link = self.searchLinkByName(my_name_val)
         if not link:
             link = self.mallocLink(my_name_val)
