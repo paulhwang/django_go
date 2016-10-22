@@ -40,16 +40,20 @@ class LinkMgrClass(object):
     def incrementGlobalLinkId(self):
         self.theGlobalLinkId += 1
 
-    def searchLink(self, my_name_val, link_id_val):
-        self.debug(False, "searchLink", "my_name=%s link_id=%s", my_name_val, link_id_val)
-        return self.linkQueue().searchIt(compareFunction, my_name_val, link_id_val, None)
-        #return self.linkQueue().searchIt(function (link_val, my_name_val, link_id_val) {
-        #    return ((my_name_val === link_val.myName()) &&
-         #           ((link_id_val === link_val.linkId()) || (link_id_val === 0)));
-        #}, my_name_val, link_id_val);
+    def searchLinkByName(self, my_name_val):
+        self.debug(False, "searchLinkByName", "name=%s", my_name_val);
+        return self.linkQueue().searchIt(compareNameFunction_, my_name_val, None, None)
+
+    def searchLinkByLinkId(self, link_id_val):
+        self.debug(False, "searchLinkByLinkId", "link_id=%i", link_id_val);
+        return self.linkQueue().searchIt(compareLinkIdFunction_, link_id_val, None, None)
+
+    def searchLinkByNameAndLinkId(self, my_name_val, link_id_val):
+        self.debug(False, "searchLinkByNameAndLinkId", "my_name=%s link_id=%s", my_name_val, link_id_val)
+        return self.linkQueue().searchIt(compareNameAndLinkIdFunction_, my_name_val, link_id_val, None)
 
     def searchAndCreate(self, my_name_val, link_id_val):
-        link = self.searchLink(my_name_val, link_id_val)
+        link = self.searchLinkByName(my_name_val)
         if not link:
             link = self.mallocLink(my_name_val)
             self.debug(True, "searchAndCreate", "malloc link: name=%s link_id=%i", link.myName(), link.linkId())
@@ -97,9 +101,11 @@ class LinkMgrClass(object):
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
-def compareFunction(link_val, my_name_val, link_id_val, dummy_val):
-    if my_name_val != link_val.myName():
-        return False
-    if (link_id_val == link_val.linkId() or link_id_val == 0):
-        return True
-    return False
+def compareNameAndLinkIdFunction_(link_val, my_name_val, link_id_val, dummy_val):
+    return  (my_name_val == link_val.myName()) and (link_id_val == link_val.linkId() or link_id_val == 0)
+
+def compareNameFunction_(link_val, my_name_val, dummy_val3, dummy_val4):
+    return my_name_val == link_val.myName()
+
+def compareLinkIdFunction_(link_val, link_id_val, dummy_val3, dummy_val4):
+    return link_id_val == link_val.linkId()

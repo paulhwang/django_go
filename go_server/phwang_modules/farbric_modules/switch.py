@@ -58,7 +58,7 @@ class SwitchClass(object):
         return json_data
 
     def getLinkObject(self, go_request):
-        link = self.linkMgrObject().searchLink(go_request.get("my_name"), go_request.get("link_id"))
+        link = self.linkMgrObject().searchLinkByNameAndLinkId(go_request.get("my_name"), go_request.get("link_id"))
         if not link:
             self.abend("getLinkObject", "null link: link_id=%i my_name=%s", go_request.get("link_id"), go_request.get("my_name"))
             return None
@@ -107,7 +107,7 @@ class SwitchClass(object):
                 self.abend("setupSession", "null session")
                 return None
 
-        his_link = self.linkMgrObject().searchLink(go_request.get("his_name"), 0)
+        his_link = self.linkMgrObject().searchLinkByNameAndLinkId(go_request.get("his_name"), 0)
         if not his_link:
             res.send(self.jsonStingifyData(go_request.get("command"), go_request.get("ajax_id"), None))
             return None
