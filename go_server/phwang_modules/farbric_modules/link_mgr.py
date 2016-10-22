@@ -31,9 +31,6 @@ class LinkMgrClass(object):
     def linkQueue(self):
         return self.theLinkQueue
 
-    def poolQueue(self):
-        return self.thePoolQueue
-
     def globalLinkId(self):
         return self.theGlobalLinkId
 
@@ -80,16 +77,11 @@ class LinkMgrClass(object):
         return name_array
 
     def mallocLink(self, my_name_val):
-        entry = self.poolQueue().deQueue()
-        if not entry:
-            entry = self.linkModuleMalloc(my_name_val, self.globalLinkId())
-        else:
-            entry.resetIt(my_name_val, self.globalLinkId())
+        entry = self.linkModuleMalloc(my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
         return entry
 
-    def freeLink(self, link_val):
-        self.poolQueue().enQueue(link_val)
+    #def freeLink(self, link_val):
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

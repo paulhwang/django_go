@@ -38,9 +38,6 @@ class SessionMgrClass(object):
     def preSessionQueue(self):
         return self.thePreSessionQueue;
 
-    def poolQueue(self):
-        return self.thePoolQueue
-
     def globalSessionId(self):
         return self.theGlobalSessionId;
 
@@ -68,16 +65,11 @@ class SessionMgrClass(object):
         return session
 
     def mallocSession(self, my_name_val, his_name_val, cluster_val):
-        entry = self.poolQueue().deQueue();
-        if not entry:
-            entry = self.sessionModuleMalloc(my_name_val, his_name_val, self.globalSessionId(), cluster_val)
-        else:
-            entry.resetIt(my_name_val, his_name_val, self.globalSessionId(), cluster_val)
+        entry = self.sessionModuleMalloc(my_name_val, his_name_val, self.globalSessionId(), cluster_val)
         self.incrementGlobalSessionId()
         return entry
 
-    def freeSession(self, session_val):
-        self.poolQueue().enQueue(link_val)
+    #def freeSession(self, session_val):
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
