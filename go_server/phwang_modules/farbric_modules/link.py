@@ -1,3 +1,5 @@
+import threading
+
 def malloc(link_mgr_val, my_name_val, link_id_val):
     return LinkClass(link_mgr_val, my_name_val, link_id_val)
 
@@ -65,16 +67,11 @@ class LinkClass(object):
 
     def resetTimeout(self):
         if self.keepAliveTimer():
-            clearInterval(self.keepAliveTimer())
+            self.keepAliveTimer().cancel()
 
-        self.debug(False, "resetTimeout", "my_name=%s link_id=%i", self.myName(), self.linkId())
-        #time_out = setInterval(function (link_val) {
-        #    console.log("resetTimeout(***timeout occurs)", "my_name=" + link_val.myName() + " link_id=" + link_val.linkId());
-        #    clearInterval(link_val.keepAliveTimer());
-        #    link_val.linkMgrObject().freeLink(link_val);
-        #}, 20000, self);
-        #return time_out;
-        return None
+        t = threading.Timer(20.0, timeoutFunction_, [self])
+        t.start()
+        return t
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
@@ -85,3 +82,8 @@ class LinkClass(object):
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.linkMgrObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+def timeoutFunction_(link_val):
+    link_val.debug(True, "timeoutFunction_(***timeout occurs)", "link_id=%i", link_val.linkId())
+    link_val.keepAliveTimer().cancel()
+    link_val.linkMgrObject().freeLink(link_val)
