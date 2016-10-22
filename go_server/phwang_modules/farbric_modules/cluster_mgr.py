@@ -11,7 +11,7 @@ class ClusterMgrClass(object):
         self.theFarbricObject = fabric_val;
         self.theClusterObject = malloc_cluster(self)
 
-    def mallocCluster(self):
+    def mallocCluster(self, topic_val):
         return malloc_cluster(self)
 
     def className(self):

@@ -17,6 +17,9 @@ class SwitchClass(object):
     def linkMgrObject(self):
         return self.farbricObject().linkMgrObject()
 
+    def clusterMgrObject(self):
+        return self.farbricObject().clusterMgrObject()
+
     def sessionMgrObject(self):
         return self.farbricObject().sessionMgrObject()
 
@@ -102,6 +105,10 @@ class SwitchClass(object):
     def setupSession (self, go_request):
         link = self.getLinkObject(go_request)
         if not link:
+            return None
+
+        cluster = self.clusterMgrObject().mallocCluster(go_request.get("topic"))
+        if not cluster:
             return None
 
         session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("link_id"))

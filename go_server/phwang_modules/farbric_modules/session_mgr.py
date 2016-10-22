@@ -53,7 +53,7 @@ class SessionMgrClass(object):
     def searchAndCreate(self, my_name_val, his_name_val, session_id_val):
         session = self.searchSession(my_name_val, his_name_val, session_id_val)
         if not session:
-            cluster = self.clusterMgrObject().mallocCluster()
+            cluster = self.clusterMgrObject().mallocCluster("go")
             session = self.mallocSession(my_name_val, his_name_val, cluster)
             self.sessionQueue().enQueue(session)
 
