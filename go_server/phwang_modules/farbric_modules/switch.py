@@ -5,23 +5,23 @@ def malloc(fabric_val):
 
 class SwitchClass(object):
     def __init__(self, fabric_val):
-        self.theFarbricObject = fabric_val
+        self.theFabricObject = fabric_val
         self.initSwitchTable()
 
     def className(self):
         return "SwitchClass"
 
-    def farbricObject(self):
-        return self.theFarbricObject
+    def fabricObject(self):
+        return self.theFabricObject
 
     def linkMgrObject(self):
-        return self.farbricObject().linkMgrObject()
+        return self.fabricObject().linkMgrObject()
 
     def clusterMgrObject(self):
-        return self.farbricObject().clusterMgrObject()
+        return self.fabricObject().clusterMgrObject()
 
     def sessionMgrObject(self):
-        return self.farbricObject().sessionMgrObject()
+        return self.fabricObject().sessionMgrObject()
 
     def initSwitchTable(self):
         self.switch_table = {
@@ -217,8 +217,8 @@ class SwitchClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
