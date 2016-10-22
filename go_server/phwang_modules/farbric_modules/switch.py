@@ -100,6 +100,10 @@ class SwitchClass(object):
         return json_data
 
     def setupSession (self, go_request):
+        link = self.getLinkObject(go_request)
+        if not link:
+            return None
+
         session = self.sessionMgrObject().searchSession(go_request.get("my_name"), go_request.get("his_name"), go_request.get("link_id"))
         if not session:
             session = self.sessionMgrObject().searchAndCreate(go_request.get("my_name"), go_request.get("his_name"), 0)
