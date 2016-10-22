@@ -53,8 +53,16 @@ class LinkMgrClass(object):
         if not link:
             link = self.mallocLink(my_name_val)
             self.debug(True, "searchAndCreate", "malloc link: name=%s link_id=%i", link.myName(), link.linkId())
+            self.setNameListChanged();
             self.linkQueue().enQueue(link)
         return link
+
+    def setNameListChanged(self):
+        queue_element = self.linkQueue().tail()
+        while queue_element:
+            link = queue_element.data()
+            link.setNameListChanged()
+            queue_element = queue_element.prev()
 
     def getNameList(self):
         name_array = [None] * self.linkQueue().size()

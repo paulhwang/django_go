@@ -40,6 +40,15 @@ class LinkClass(object):
     def receiveRing(self):
         return self.theReceiveRing;
 
+    def nameListChanged(self):
+        return self.theNameListChanged
+
+    def setNameListChanged(self):
+        self.theNameListChanged = True
+
+    def clearNameListChanged(self):
+        self.theNameListChanged = False
+
     def resetIt(self, my_name_val, link_id_val):
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
@@ -48,6 +57,7 @@ class LinkClass(object):
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theReceiveRing = self.utilObject().mallocRing()
         self.theKeepAliveTimer = self.resetTimeout()
+        self.theNameListChanged = True
 
     def resetKeepAliveTimer(self):
         self.debug(False, "resetKeepAliveTimer", "my_name=%s link_id=%i", self.myName(), self.linkId())

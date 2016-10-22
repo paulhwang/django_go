@@ -79,7 +79,10 @@ class SwitchClass(object):
         data = link.receiveQueue().deQueue()
         if data:
             self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
-        return json.dumps(data)
+        return json.dumps({"link_id": link.linkId(),
+                           "name_list": link.nameListChanged(),
+                           "data": data,
+                           })
 
     def putLinkData(self, go_request):
         self.abend("putLinkData", "putLinkData is not implemented")
@@ -90,6 +93,7 @@ class SwitchClass(object):
         if not link:
             return None
 
+        link.clearNameListChanged()
         json_data = json.dumps(self.linkMgrObject().getNameList())
         self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), json_data)
         return json_data
