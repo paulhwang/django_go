@@ -18,11 +18,11 @@ class ClusterMgrClass(object):
     def className(self):
         return "ClusterMgrClass"
 
-    def farbricObject(self):
+    def fabricObject(self):
         return self.theFarbricObject
 
     def phwangObject(self):
-        return self.farbricObject().phwangObject()
+        return self.fabricObject().phwangObject()
 
     def utilObject(self):
         return self.phwangObject().utilObject()
@@ -43,7 +43,7 @@ class ClusterMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
