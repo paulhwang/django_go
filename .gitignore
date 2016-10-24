@@ -6,5 +6,5 @@ db.sqlite3
 /go_server/phwang_modules/__pycache__
 /go_server/phwang_modules/util_modules/__pycache__
 /go_server/phwang_modules/port_modules/__pycache__
-/go_server/phwang_modules/farbric_modules/__pycache__
+/go_server/phwang_modules/fabric_modules/__pycache__
 /go_server/phwang_modules/go_modules/__pycache__

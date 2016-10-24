@@ -1,10 +1,10 @@
-import go_server.phwang_modules.farbric_modules.cluster
+import go_server.phwang_modules.fabric_modules.cluster
 
 def malloc(fabric_val):
     return ClusterMgrClass(fabric_val)
 
 def malloc_cluster(cluster_mgr_val, topic_val, session_val):
-    return go_server.phwang_modules.farbric_modules.cluster.malloc(cluster_mgr_val, topic_val, session_val)
+    return go_server.phwang_modules.fabric_modules.cluster.malloc(cluster_mgr_val, topic_val, session_val)
 
 class ClusterMgrClass(object):
     def __init__(self, fabric_val):

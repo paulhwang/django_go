@@ -1,11 +1,11 @@
 import threading
-import go_server.phwang_modules.farbric_modules.session_mgr
+import go_server.phwang_modules.fabric_modules.session_mgr
 
 def malloc(link_mgr_val, my_name_val, link_id_val):
     return LinkClass(link_mgr_val, my_name_val, link_id_val)
 
 def malloc_session_mgr(link_val):
-    return go_server.phwang_modules.farbric_modules.session_mgr.malloc(link_val)
+    return go_server.phwang_modules.fabric_modules.session_mgr.malloc(link_val)
 
 class LinkClass(object):
     def __init__(self, link_mgr_val, my_name_val, link_id_val):

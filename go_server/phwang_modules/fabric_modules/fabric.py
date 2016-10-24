@@ -1,18 +1,18 @@
-import go_server.phwang_modules.farbric_modules.link_mgr
-import go_server.phwang_modules.farbric_modules.cluster_mgr
-import go_server.phwang_modules.farbric_modules.switch
+import go_server.phwang_modules.fabric_modules.link_mgr
+import go_server.phwang_modules.fabric_modules.cluster_mgr
+import go_server.phwang_modules.fabric_modules.switch
 
 def malloc(phwang_val):
     return FibreClass(phwang_val)
 
 def malloc_link_mgr(phwang_val):
-    return go_server.phwang_modules.farbric_modules.link_mgr.malloc(phwang_val)
+    return go_server.phwang_modules.fabric_modules.link_mgr.malloc(phwang_val)
 
 def malloc_cluster_mgr(phwang_val):
-    return go_server.phwang_modules.farbric_modules.cluster_mgr.malloc(phwang_val)
+    return go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(phwang_val)
 
 def malloc_switch(phwang_val):
-    return go_server.phwang_modules.farbric_modules.switch.malloc(phwang_val)
+    return go_server.phwang_modules.fabric_modules.switch.malloc(phwang_val)
 
 class FibreClass(object):
     def __init__(self, phwang_val):

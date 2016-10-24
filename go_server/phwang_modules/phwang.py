@@ -1,5 +1,5 @@
 import go_server.phwang_modules.util_modules.util
-import go_server.phwang_modules.farbric_modules.farbric
+import go_server.phwang_modules.fabric_modules.fabric
 import go_server.phwang_modules.port_modules.port
 
 def malloc():
@@ -9,7 +9,7 @@ def malloc_util(phwang_val):
     return go_server.phwang_modules.util_modules.util.malloc(phwang_val)
 
 def malloc_farbric(phwang_val):
-    return go_server.phwang_modules.farbric_modules.farbric.malloc(phwang_val)
+    return go_server.phwang_modules.fabric_modules.fabric.malloc(phwang_val)
 
 def malloc_port(phwang_val):
     return go_server.phwang_modules.port_modules.port.malloc(phwang_val)
