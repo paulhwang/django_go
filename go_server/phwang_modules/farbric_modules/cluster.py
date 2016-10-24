@@ -8,8 +8,9 @@ class ClusterClass(object):
     def __init__(self, cluster_mgr_val, topic_val, session_val):
         self.theClusterMgrObject = cluster_mgr_val
         session_val.setClusterObject(self)
-        self.theSessionArray = [2]
-        self.theSessionArrayLength = 0
+        self.theSessionArray = [None] * 2
+        self.theSessionArray[0] = session_val
+        self.theSessionArrayLength = 1
         self.theGoObject = self.goObjectMalloc()
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
