@@ -8,7 +8,7 @@ def malloc_link(link_mgr_val, my_name_val, link_id_val):
 
 class LinkMgrClass(object):
     def __init__(self, fabric_val):
-        self.theFarbricObject = fabric_val
+        self.theFabricObject = fabric_val
         self.theGlobalLinkId = 10
         self.theLinkQueue = self.utilObject().mallocQueue()
         self.thePoolQueue = self.utilObject().mallocQueue()
@@ -19,11 +19,11 @@ class LinkMgrClass(object):
     def className(self):
         return "LinkMgrClass"
 
-    def farbricObject(self):
-        return self.theFarbricObject
+    def fabricObject(self):
+        return self.theFabricObject
 
     def phwangObject(self):
-        return self.farbricObject().phwangObject()
+        return self.fabricObject().phwangObject()
 
     def utilObject(self):
         return self.phwangObject().utilObject()
@@ -88,10 +88,10 @@ class LinkMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 def compareNameAndLinkIdFunction_(link_val, my_name_val, link_id_val, dummy_val):
     return  (my_name_val == link_val.myName()) and (link_id_val == link_val.linkId() or link_id_val == 0)

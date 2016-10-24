@@ -1,12 +1,12 @@
-def malloc(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
-    return SessionClass(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
+def malloc(session_mgr_val, session_id_val):
+    return SessionClass(session_mgr_val, session_id_val)
 
 class SessionClass(object):
-    def __init__(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
+    def __init__(self, session_mgr_val, session_id_val):
         self.theSessionMgrObject = session_mgr_val;
-        self.resetIt(session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val)
+        self.resetIt(session_mgr_val, session_id_val)
 
-    def className(self):
+    def objectName(self):
         return "SessionClass"
 
     def sessionMgrObject(self):
@@ -14,6 +14,9 @@ class SessionClass(object):
 
     def clusterObject(self):
         return self.theClusterObject
+
+    def setClusterObject(self, val):
+        self.theClusterObject = val
 
     def farbricObject(self):
         return self.sessionMgrObject().farbricObject()
@@ -54,19 +57,15 @@ class SessionClass(object):
     def receiveRing(self):
         return self.theReceiveRing;
 
-    def resetIt(self, session_mgr_val, my_name_val, his_name_val, session_id_val, cluster_val):
+    def resetIt(self, session_mgr_val, session_id_val):
         self.theSessionMgrObject = session_mgr_val
         self.theSessionId = session_id_val
-        self.theMyName = my_name_val
-        self.theHisName = his_name_val
         self.theHisSession = None
         self.up_seq = 0
         self.down_seq = 0
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
         self.theReceiveRing = self.utilObject().mallocRing()
-        self.theClusterObject = cluster_val
-        self.clusterObject().addAdditionalSession(self)
 
     def enqueueTransmitData(self, data_val):
         self.debug(True, "enqueueTransmitData", data_val)
@@ -82,7 +81,7 @@ class SessionClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.farbricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.farbricObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

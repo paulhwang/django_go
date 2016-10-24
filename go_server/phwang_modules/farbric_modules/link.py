@@ -1,7 +1,11 @@
 import threading
+import go_server.phwang_modules.farbric_modules.session_mgr
 
 def malloc(link_mgr_val, my_name_val, link_id_val):
     return LinkClass(link_mgr_val, my_name_val, link_id_val)
+
+def malloc_session_mgr(link_val):
+    return go_server.phwang_modules.farbric_modules.session_mgr.malloc(link_val)
 
 class LinkClass(object):
     def __init__(self, link_mgr_val, my_name_val, link_id_val):
@@ -14,6 +18,9 @@ class LinkClass(object):
 
     def linkMgrObject(self):
         return self.theLinkMgrObject
+
+    def sessionMgrObject(self):
+        return self.theSessionMgrObject
 
     def utilObject(self):
         return self.linkMgrObject().utilObject()
@@ -52,6 +59,7 @@ class LinkClass(object):
         self.theNameListChanged = False
 
     def resetIt(self, my_name_val, link_id_val):
+        self.theSessionMgrObject = malloc_session_mgr(self)
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
         self.up_seq = 0
@@ -72,6 +80,12 @@ class LinkClass(object):
         t = threading.Timer(20.0, timeoutFunction_, [self])
         t.start()
         return t
+
+    def searchSessionBySessionId(self, session_id_val):
+        return self.sessionMgrObject().searchSessionBySessionId(session_id_val)
+
+    def mallocSession(self):
+        return self.sessionMgrObject().mallocSession()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
