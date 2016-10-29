@@ -12,6 +12,8 @@ class LinkClass(object):
         self.theLinkMgrObject = link_mgr_val;
         self.theKeepAliveTimer = None
         self.resetIt(my_name_val, link_id_val)
+        self.thePrev = None
+        self.theNext = None
 
     def className(self):
         return "LinkClass"
@@ -48,6 +50,18 @@ class LinkClass(object):
 
     def receiveRing(self):
         return self.theReceiveRing;
+
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
 
     def nameListChanged(self):
         return self.theNameListChanged

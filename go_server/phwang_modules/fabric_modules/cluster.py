@@ -14,7 +14,8 @@ class ClusterClass(object):
         self.theGoObject = self.goObjectMalloc()
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
-        self.theNext = None
+        self.theNext1 = None
+        self.thePrev = None
 
     def goObjectMalloc(self):
         return go_server.phwang_modules.go_modules.go.malloc(self)
@@ -51,6 +52,18 @@ class ClusterClass(object):
 
     def transmitQueue(self):
         return self.theTransmitQueue
+
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
 
     def addAdditionalSession(self, session_val):
         self.theSessionArray[self.sessionArrayLength()] = session_val
