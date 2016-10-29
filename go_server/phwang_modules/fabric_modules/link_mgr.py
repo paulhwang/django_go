@@ -13,7 +13,6 @@ class LinkMgrClass(object):
         self.theHead = None
         self.theTail = None
         self.theSize = 0
-        self.theLinkQueue = self.utilObject().mallocQueue()
 
     def linkModuleMalloc(self, my_name_val, link_id_val):
         return malloc_link(self, my_name_val, link_id_val)
@@ -29,9 +28,6 @@ class LinkMgrClass(object):
 
     def utilObject(self):
         return self.phwangObject().utilObject()
-
-    def linkQueue(self):
-        return self.theLinkQueue
 
     def globalLinkId(self):
         return self.theGlobalLinkId
@@ -65,7 +61,6 @@ class LinkMgrClass(object):
         self.incrementGlobalLinkId()
         self.insertLinkToList(link)
         self.setNameListChanged()
-        self.linkQueue().enQueue(link)
         return link
 
     def freeLink(self, link_val):
@@ -129,21 +124,17 @@ class LinkMgrClass(object):
         return False
 
     def setNameListChanged(self):
-        queue_element = self.linkQueue().tail()
-        while queue_element:
-            link = queue_element.data()
+        link = self.head()
+        while link:
             link.setNameListChanged()
-            queue_element = queue_element.prev()
+            link = link.next()
 
     def getNameList(self):
-        name_array = [None] * self.linkQueue().size()
-        i = 0
-        queue_element = self.linkQueue().tail()
-        while queue_element:
-            link = queue_element.data()
-            name_array[i] = link.myName()
-            i += 1
-            queue_element = queue_element.prev()
+        name_array = []
+        link = self.head()
+        while link:
+            name_array.append(link.myName())
+            link = link.next()
         return name_array
 
     def abendIt(self):
