@@ -95,6 +95,13 @@ class SessionMgrClass(object):
         self.abendIt()
 
     def deleteSessionFromList(self, session_val):
+        if self.size() <= 0:
+            self.abend("deleteSessionFromList", "size=%i", self.size())
+            return
+        if not self.sessionExistInTheList(session_val):
+            self.abend("deleteSessionFromList", "sessionExistInTheList is false")
+            return
+
         self.abendIt()
         if session_val.prev():
             session_val.prev().setNext(session_val.next())
@@ -114,6 +121,14 @@ class SessionMgrClass(object):
                 return session
             session = session.next()
         return None
+
+    def sessionExistInTheList(self, session_val):
+        session = self.head()
+        while session:
+            if session == session_val:
+                return True
+            session = session.next()
+        return False
 
     def getPendingSessions(self):
         data = []

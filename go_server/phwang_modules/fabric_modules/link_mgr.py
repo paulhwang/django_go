@@ -92,6 +92,13 @@ class LinkMgrClass(object):
         self.abendIt()
 
     def deleteLinkFromList(self, link_val):
+        if self.size() <= 0:
+            self.abend("deleteLinkFromList", "size=%i", self.size())
+            return
+        if not self.linkExistInTheList(link_val):
+            self.abend("deleteLinkFromList", "linkExistInTheList is false")
+            return
+
         self.abendIt()
         if link_val.prev():
             link_val.prev().setNext(link_val.next())
@@ -112,6 +119,14 @@ class LinkMgrClass(object):
                 return link
             link = link.next()
         return None
+
+    def linkExistInTheList(self, link_val):
+        link = self.head()
+        while link:
+            if link == link_val:
+                return True
+            link = link.next()
+        return False
 
     def setNameListChanged(self):
         queue_element = self.linkQueue().tail()
