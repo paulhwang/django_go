@@ -15,6 +15,9 @@ class LinkClass(object):
         self.thePrev = None
         self.theNext = None
 
+    def linkTimeoutInterval(self):
+        return 30.0
+
     def className(self):
         return "LinkClass"
 
@@ -91,7 +94,7 @@ class LinkClass(object):
         if self.keepAliveTimer():
             self.keepAliveTimer().cancel()
 
-        t = threading.Timer(20.0, timeoutFunction_, [self])
+        t = threading.Timer(self.linkTimeoutInterval(), timeoutFunction_, [self])
         t.start()
         return t
 
