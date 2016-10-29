@@ -10,6 +10,9 @@ class LinkMgrClass(object):
     def __init__(self, fabric_val):
         self.theFabricObject = fabric_val
         self.theGlobalLinkId = 10
+        self.theHead = None
+        self.theTail = None
+        self.theSize = 0
         self.theLinkQueue = self.utilObject().mallocQueue()
         self.thePoolQueue = self.utilObject().mallocQueue()
 
@@ -37,26 +40,79 @@ class LinkMgrClass(object):
     def incrementGlobalLinkId(self):
         self.theGlobalLinkId += 1
 
-    def searchLinkByName(self, my_name_val):
-        self.debug(False, "searchLinkByName", "name=%s", my_name_val);
-        return self.linkQueue().searchIt(compareNameFunction_, my_name_val, None, None)
+    def head(self):
+        return self.theHead
 
-    def searchLinkByLinkId(self, link_id_val):
-        self.debug(False, "searchLinkByLinkId", "link_id=%i", link_id_val);
-        return self.linkQueue().searchIt(compareLinkIdFunction_, link_id_val, None, None)
+    def setHead(self, val):
+        self.theHead = val
+
+    def tail(self):
+        return self.theTail
+
+    def setTail(self, val):
+        self.theTail = val
+
+    def size(self):
+        return self.theSize
+
+    def incrementSize(self):
+        self.theSize += 1
+
+    def decrementSize(self):
+        self.theSize -= 1
+
+    def mallocLink(self, my_name_val):
+        link = self.linkModuleMalloc(my_name_val, self.globalLinkId())
+        self.incrementGlobalLinkId()
+        self.insertLinkToList(link)
+        self.setNameListChanged()
+        self.linkQueue().enQueue(link)
+        return link
+
+    def freeLink(self, link_val):
+        self.deleteLinkFromList(link_val)
+
+    def insertLinkToList(self, link_val):
+        if not link_val:
+            self.abend("enQueue", "null link_val")
+            return
+
+        self.abendIt()
+
+        self.incrementSize()
+        if not self.head():
+            link_val.setPrev(None)
+            link_val.setNext(None)
+            self.setHead(link_val)
+            self.setTail(link_val)
+        else:
+            self.tail().setNext(link_val)
+            link_val.setPrev(self.tail())
+            link_val.setNext(None)
+            self.setTail(link_val)
+        self.abendIt()
+
+    def deleteLinkFromList(self, link_val):
+        self.abendIt()
+        if link_val.prev():
+            link_val.prev().setNext(link_val.next())
+        else:
+            self.setHead(link_val.next())
+        if link_val.next():
+            link_val.next().setPrev(link_val.prev())
+        else:
+            self.setTail(link_val.prev())
+        self.decrementSize()
+        self.abendIt()
 
     def searchLinkByNameAndLinkId(self, my_name_val, link_id_val):
-        self.debug(False, "searchLinkByNameAndLinkId", "my_name=%s link_id=%s", my_name_val, link_id_val)
-        return self.linkQueue().searchIt(compareNameAndLinkIdFunction_, my_name_val, link_id_val, None)
-
-    def searchAndCreate(self, my_name_val):
-        link = self.searchLinkByName(my_name_val)
-        if not link:
-            link = self.mallocLink(my_name_val)
-            self.debug(True, "searchAndCreate", "malloc link: name=%s link_id=%i", link.myName(), link.linkId())
-            self.setNameListChanged();
-            self.linkQueue().enQueue(link)
-        return link
+        self.debug(False, "searchLinkByNameAndLinkId name=%s id=%i", my_name_val, link_id_val)
+        link = self.head()
+        while link:
+            if (link.linkId() == link_id_val) and (link.myName() == my_name_val):
+                return link
+            link = link.next()
+        return None
 
     def setNameListChanged(self):
         queue_element = self.linkQueue().tail()
@@ -76,12 +132,22 @@ class LinkMgrClass(object):
             queue_element = queue_element.prev()
         return name_array
 
-    def mallocLink(self, my_name_val):
-        entry = self.linkModuleMalloc(my_name_val, self.globalLinkId())
-        self.incrementGlobalLinkId()
-        return entry
+    def abendIt(self):
+        i = 0;
+        link = self.head()
+        while link:
+            link = link.next()
+            i += 1
+        if i != self.size():
+            self.abend("abendIt", "head: size=%i i=%i", self.size(), i)
 
-    #def freeLink(self, link_val):
+        i = 0
+        link = self.tail()
+        while link:
+            link = link.prev()
+            i += 1
+        if i != self.size():
+            self.abend("abendIt", "tail: size=%i i=%i", self.size(), i)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
@@ -92,12 +158,3 @@ class LinkMgrClass(object):
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-def compareNameAndLinkIdFunction_(link_val, my_name_val, link_id_val, dummy_val):
-    return  (my_name_val == link_val.myName()) and (link_id_val == link_val.linkId() or link_id_val == 0)
-
-def compareNameFunction_(link_val, my_name_val, dummy_val3, dummy_val4):
-    return my_name_val == link_val.myName()
-
-def compareLinkIdFunction_(link_val, link_id_val, dummy_val3, dummy_val4):
-    return link_id_val == link_val.linkId()

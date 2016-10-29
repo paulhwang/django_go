@@ -59,7 +59,7 @@ class SwitchClass(object):
             return None
 
     def setupLink(self, go_request):
-        link = self.linkMgrObject().searchAndCreate(go_request.get("my_name"))
+        link = self.linkMgrObject().mallocLink(go_request.get("my_name"))
         if not link:
             self.abend("setupLink", "null link")
             return None
