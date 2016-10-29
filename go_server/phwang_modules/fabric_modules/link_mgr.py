@@ -14,7 +14,6 @@ class LinkMgrClass(object):
         self.theTail = None
         self.theSize = 0
         self.theLinkQueue = self.utilObject().mallocQueue()
-        self.thePoolQueue = self.utilObject().mallocQueue()
 
     def linkModuleMalloc(self, my_name_val, link_id_val):
         return malloc_link(self, my_name_val, link_id_val)
