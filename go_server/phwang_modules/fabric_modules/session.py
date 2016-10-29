@@ -57,6 +57,18 @@ class SessionClass(object):
     def receiveRing(self):
         return self.theReceiveRing;
 
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
+
     def resetIt(self, session_mgr_val, session_id_val):
         self.theSessionMgrObject = session_mgr_val
         self.theSessionId = session_id_val
@@ -66,6 +78,8 @@ class SessionClass(object):
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
         self.theReceiveRing = self.utilObject().mallocRing()
+        self.thePrev = None
+        self.theNext = None
 
     def enqueueTransmitData(self, data_val):
         self.debug(True, "enqueueTransmitData", data_val)

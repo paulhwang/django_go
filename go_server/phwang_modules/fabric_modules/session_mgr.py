@@ -9,9 +9,9 @@ def malloc_session(session_mgr_val, session_id_val):
 class SessionMgrClass(object):
     def __init__(self, link_val):
         self.theLinkObject = link_val
-        self.theSessionQueue = self.utilObject().mallocQueue()
-        self.thePreSessionQueue = self.utilObject().mallocQueue()
-        self.thePoolQueue = self.utilObject().mallocQueue()
+        self.theHead = None
+        self.theTail = None
+        self.theSize = 0
         self.theGlobalSessionId = 1000
 
     def sessionModuleMalloc(self, session_id_val):
@@ -38,48 +38,113 @@ class SessionMgrClass(object):
     def utilObject(self):
         return self.phwangObject().utilObject()
 
-    def sessionQueue(self):
-        return self.theSessionQueue;
-
-    def preSessionQueue(self):
-        return self.thePreSessionQueue;
-
     def globalSessionId(self):
-        return self.theGlobalSessionId;
+        return self.theGlobalSessionId
 
     def incrementGlobalSessionId(self):
         self.theGlobalSessionId += 1
 
-    def searchSessionBySessionId(self, session_id_val):
-        return self.sessionQueue().searchIt(compareSessionId, session_id_val, None, None)
+    def head(self):
+        return self.theHead
 
-    def searchSession(self, my_name_val, his_name_val, session_id_val):
-        return self.sessionQueue().searchIt(compareSessionData, my_name_val, his_name_val, session_id_val)
+    def setHead(self, val):
+        self.theHead = val
 
-    def searchAndCreate(self, my_name_val, his_name_val, session_id_val):
-        session = self.searchSession(my_name_val, his_name_val, session_id_val)
-        if not session:
-            cluster = self.clusterMgrObject().mallocCluster("go")
-            session = self.mallocSession(my_name_val, his_name_val, cluster)
-            self.sessionQueue().enQueue(session)
+    def tail(self):
+        return self.theTail
 
-            if my_name_val == his_name_val:
-                session.setHisName(his_name_val)
-                session.setHisSession(session)
-            else:
-                his_session = self.mallocSession(his_name_val, my_name_val, cluster)
-                session.setHisSession(his_session)
-                his_session.setHisSession(session)
-                self.sessionQueue().enQueue(his_session)
-        return session
+    def setTail(self, val):
+        self.theTail = val
+
+    def size(self):
+        return self.theSize
+
+    def incrementSize(self):
+        self.theSize += 1
+
+    def decrementSize(self):
+        self.theSize -= 1
 
     def mallocSession(self):
         session = self.sessionModuleMalloc(self.globalSessionId())
         self.incrementGlobalSessionId()
-        self.sessionQueue().enQueue(session)
+        self.insertSessionToList(session)
         return session
 
-    #def freeSession(self, session_val):
+    def freeSession(self, session_val):
+        self.deleteSessionFromList(session_val)
+
+    def insertSessionToList(self, session_val):
+        if not session_val:
+            self.abend("enQueue", "null session_val")
+            return
+
+        self.abendIt()
+
+        self.incrementSize()
+        if not self.head():
+            session_val.setPrev(None)
+            session_val.setNext(None)
+            self.setHead(session_val)
+            self.setTail(session_val)
+        else:
+            self.tail().setNext(session_val)
+            session_val.setPrev(self.tail())
+            session_val.setNext(None)
+            self.setTail(session_val)
+        self.abendIt()
+
+    def deleteSessionFromList(self, session_val):
+        self.abendIt()
+        if session_val.prev():
+            session_val.prev().setNext(session_val.next())
+        else:
+            self.setHead(session_val.next())
+        if session_val.next():
+            session_val.next().setPrev(session_val.prev())
+        else:
+            self.setTail(session_val.prev())
+        self.decrementSize()
+        self.abendIt()
+
+    def searchSessionBySessionId(self, session_id_val):
+        session = self.head()
+        while session:
+            if session.sessionId() == session_id_val:
+                return session
+            session = session.next()
+        return None
+
+    def getPendingSessions(self):
+        data = []
+        i = 0
+        session = self.head()
+        while session:
+            if session.transmitQueue().size() > 0:
+                data.append(session.sessionId())
+                i += 1
+            session = session.next();
+        if i == 0:
+            return None
+        else:
+            return data
+
+    def abendIt(self):
+        i = 0;
+        session = self.head()
+        while session:
+            session = session.next()
+            i += 1
+        if i != self.size():
+            self.abend("abendIt", "head: size=%i i=%i", self.size(), i)
+
+        i = 0
+        session = self.tail()
+        while session:
+            session = session.prev()
+            i += 1
+        if i != self.size():
+            self.abend("abendIt", "tail: size=%i i=%i", self.size(), i)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
@@ -90,16 +155,3 @@ class SessionMgrClass(object):
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.fabricObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-def compareSessionData(session_val, my_name_val, his_name_val, session_id_val):
-    if my_name_val != session_val.myName():
-        return False
-    if his_name_val != session_val.hisName():
-        return False
-    if (session_id_val == session_val.sessionId()) or (session_id_val == 0):
-        return True
-    return False
-
-def compareSessionId(session_val, session_id_val, dummy_val3, dummy_val4):
-    return session_id_val == session_val.sessionId()
-

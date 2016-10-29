@@ -80,12 +80,14 @@ class SwitchClass(object):
         if not link:
             return None
 
+        pending_sessions = link.getPendingSessions()
         data = link.receiveQueue().deQueue()
         if data:
             self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
         return json.dumps({"link_id": link.linkId(),
                            "name_list": link.nameListChanged(),
                            "data": data,
+                           "pending_sessions": pending_sessions,
                            })
 
     def putLinkData(self, go_request):
