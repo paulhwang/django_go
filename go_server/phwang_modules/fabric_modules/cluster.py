@@ -14,7 +14,7 @@ class ClusterClass(object):
         self.theGoObject = self.goObjectMalloc()
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theTransmitQueue = self.utilObject().mallocQueue()
-        self.theNext1 = None
+        self.theNext = None
         self.thePrev = None
 
     def goObjectMalloc(self):
