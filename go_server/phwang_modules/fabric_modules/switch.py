@@ -8,6 +8,9 @@ class SwitchClass(object):
         self.theFabricObject = fabric_val
         self.initSwitchTable()
 
+    def defaultLinkUpdateInterval(self):
+        return 3000
+
     def className(self):
         return "SwitchClass"
 
@@ -22,6 +25,12 @@ class SwitchClass(object):
 
     def sessionMgrObject(self):
         return self.fabricObject().sessionMgrObject()
+
+    def linkUpdateInterval(self):
+        return self.theLinkUpdateInterval;
+
+    def setLinkUpdateInterval(self, val):
+        self.theLinkUpdateInterval = val;
 
     def initSwitchTable(self):
         self.switch_table = {
@@ -55,6 +64,7 @@ class SwitchClass(object):
             self.abend("setupLink", "null link")
             return None
         link.resetKeepAliveTimer()
+        self.setLinkUpdateInterval(self.defaultLinkUpdateInterval())
 
         json_data = json.dumps({"link_id": link.linkId()});
         self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
@@ -88,6 +98,7 @@ class SwitchClass(object):
                            "name_list": link.nameListChanged(),
                            "data": data,
                            "pending_sessions": pending_sessions,
+                           "interval": self.linkUpdateInterval(),
                            })
 
     def putLinkData(self, go_request):
