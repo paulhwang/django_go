@@ -10,10 +10,18 @@ def malloc_session_mgr(link_val):
 class LinkClass(object):
     def __init__(self, link_mgr_val, my_name_val, link_id_val):
         self.theLinkMgrObject = link_mgr_val;
+        self.theMyName = my_name_val
+        self.theLinkId = link_id_val
+
         self.theKeepAliveTimer = None
-        self.resetIt(my_name_val, link_id_val)
         self.thePrev = None
         self.theNext = None
+        self.up_seq = 0
+        self.down_seq = 0
+        self.theReceiveQueue = self.utilObject().mallocQueue()
+        self.theReceiveRing = self.utilObject().mallocRing()
+        self.theNameListChanged = True
+        self.theSessionMgrObject = malloc_session_mgr(self)
 
     def linkTimeoutInterval(self):
         return 30.0
@@ -74,17 +82,6 @@ class LinkClass(object):
 
     def clearNameListChanged(self):
         self.theNameListChanged = False
-
-    def resetIt(self, my_name_val, link_id_val):
-        self.theSessionMgrObject = malloc_session_mgr(self)
-        self.theMyName = my_name_val
-        self.theLinkId = link_id_val
-        self.up_seq = 0
-        self.down_seq = 0
-        self.theReceiveQueue = self.utilObject().mallocQueue()
-        self.theReceiveRing = self.utilObject().mallocRing()
-        self.theKeepAliveTimer = self.resetTimeout()
-        self.theNameListChanged = True
 
     def resetKeepAliveTimer(self):
         self.debug(False, "resetKeepAliveTimer", "my_name=%s link_id=%i", self.myName(), self.linkId())
