@@ -199,7 +199,6 @@ class SwitchClass(object):
                 self.logit("***abend: putSessionData", "%s post seq=%i dropped", go_request.get("data"), xmt_seq);
 
         self.debug(True, "putSessionData", "queue_size=%i", session.receiveQueue().size())
-        return None
 
         res_data = session.dequeueTransmitData()
         if not res_data:
