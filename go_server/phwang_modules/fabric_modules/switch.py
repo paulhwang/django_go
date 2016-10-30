@@ -161,7 +161,6 @@ class SwitchClass(object):
         if not session:
             return None
 
-
         res_data = session.dequeueTransmitData()
         if not res_data:
             self.debug(True, "getSessionData", "no data")
@@ -201,6 +200,18 @@ class SwitchClass(object):
 
         self.debug(True, "putSessionData", "queue_size=%i", session.receiveQueue().size())
         return None
+
+        res_data = session.dequeueTransmitData()
+        if not res_data:
+            self.debug(True, "putSessionData", "no data")
+            return None
+
+        self.debug(False, "putSessionData", "ajax_id=%i", go_request.get("ajax_id"))
+        self.debug(True, "putSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
+
+        return json.dumps({"session_id": session.sessionId(),
+                           "res_data": res_data,
+                           })
 
     def keepAlive(self, go_request):
         self.abend("keepAlive", "keepAlive is not implemented")
