@@ -68,7 +68,7 @@ class ClusterClass(object):
     def createTopic(self, data_val):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
-        if data.get("topic") == 'go':
+        if data.get("topic") == 'GO_GAME':
             self.theGoObject = self.goObjectMalloc()
 
     def addAdditionalSession(self, session_val):
