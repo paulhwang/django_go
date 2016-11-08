@@ -127,7 +127,7 @@ class SwitchClass(object):
             return None
         self.debug(True, "setupSession", "start2 %s %i", session.objectName(), session.sessionId());
 
-        cluster = self.clusterMgrObject().mallocCluster(go_request.get("topic"), session)
+        cluster = self.clusterMgrObject().mallocCluster(go_request.get("data"), session)
         if not cluster:
             return None
         self.debug(True, "setupSession", "start3");
