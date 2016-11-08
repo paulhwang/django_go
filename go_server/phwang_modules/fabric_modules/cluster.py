@@ -26,9 +26,6 @@ class ClusterClass(object):
     def clusterMgrObject(self):
         return self.theClusterMgrObject
 
-    def goObject(self):
-        return self.theGoObject
-
     def fabricObject(self):
         return self.clusterMgrObject().fabricObject()
 
@@ -37,6 +34,12 @@ class ClusterClass(object):
 
     def utilObject(self):
         return self.clusterMgrObject().utilObject()
+
+    def topicObject(self):
+        return self.theTopicObject
+
+    def setTopicObject(self, val):
+        self.theTopicObject = val
 
     def sessionArray(self, index_val):
         return self.theSessionArray[index_val]
@@ -69,7 +72,7 @@ class ClusterClass(object):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
         if data.get("topic") == 'GO_GAME':
-            self.theGoObject = self.goObjectMalloc()
+            self.setTopicObject(self.goObjectMalloc())
 
     def addAdditionalSession(self, session_val):
         self.theSessionArray[self.sessionArrayLength()] = session_val
@@ -113,7 +116,7 @@ class ClusterClass(object):
         self.debug(True, "processSetupTopicData", "data=%s", json_data_val)
         topic_data = json.loads(json_data_val)
         if topic_data.get("command") == "config":
-            self.goObject().configObject().createConfig(topic_data.get("data"))
+            self.topicObject().configObject().createConfig(topic_data.get("data"))
 
     def processReceiveData(self):
         while True:
@@ -128,7 +131,7 @@ class ClusterClass(object):
         self.processReceiveData()
 
     def receiveStringData(self, str_val):
-        self.goObject().portObject().receiveStringData(str_val)
+        self.topicObject().portObject().receiveStringData(str_val)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
