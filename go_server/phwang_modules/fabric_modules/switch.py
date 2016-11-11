@@ -90,14 +90,15 @@ class SwitchClass(object):
         if not link:
             return None
 
-        pending_session_data = link.getPendingSessionData()
         pending_session_setup = link.getPendingSessionSetup()
+        pending_session_data = link.getPendingSessionData()
         data = link.receiveQueue().deQueue()
         if data:
             self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
         return json.dumps({"link_id": link.linkId(),
                            "name_list": link.nameListChanged(),
                            "data": data,
+                           "pending_session_data": pending_session_setup,
                            "pending_session_data": pending_session_data,
                            "interval": self.linkUpdateInterval(),
                            })
@@ -121,7 +122,15 @@ class SwitchClass(object):
         link = self.getLinkObject(go_request)
         if not link:
             return None
-        self.debug(True, "setupSession", "start1")
+
+        his_session = None
+        if go_request.get("my_name") != go_request.get("his_name"):
+            his_link = self.linkMgrObject().searchLinkByName(go_request.get("his_name"))
+            if not his_link:
+                return None
+            his_session = his_link.mallocSession()
+            if not his_session:
+                return None
 
         session = link.mallocSession()
         if not session:
