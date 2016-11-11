@@ -135,12 +135,11 @@ class SwitchClass(object):
         session = link.mallocSession()
         if not session:
             return None
-        self.debug(True, "setupSession", "start2 %s %i", session.objectName(), session.sessionId());
 
         cluster = self.clusterMgrObject().mallocCluster(go_request.get("data"), session)
         if not cluster:
             return None
-        self.debug(True, "setupSession", "start3");
+        cluster.addAdditionalSession(his_session)
 
         #if (go_request.data !== null) {
             #session.clusterObject().processSetupTopicData(go_request.data);
