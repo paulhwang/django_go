@@ -1,4 +1,5 @@
 import threading
+import json
 import go_server.phwang_modules.fabric_modules.session_mgr
 
 def malloc(link_mgr_val, my_name_val, link_id_val):
@@ -20,6 +21,7 @@ class LinkClass(object):
         self.down_seq = 0
         self.theReceiveQueue = self.utilObject().mallocQueue()
         self.theReceiveRing = self.utilObject().mallocRing()
+        self.thePendingSessionSetupQueue = self.utilObject().mallocQueue()
         self.theNameListChanged = True
         self.theSessionMgrObject = malloc_session_mgr(self)
 
@@ -57,10 +59,13 @@ class LinkClass(object):
         self.theKeepAliveTimer = val
 
     def receiveQueue(self):
-        return self.theReceiveQueue;
+        return self.theReceiveQueue
 
     def receiveRing(self):
-        return self.theReceiveRing;
+        return self.theReceiveRing
+
+    def pendingSessionSetupQueue(self):
+        return self.thePendingSessionSetupQueue
 
     def prev(self):
         return self.thePrev
@@ -101,11 +106,16 @@ class LinkClass(object):
     def mallocSession(self):
         return self.sessionMgrObject().mallocSession()
 
-    def getPendingSessionSetup(self):
-        return self.sessionMgrObject().getPendingSessionSetup()
-
     def getPendingSessionData(self):
         return self.sessionMgrObject().getPendingSessionData()
+
+    def getPendingSessionSetup(self):
+        return self.pendingSessionSetupQueue().deQueue();
+
+    def setPendingSessionSetup (self, session_val, data_val):
+        self.pendingSessionSetupQueue().enQueue(json.dumps({"session_id": session_val.sessionId(),
+                                                            "data": data_val
+                                                            }))
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

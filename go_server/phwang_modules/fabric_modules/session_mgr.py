@@ -130,9 +130,6 @@ class SessionMgrClass(object):
             session = session.next()
         return False
 
-    def getPendingSessionSetup(self):
-        return None
-
     def getPendingSessionData(self):
         data = []
         i = 0

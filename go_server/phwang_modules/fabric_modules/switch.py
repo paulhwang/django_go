@@ -91,14 +91,18 @@ class SwitchClass(object):
             return None
 
         pending_session_setup = link.getPendingSessionSetup()
+        if pending_session_setup:
+            self.debug(True, "getLinkData", "pending_session_setup=%s", pending_session_setup);
+
         pending_session_data = link.getPendingSessionData()
+
         data = link.receiveQueue().deQueue()
         if data:
             self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
         return json.dumps({"link_id": link.linkId(),
                            "name_list": link.nameListChanged(),
                            "data": data,
-                           "pending_session_data": pending_session_setup,
+                           "pending_session_setup": pending_session_setup,
                            "pending_session_data": pending_session_data,
                            "interval": self.linkUpdateInterval(),
                            })
@@ -140,6 +144,7 @@ class SwitchClass(object):
         if not cluster:
             return None
         cluster.addAdditionalSession(his_session)
+        his_link.setPendingSessionSetup(his_session, go_request.get("data"))
 
         #if (go_request.data !== null) {
             #session.clusterObject().processSetupTopicData(go_request.data);
