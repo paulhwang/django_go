@@ -39,6 +39,7 @@ class SwitchClass(object):
             "put_link_data": self.putLinkData,
             "get_name_list": self.getNameList,
             "setup_session": self.setupSession,
+            "setup_session_reply": self.setupSessionReply,
             "get_session_data": self.getSessionData,
             "put_session_data": self.putSessionData,
             "keep_alive": self.keepAlive,
@@ -167,6 +168,15 @@ class SwitchClass(object):
             return None
 
         return session
+
+    def setupSessionReply(self, go_request):
+        self.debug(True, "setupSessionReply", "id=(%i,%i)", go_request.get("link_id"), go_request.get("session_id"))
+
+        session = self.getSessionObject(go_request)
+        if not session:
+            return None
+        return json.dumps({"session_id": session.sessionId(),
+                          })
 
     def getSessionData(self, go_request):
         self.debug(True, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
