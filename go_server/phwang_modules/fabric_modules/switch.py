@@ -127,15 +127,6 @@ class SwitchClass(object):
         if not link:
             return None
 
-        his_session = None
-        if go_request.get("my_name") != go_request.get("his_name"):
-            his_link = self.linkMgrObject().searchLinkByName(go_request.get("his_name"))
-            if not his_link:
-                return None
-            his_session = his_link.mallocSession()
-            if not his_session:
-                return None
-
         session = link.mallocSession()
         if not session:
             return None
@@ -143,8 +134,17 @@ class SwitchClass(object):
         cluster = self.clusterMgrObject().mallocCluster(go_request.get("data"), session)
         if not cluster:
             return None
-        cluster.addAdditionalSession(his_session)
-        his_link.setPendingSessionSetup(his_session, go_request.get("data"))
+
+
+        if go_request.get("my_name") != go_request.get("his_name"):
+            his_link = self.linkMgrObject().searchLinkByName(go_request.get("his_name"))
+            if not his_link:
+                return None
+            his_session = his_link.mallocSession()
+            if not his_session:
+                return None
+            cluster.addAdditionalSession(his_session)
+            his_link.setPendingSessionSetup(his_session, go_request.get("data"))
 
         #if (go_request.data !== null) {
             #session.clusterObject().processSetupTopicData(go_request.data);
