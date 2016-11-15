@@ -119,7 +119,9 @@ class SwitchClass(object):
             return None
 
         link.clearNameListChanged()
-        json_data = json.dumps(self.linkMgrObject().getNameList())
+        json_data = json.dumps({"link_id": link.linkId(),
+                                "name_list": self.linkMgrObject().getNameList(),
+                                });
         self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), json_data)
         return json_data
 
