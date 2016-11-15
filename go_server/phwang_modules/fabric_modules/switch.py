@@ -69,7 +69,8 @@ class SwitchClass(object):
 
         json_data = json.dumps({"link_id": link.linkId()});
         self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
-        return json.dumps({"link_id": link.linkId(),
+        return json.dumps({"my_name": link.myName(),
+                           "link_id": link.linkId(),
                           });
 
     def getLinkObject(self, go_request):
