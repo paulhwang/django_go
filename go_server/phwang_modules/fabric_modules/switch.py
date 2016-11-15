@@ -154,6 +154,7 @@ class SwitchClass(object):
             #session.clusterObject().processSetupTopicData(go_request.data);
 
         json_data = json.dumps({
+                        "link_id": link.linkId(),
                         "session_id": session.sessionId(),
                         "extra_data": go_request.get("data"),
                     });
@@ -178,7 +179,8 @@ class SwitchClass(object):
         session = self.getSessionObject(go_request)
         if not session:
             return None
-        return json.dumps({"session_id": session.sessionId(),
+        return json.dumps({"link_id": session.linkObject().linkId(),
+                           "session_id": session.sessionId(),
                           })
 
     def getSessionData(self, go_request):
@@ -196,7 +198,8 @@ class SwitchClass(object):
         self.debug(False, "getSessionData", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "getSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
 
-        return json.dumps({"session_id": session.sessionId(),
+        return json.dumps({"link_id": session.linkObject().linkId(),
+                           "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
 
@@ -235,7 +238,8 @@ class SwitchClass(object):
         self.debug(False, "putSessionData", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "putSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
 
-        return json.dumps({"session_id": session.sessionId(),
+        return json.dumps({"link_id": session.linkObject().linkId(),
+                           "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
 

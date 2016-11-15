@@ -12,6 +12,9 @@ class SessionClass(object):
     def sessionMgrObject(self):
         return self.theSessionMgrObject
 
+    def linkObject(self):
+        return self.sessionMgrObject().linkObject()
+
     def clusterObject(self):
         return self.theClusterObject
 
