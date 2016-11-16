@@ -96,7 +96,7 @@ class RingClass(object):
         return data
 
     def enlargeSize(self):
-        self.debug(True, "enlargeSize", "size=%i=>%i", self.size(), self.size() * 2)
+        self.debug(False, "enlargeSize", "size=%i=>%i", self.size(), self.size() * 2)
 
         old_array = self.theArray;
         self.theArray = [None] * (self.size() * 2)

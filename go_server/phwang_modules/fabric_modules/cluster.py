@@ -79,15 +79,15 @@ class ClusterClass(object):
         self.incrementSessionArrayLength()
 
     def enqueueTransmitData(self, data_val):
-        self.debug(True, "enqueueTransmitData", data_val)
+        self.debug(False, "enqueueTransmitData", data_val)
         self.transmitQueue().enQueue(data_val)
 
     def dequeueTransmitData(self):
         data = self.transmitQueue().deQueue()
         if data:
-            self.debug(True, "dequeueTransmitData", "data=%s", data)
+            self.debug(False, "dequeueTransmitData", "data=%s", data)
         else:
-            self.debug(True, "dequeueTransmitData", "queue is empty")
+            self.debug(False, "dequeueTransmitData", "queue is empty")
         return data
 
     def enqueueReceiveData(self, data_val):
@@ -97,9 +97,9 @@ class ClusterClass(object):
     def dequeueReceiveData(self):
         data = self.receiveQueue().deQueue()
         if data:
-            self.debug(True, "dequeueReceiveData", "data=%s", data)
+            self.debug(False, "dequeueReceiveData", "data=%s", data)
         else:
-            self.debug(True, "dequeueReceiveData", "queue is empty")
+            self.debug(False, "dequeueReceiveData", "queue is empty")
         return data
 
     def processTransmitData(self):
@@ -113,7 +113,7 @@ class ClusterClass(object):
                 i += 1
 
     def processSetupTopicData(self, json_data_val):
-        self.debug(True, "processSetupTopicData", "data=%s", json_data_val)
+        self.debug(False, "processSetupTopicData", "data=%s", json_data_val)
         topic_data = json.loads(json_data_val)
         if topic_data.get("command") == "config":
             self.topicObject().configObject().createConfig(topic_data.get("data"))

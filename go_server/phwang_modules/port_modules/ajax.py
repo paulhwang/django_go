@@ -61,7 +61,7 @@ class AjaxClass(object):
         if go_request["command"] != "keep_alive" and go_request["command"] != "get_name_list" and go_request["command"] != "get_link_data" and go_request["command"] != "get_session_data":
             self.debug(False, "processGet", "command=%s", go_request["command"])
 
-        data = self.switchObject().switchRequest(go_request)
+        data = self.switchObject().switchRequest(json_request)
         return JsonResponse({
                         "command": go_request["command"],
                         "ajax_id": go_request["ajax_id"],

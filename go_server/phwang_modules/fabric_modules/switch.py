@@ -45,12 +45,16 @@ class SwitchClass(object):
             "keep_alive": self.keepAlive,
         }
 
-    def switchRequest(self, go_request):
+    def switchRequest(self, input_val):
+        go_request = json.loads(input_val)
+        if go_request.get("command") == "get_link_data":
+            self.debug(False, "switchRequest", "input_val=%s", input_val)
+        else:
+            self.debug(True, "switchRequest", "input_val=%s", input_val)
+
         if not go_request:
             self.abend("switchRequest", "null go_request")
             return None
-
-        self.debug(False, "switchRequest", "command=%s", go_request["command"])
 
         func = self.switch_table[go_request.get("command")]
         if func:
@@ -68,10 +72,11 @@ class SwitchClass(object):
         self.setLinkUpdateInterval(self.defaultLinkUpdateInterval())
 
         json_data = json.dumps({"link_id": link.linkId()});
-        self.debug(False, "setupLink", "name=%s link_id=%i", go_request.get("my_name"), link.linkId())
-        return json.dumps({"my_name": link.myName(),
+        output = json.dumps({"my_name": link.myName(),
                            "link_id": link.linkId(),
                           });
+        self.debug(True, "setupLink", "output=%s", output)
+        return output
 
     def getLinkObject(self, go_request):
         link = self.linkMgrObject().searchLinkByNameAndLinkId(go_request.get("my_name"), go_request.get("link_id"))
@@ -92,22 +97,30 @@ class SwitchClass(object):
         if not link:
             return None
 
+        if link.nameListChanged():
+            self.debug(True, "getLinkData", "link.nameListChanged()=%s", link.nameListChanged());
+
         pending_session_setup = link.getPendingSessionSetup()
         if pending_session_setup:
             self.debug(True, "getLinkData", "pending_session_setup=%s", pending_session_setup);
 
         pending_session_data = link.getPendingSessionData()
+        if pending_session_data:
+            self.debug(True, "getLinkData", "pending_session_data=%s", pending_session_data);
 
         data = link.receiveQueue().deQueue()
         if data:
-            self.debug(False, "getLinkData", "link_id=%i my_name=%s data={%s}", go_request.get("link_id"), go_request.get("my_name"), data)
-        return json.dumps({"link_id": link.linkId(),
+            self.debug(True, "getLinkData", "data=%s", data);
+
+        output = json.dumps({"link_id": link.linkId(),
                            "name_list": link.nameListChanged(),
                            "data": data,
                            "pending_session_setup": pending_session_setup,
                            "pending_session_data": pending_session_data,
                            "interval": self.linkUpdateInterval(),
                            })
+        self.debug(False, "getLinkData", "output=%s", output)
+        return output
 
     def putLinkData(self, go_request):
         self.abend("putLinkData", "putLinkData is not implemented")
@@ -119,14 +132,13 @@ class SwitchClass(object):
             return None
 
         link.clearNameListChanged()
-        json_data = json.dumps({"link_id": link.linkId(),
+        output = json.dumps({"link_id": link.linkId(),
                                 "name_list": self.linkMgrObject().getNameList(),
                                 });
-        self.debug(False, "getNameList", "link_id=%i my_name=%s data=%s", link.linkId(), go_request.get("my_name"), json_data)
-        return json_data
+        self.debug(True, "getNameList", "output=%s", output)
+        return output
 
     def setupSession(self, go_request):
-        self.debug(True, "setupSession", "start")
         link = self.getLinkObject(go_request)
         if not link:
             return None
@@ -153,17 +165,18 @@ class SwitchClass(object):
         #if (go_request.data !== null) {
             #session.clusterObject().processSetupTopicData(go_request.data);
 
-        json_data = json.dumps({
+        output = json.dumps({
                         "link_id": link.linkId(),
                         "session_id": session.sessionId(),
                         "extra_data": go_request.get("data"),
                     });
-        self.logit("setupSessionReply", "(%i:%i) %s=>%s", go_request.get("link_id"), session.sessionId(), go_request.get("my_name"), go_request.get("his_name"));
-        return json_data
+        self.debug(True, "setupSession", "output=%s", output)
+        return output
 
     def getSessionObject(self, go_request):
-        link = self.getLinkObject(go_request)
+        link = self.linkMgrObject().searchLinkByLinkId(go_request.get("link_id"))
         if not link:
+            self.logit("getSessionObject", "link not found: link_id=%i", go_request.gt("link_id"))
             return None
 
         session = link.searchSessionBySessionId(go_request.get("session_id"))
@@ -184,8 +197,6 @@ class SwitchClass(object):
                           })
 
     def getSessionData(self, go_request):
-        self.debug(True, "getSessionData", "(%i:%i) %s=>%s", go_request.get("link_id"),  go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"))
-
         session = self.getSessionObject(go_request)
         if not session:
             return None
@@ -198,21 +209,17 @@ class SwitchClass(object):
         self.debug(False, "getSessionData", "ajax_id=%i", go_request.get("ajax_id"))
         self.debug(True, "getSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
 
-        return json.dumps({"link_id": session.linkObject().linkId(),
+        output = json.dumps({"link_id": session.linkObject().linkId(),
                            "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
+        self.debug(True, "getSessionData", "output=%s", output)
+        return output
 
     def putSessionData(self, go_request):
-        #console.log(req.headers);
-        #self.debug(True, "putSessionData ", "ajax_id=%i", go_request.get("ajax_id"))
-        self.debug(True, "putSessionData ", "(%i,%i) %s=>%s (%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), go_request.get("data"))
-
         session = self.getSessionObject(go_request)
         if not session:
             return None
-
-        self.debug(True, "putSessionData", "(%i,%i) %s=>%s {%s} %i=>%i", go_request.get("link_id"), go_request.get("session_id"), go_request.get("my_name"), go_request.get("his_name"), go_request.get("data"), go_request.get("xmt_seq"), session.up_seq)
 
         if go_request.get("xmt_seq") == session.up_seq:
             session.clusterObject().enqueAndPocessReceiveData(go_request.get("data"))
@@ -228,20 +235,17 @@ class SwitchClass(object):
             else:
                 self.logit("***abend: putSessionData", "%s post seq=%i dropped", go_request.get("data"), xmt_seq);
 
-        self.debug(True, "putSessionData", "queue_size=%i", session.receiveQueue().size())
-
         res_data = session.dequeueTransmitData()
         if not res_data:
             self.debug(True, "putSessionData", "no data")
             return None
 
-        self.debug(False, "putSessionData", "ajax_id=%i", go_request.get("ajax_id"))
-        self.debug(True, "putSessionData", "(%i,%i %s=>%s) {%s}", go_request.get("link_id"), go_request.get("session_id"), go_request.get("his_name"), go_request.get("my_name"), res_data)
-
-        return json.dumps({"link_id": session.linkObject().linkId(),
+        output = json.dumps({"link_id": session.linkObject().linkId(),
                            "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
+        self.debug(True, "putSessionData", "output=%s", output)
+        return output
 
     def keepAlive(self, go_request):
         self.abend("keepAlive", "keepAlive is not implemented")

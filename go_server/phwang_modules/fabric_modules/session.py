@@ -85,7 +85,7 @@ class SessionClass(object):
         self.theNext = None
 
     def enqueueTransmitData(self, data_val):
-        self.debug(True, "enqueueTransmitData", data_val)
+        self.debug(False, "enqueueTransmitData", data_val)
         self.transmitQueue().enQueue(data_val)
 
     def dequeueTransmitData(self):

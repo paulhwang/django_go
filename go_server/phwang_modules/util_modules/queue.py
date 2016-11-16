@@ -110,7 +110,6 @@ class QueueClass(object):
                 self.head().setPrev(0)
 
         if data_entry:
-            self.debug(True, "deQueue", "data=%s", data_entry.data)
             self.holderPoolObject().freeEntry(data_entry)
 
         self.abendIt()

@@ -115,6 +115,15 @@ class LinkMgrClass(object):
             link = link.next()
         return None
 
+    def searchLinkByLinkId(self, link_id_val):
+        self.debug(False, "searchLinkByLinkId id=%i", link_id_val)
+        link = self.head()
+        while link:
+            if (link.linkId() == link_id_val):
+                return link
+            link = link.next()
+        return None
+
     def searchLinkByName(self, my_name_val):
         self.debug(False, "searchLinkByName name=%s", my_name_val)
         link = self.head()
