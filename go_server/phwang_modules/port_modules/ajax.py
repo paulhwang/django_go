@@ -64,7 +64,6 @@ class AjaxClass(object):
         data = self.switchObject().switchRequest(json_request)
         return JsonResponse({
                         "command": go_request["command"],
-                        "ajax_id": go_request["ajax_id"],
                         "data": data,
                     })
 

@@ -147,7 +147,7 @@ class SwitchClass(object):
         if not session:
             return None
 
-        cluster = self.clusterMgrObject().mallocCluster(go_request.get("data"), session)
+        cluster = self.clusterMgrObject().mallocCluster(go_request.get("topic_data"), session)
         if not cluster:
             return None
 
@@ -160,15 +160,15 @@ class SwitchClass(object):
             if not his_session:
                 return None
             cluster.addAdditionalSession(his_session)
-            his_link.setPendingSessionSetup(his_session, go_request.get("data"))
+            his_link.setPendingSessionSetup(his_session, go_request.get("topic_data"))
 
-        #if (go_request.data !== null) {
-            #session.clusterObject().processSetupTopicData(go_request.data);
+        #if (go_request.topic_data !== null) {
+            #session.clusterObject().processSetupTopicData(go_request.topic_data);
 
         output = json.dumps({
                         "link_id": link.linkId(),
                         "session_id": session.sessionId(),
-                        "extra_data": go_request.get("data"),
+                        "topic_data": go_request.get("topic_data"),
                     });
         self.debug(True, "setupSession", "output=%s", output)
         return output
