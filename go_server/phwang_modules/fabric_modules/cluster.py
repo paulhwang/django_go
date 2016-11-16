@@ -91,7 +91,7 @@ class ClusterClass(object):
         return data
 
     def enqueueReceiveData(self, data_val):
-        self.debug(True, "enqueueReceiveData", data_val)
+        self.debug(False, "enqueueReceiveData", data_val)
         self.receiveQueue().enQueue(data_val)
 
     def dequeueReceiveData(self):
@@ -126,7 +126,7 @@ class ClusterClass(object):
             self.receiveStringData(data)
 
     def enqueAndPocessReceiveData(self, data_val):
-        self.debug(True, "enqueAndPocessReceiveData", data_val)
+        self.debug(False, "enqueAndPocessReceiveData", data_val)
         self.enqueueReceiveData(data_val)
         self.processReceiveData()
 

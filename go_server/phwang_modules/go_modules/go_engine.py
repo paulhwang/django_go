@@ -164,7 +164,7 @@ class GoEngineClass(object):
             return "White: %s (%i + %i + %i*2 + %i.5)" %(self.whiteScore(), self.whiteCaptureStones(), self.whiteLandScore(), self.blackDeadGroupList().totalStoneCount(), self.configObject().realKomiPoint())
 
     def enterWar(self, move_val):
-        self.debug(True, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
+        self.debug(False, "enterWar", "(%i,%i) color=%i turn=%i", move_val.xX(), move_val.yY(), move_val.myColor(), move_val.turnIndex())
 
         group = self.insertStoneToGroupList(move_val)
         if not group:
