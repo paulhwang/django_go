@@ -1,11 +1,11 @@
 import go_server.phwang_modules.go_modules.go
 import json
 
-def malloc(cluster_mgr_val, data_val, session_val):
-    return ClusterClass(cluster_mgr_val, data_val, session_val)
+def malloc(cluster_mgr_val, topic_data_val, session_val):
+    return ClusterClass(cluster_mgr_val, topic_data_val, session_val)
 
 class ClusterClass(object):
-    def __init__(self, cluster_mgr_val, data_val, session_val):
+    def __init__(self, cluster_mgr_val, topic_data_val, session_val):
         self.theClusterMgrObject = cluster_mgr_val
         session_val.setClusterObject(self)
         self.theSessionArray = [None] * 2
@@ -15,7 +15,7 @@ class ClusterClass(object):
         self.theTransmitQueue = self.utilObject().mallocQueue()
         self.theNext = None
         self.thePrev = None
-        self.createTopic(data_val)
+        self.createTopic(topic_data_val)
 
     def goObjectMalloc(self):
         return go_server.phwang_modules.go_modules.go.malloc(self)
@@ -71,7 +71,7 @@ class ClusterClass(object):
     def createTopic(self, data_val):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
-        if data.get("topic") == 'GO_GAME':
+        if data.get("title") == "go":
             self.setTopicObject(self.goObjectMalloc())
 
     def addAdditionalSession(self, session_val):
