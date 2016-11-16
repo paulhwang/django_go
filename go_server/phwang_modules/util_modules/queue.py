@@ -10,6 +10,9 @@ class QueueClass(object):
         self.theHolderPoolObject = HolderPoolClass(self)
         self.theRing = self.utilObject().mallocRing()
 
+    def debugRing(self):
+        return True
+
     def className(self):
         return "QueueClass"
 
@@ -57,10 +60,11 @@ class QueueClass(object):
             self.abend("enQueue", "null data_val")
             return
 
-        i = 10
-        while (i > 0):
-            self.ring().enQueue(data_val)
-            i -= 1;
+        if self.debugRing():
+            i = 10
+            while (i > 0):
+                self.ring().enQueue(data_val)
+                i -= 1;
 
         self.abendIt()
 
@@ -114,12 +118,13 @@ class QueueClass(object):
 
         self.abendIt()
 
-        i = 10
-        while (i > 0):
-            data1 = self.ring().deQueue()
-            if data != data1:
-                self.abend("deQueue", "ring not match")
-            i -= 1
+        if self.debugRing():
+            i = 10
+            while (i > 0):
+                data1 = self.ring().deQueue()
+                if data != data1:
+                    self.abend("deQueue", "ring not match")
+                i -= 1
 
         return data
 
