@@ -195,6 +195,7 @@ class SwitchClass(object):
                            "session_id": session.sessionId(),
                            "confirm": "yes",
                            "topic_data": go_request.get("topic_data"),
+                           "his_name": "tbd",
                            })
         self.debug(True, "setupSessionReply", "output=%s", output)
         return output
