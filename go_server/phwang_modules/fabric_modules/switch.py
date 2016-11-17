@@ -188,14 +188,16 @@ class SwitchClass(object):
         return session
 
     def setupSessionReply(self, go_request):
-        self.debug(True, "setupSessionReply", "id=(%i,%i)", go_request.get("link_id"), go_request.get("session_id"))
-
         session = self.getSessionObject(go_request)
         if not session:
             return None
-        return json.dumps({"link_id": session.linkObject().linkId(),
+        output = json.dumps({"link_id": session.linkObject().linkId(),
                            "session_id": session.sessionId(),
-                          })
+                           "confirm": "yes",
+                           "topic_data": go_request.get("topic_data"),
+                           })
+        self.debug(True, "setupSessionReply", "output=%s", output)
+        return output
 
     def getSessionData(self, go_request):
         session = self.getSessionObject(go_request)

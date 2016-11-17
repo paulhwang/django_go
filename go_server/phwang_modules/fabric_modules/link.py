@@ -112,9 +112,9 @@ class LinkClass(object):
     def getPendingSessionSetup(self):
         return self.pendingSessionSetupQueue().deQueue();
 
-    def setPendingSessionSetup (self, session_val, data_val):
+    def setPendingSessionSetup (self, session_val, topic_data_val):
         self.pendingSessionSetupQueue().enQueue(json.dumps({"session_id": session_val.sessionId(),
-                                                            "data": data_val
+                                                            "topic_data": topic_data_val
                                                             }))
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
