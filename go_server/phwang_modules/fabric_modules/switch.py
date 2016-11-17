@@ -168,6 +168,7 @@ class SwitchClass(object):
         output = json.dumps({
                         "link_id": link.linkId(),
                         "session_id": session.sessionId(),
+                        "his_name": go_request.get("his_name"),
                         "topic_data": go_request.get("topic_data"),
                     });
         self.debug(True, "setupSession", "output=%s", output)
