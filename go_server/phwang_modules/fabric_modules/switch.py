@@ -160,6 +160,7 @@ class SwitchClass(object):
             if not his_session:
                 return None
             cluster.addAdditionalSession(his_session)
+            his_session.setClusterObject(cluster)
             his_link.setPendingSessionSetup(his_session, go_request.get("topic_data"))
 
         #if (go_request.topic_data !== null) {
