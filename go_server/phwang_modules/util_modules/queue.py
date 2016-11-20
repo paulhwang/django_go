@@ -7,7 +7,6 @@ class QueueClass(object):
         self.theSize = 0
         self.theHead = None
         self.theTail = None
-        self.theHolderPoolObject = HolderPoolClass(self)
         if self.debugRing:
             self.theRing = self.rootObject().mallocRing()
         self.debug(True, "init__", "")
@@ -62,10 +61,11 @@ class QueueClass(object):
 
         self.abendIt()
 
-        data_entry = self.holderPoolObject().mallocEntry(data_val)
+        data_entry = HolderEntryClass()
         if not data_entry:
             self.abend("enQueue", "null data_entry")
             return
+        data_entry.setData(data_val)
 
         self.incrementSize()
 
@@ -106,9 +106,6 @@ class QueueClass(object):
                 data = data_entry.data()
                 self.setHead(self.head().next())
                 self.head().setPrev(0)
-
-        if data_entry:
-            self.holderPoolObject().freeEntry(data_entry)
 
         self.abendIt()
 
@@ -162,95 +159,6 @@ class QueueClass(object):
 
         if i != self.size():
             i = self.abend("abendIt", "tail: size=%i i=", self.size(), i)
-
-    def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if debug_val:
-            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-    def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-    def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
-
-class HolderPoolClass(object):
-    def __init__(self, queue_val):
-        self.theQueueObject = queue_val
-        self.theHead = None
-        self.theTail = None
-        self.theSize = 0
-        self.debug(True, "init__", "")
-
-    def objectName(self):
-        return "HolderPoolClass"
-
-    def queueObject(self):
-        return self.theQueueObject
-
-    def rootObject(self):
-        return self.queueObject().rootObject()
-
-    def head(self):
-        return self.theHead
-
-    def setHead(self, val):
-        self.theHead = val
-
-    def size(self):
-        return self.theSize;
-
-    def incrementSize(self):
-        self.theSize += 1
-
-    def decrementSize(self):
-        self.theSize -= 1
-
-    def mallocEntry(self, data_val):
-        entry = 0
-
-        self.abendIt()
-
-        if not self.head():
-            entry = HolderEntryClass()
-        else:
-            entry = self.head()
-            self.setHead(entry.next())
-            self.decrementSize()
-
-        self.abendIt()
-
-        if entry:
-            entry.setData(data_val)
-        else:
-            self.abend('mallocEntry', 'null')
-
-        return entry
-
-    def freeEntry(self, entry_val):
-        self.abendIt()
-        if not entry_val:
-            return
-
-        self.abendIt()
-        self.incrementSize()
-        entry_val.setNext(self.head())
-        self.setHead(entry_val)
-
-        self.abendIt()
-
-    def abendIt(self):
-        i = 0
-        p = self.head()
-        while p:
-            p = p.next()
-            i += 1
-
-        if i != self.size():
-            self.abend("abendIt", "size=" + self.size() + " i=" + i)
-
-        if self.size() > 5:
-            self.abend("abendIt", " size=" + self.size())
 
     def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if debug_val:
