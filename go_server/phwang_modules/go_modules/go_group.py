@@ -16,7 +16,7 @@ class GroupClass(object):
         self.theStoneCount = 0;
         self.theExistMatrix = self.createMatrix();
         self.theDeadMatrix = self.createMatrix();
-        self.debug(True, "init__", "")
+        self.debug(False, "init__", "")
 
     def createMatrix(self):
         matrix =  [0] * 19
@@ -26,7 +26,7 @@ class GroupClass(object):
             i += 1
         return matrix
 
-    def className(self):
+    def objectName(self):
         return "GroupClass"
 
     def groupListObject(self):
@@ -232,10 +232,10 @@ class GroupClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 

@@ -12,7 +12,7 @@ class BoardClass(object):
             self.theMarkedBoardArray[i] = [0] * 19
             i += 1
         self.resetBoardObjectData()
-        self.debug(True, "init__", "")
+        self.debug(False, "init__", "")
 
     def resetBoardObjectData(self):
         #self.goLog("resetBoardObjectData", "boardSize=" + self.boardSize())
@@ -24,7 +24,7 @@ class BoardClass(object):
                 j += 1
             i += 1
 
-    def className(self):
+    def objectName(self):
         return "BoardClass"
 
     def goObject(self):
@@ -87,10 +87,10 @@ class BoardClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 

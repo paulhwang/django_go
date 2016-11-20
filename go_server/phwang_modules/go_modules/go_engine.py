@@ -13,7 +13,7 @@ class GoEngineClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val
         self.resetEngineObjectData()
-        self.debug(True, "init__", "")
+        self.debug(False, "init__", "")
 
     def resetEngineObjectData(self):
         self.theGroupListArray = [None] * 7
@@ -40,7 +40,7 @@ class GoEngineClass(object):
     def malloc_group_list(self):
         return go_server.go_folder.go_group_lsit.malloc(self)
 
-    def className(self):
+    def objectName(self):
         return "GoEngineClass"
 
     def goObject(self):
@@ -323,8 +323,8 @@ class GoEngineClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

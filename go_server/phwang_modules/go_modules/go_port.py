@@ -13,9 +13,9 @@ class GoPortClass(object):
         self.GO_PROTOCOL_CODE_MOVE_DATA = "Move   ";
         self.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
         self.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
-        self.debug(True, "init__", "")
+        self.debug(False, "init__", "")
 
-    def className(self):
+    def objectName(self):
         return "GoPortClass"
 
     def goObject(self):
@@ -99,8 +99,8 @@ class GoPortClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
