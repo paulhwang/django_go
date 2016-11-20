@@ -11,7 +11,7 @@ def go_html(request):
 
 @csrf_exempt
 def go_ajax(request):
-    return phwang.portObject().ajaxObject().processInput(request)
+    return phwang.ajaxObject().processInput(request)
 
 def hello_entry(request):
     return HttpResponse("Hello there!")

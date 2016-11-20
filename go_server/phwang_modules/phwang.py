@@ -1,5 +1,6 @@
 import go_server.phwang_modules.fabric_modules.fabric
 import go_server.phwang_modules.port_modules.port
+import go_server.phwang_modules.port_modules.ajax
 
 def malloc():
     return RootClass()
@@ -13,9 +14,13 @@ def malloc_farbric(root_object_val):
 def malloc_port(root_object_val):
     return go_server.phwang_modules.port_modules.port.malloc(root_object_val)
 
+def malloc_ajax(port_val):
+    return go_server.phwang_modules.port_modules.ajax.malloc(port_val)
+
 class RootClass(object):
     def __init__(self):
         self.theFarbricObject = malloc_farbric(self)
+        self.theAjaxObject = malloc_ajax(self)
         self.thePortObject = malloc_port(self)
         self.debug(True, "init__", "")
 
@@ -27,6 +32,9 @@ class RootClass(object):
 
     def farbricObject(self):
         return self.theFarbricObject
+
+    def ajaxObject(self):
+        return self.theAjaxObject
 
     def portObject(self):
         return self.thePortObject
