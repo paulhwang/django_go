@@ -1,27 +1,25 @@
-def malloc(util_val):
-    return QueueClass(util_val)
+def malloc(root_Object_val):
+    return QueueClass(root_Object_val)
 
 class QueueClass(object):
-    def __init__(self, util_val):
-        self.theUtilObject = util_val
+    def __init__(self, root_Object_val):
+        self.theRootObject = root_Object_val
         self.theSize = 0
         self.theHead = None
         self.theTail = None
         self.theHolderPoolObject = HolderPoolClass(self)
-        self.theRing = self.utilObject().mallocRing()
-        #self.debug(True, "init__", "")
+        if self.debugRing:
+            self.theRing = self.rootObject().mallocRing()
+        self.debug(True, "init__", "")
 
     def debugRing(self):
-        return True
+        return False
 
     def objectName(self):
         return "QueueClass"
 
-    def utilObject(self):
-        return self.theUtilObject
-
     def rootObject(self):
-        return self.utilObject().rootObject()
+        return self.theRootObject
 
     def ring(self):
         return self.theRing
@@ -52,11 +50,6 @@ class QueueClass(object):
 
     def enQueue(self, data_val):
         self.debug(0, "enQueue", "start")
-        #self.debug(1, "enQueue", "start %i", 100)
-        #self.debug(1, "enQueue", "start %i %s", 100, "A")
-        #self.debug(1, "enQueue", "start %i %s %i", 100, "b", 1000)
-        #self.debug(1, "enQueue", "start %i %s %i %i", 100, "b", 1000, 1)
-        #self.debug(1, "enQueue", "start %i %s %i %i %i", 100, "b", 1000, 1, 1)
         if not data_val:
             self.abend("enQueue", "null data_val")
             return
@@ -170,15 +163,15 @@ class QueueClass(object):
         if i != self.size():
             i = self.abend("abendIt", "tail: size=%i i=", self.size(), i)
 
-    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val:
+    def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if debug_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 class HolderPoolClass(object):
@@ -187,16 +180,16 @@ class HolderPoolClass(object):
         self.theHead = None
         self.theTail = None
         self.theSize = 0
-        #self.debug(True, "init__", "")
+        self.debug(True, "init__", "")
+
+    def objectName(self):
+        return "HolderPoolClass"
 
     def queueObject(self):
         return self.theQueueObject
 
-    def utilObject(self):
-        return self.queueObject().utilObject()
-
     def rootObject(self):
-        return self.utilObject().rootObject()
+        return self.queueObject().rootObject()
 
     def head(self):
         return self.theHead
@@ -259,16 +252,15 @@ class HolderPoolClass(object):
         if self.size() > 5:
             self.abend("abendIt", " size=" + self.size())
 
-    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val:
+    def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if debug_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
+        self.rootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 class HolderEntryClass(object):
     def __init__(self):

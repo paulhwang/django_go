@@ -10,7 +10,7 @@ class ClusterMgrClass(object):
     def __init__(self, fabric_object_val):
         self.theFarbricObject = fabric_object_val
         self.theGlobalClusterId = 100
-        self.theClusterQueue = self.utilObject().mallocQueue()
+        self.theClusterQueue = self.rootObject().mallocQueue()
         self.debug(True, "init__", "")
 
     def clusterModuleMalloc(self, topic_data_val, session_val):

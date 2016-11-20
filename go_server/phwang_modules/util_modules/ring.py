@@ -1,24 +1,21 @@
-def malloc(util_val):
-    return RingClass(util_val)
+def malloc(root_Object_val):
+    return RingClass(root_Object_val)
 
 class RingClass(object):
-    def __init__(self, util_val):
-        self.theUtilObject = util_val
+    def __init__(self, root_Object_val):
+        self.theRootObject = root_Object_val
         self.theInput = 0
         self.theOutput = 0
         self.theSize = 2
         self.theLeft = self.size()
         self.theArray = [None] * self.size()
-        #self.debug(True, "init__", "")
+        self.debug(True, "init__", "")
 
-    def className(self):
+    def objectName(self):
         return "RingClass"
 
-    def utilObject(self):
-        return self.theUtilObject
-
-    def phwangObject(self):
-        return self.utilObject().phwangObject()
+    def rootObject(self):
+        return self.theRootObject
 
     def input(self):
         return self.theInput
@@ -126,13 +123,12 @@ class RingClass(object):
         if (self.input() + self.left() - self.output() != self.size()) and (self.input() + self.left() - self.output() != 0):
             self.abend('abendIt', "input(" + self.input() + ") + left(" + self.left() + ") - output(" + self.output() + ") !== size(" + self.size() + ")");
 
-    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val:
+    def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if debug_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
-
+        self.rootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

@@ -19,9 +19,8 @@ class LinkClass(object):
         self.theNext = None
         self.up_seq = 0
         self.down_seq = 0
-        self.theReceiveQueue = self.utilObject().mallocQueue()
-        self.theReceiveRing = self.utilObject().mallocRing()
-        self.thePendingSessionSetupQueue = self.utilObject().mallocQueue()
+        self.theReceiveQueue = self.rootObject().mallocQueue()
+        self.thePendingSessionSetupQueue = self.rootObject().mallocQueue()
         self.theNameListChanged = True
         self.theSessionMgrObject = malloc_session_mgr(self)
         self.debug(True, "init__", "")

@@ -82,9 +82,8 @@ class SessionClass(object):
         self.theHisSession = None
         self.up_seq = 0
         self.down_seq = 0
-        self.theReceiveQueue = self.utilObject().mallocQueue()
-        self.theTransmitQueue = self.utilObject().mallocQueue()
-        self.theReceiveRing = self.utilObject().mallocRing()
+        self.theReceiveQueue = self.rootObject().mallocQueue()
+        self.theTransmitQueue = self.rootObject().mallocQueue()
         self.thePrev = None
         self.theNext = None
 
