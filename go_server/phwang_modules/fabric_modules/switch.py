@@ -11,6 +11,9 @@ class SwitchClass(object):
     def defaultLinkUpdateInterval(self):
         return 3000
 
+    def debugOutput(self):
+        return False
+
     def className(self):
         return "SwitchClass"
 
@@ -75,7 +78,7 @@ class SwitchClass(object):
         output = json.dumps({"my_name": link.myName(),
                            "link_id": link.linkId(),
                           });
-        self.debug(True, "setupLink", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "setupLink", "output=%s", output)
         return output
 
     def getLinkObject(self, go_request):
@@ -119,7 +122,7 @@ class SwitchClass(object):
                            "pending_session_data": pending_session_data,
                            "interval": self.linkUpdateInterval(),
                            })
-        self.debug(False, "getLinkData", "output=%s", output)
+        self.debug_(False, self.debugOutput(), "getLinkData", "output=%s", output)
         return output
 
     def putLinkData(self, go_request):
@@ -135,7 +138,7 @@ class SwitchClass(object):
         output = json.dumps({"link_id": link.linkId(),
                                 "name_list": self.linkMgrObject().getNameList(),
                                 });
-        self.debug(True, "getNameList", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "getNameList", "output=%s", output)
         return output
 
     def setupSession(self, go_request):
@@ -172,7 +175,7 @@ class SwitchClass(object):
                         "his_name": go_request.get("his_name"),
                         "topic_data": go_request.get("topic_data"),
                     });
-        self.debug(True, "setupSession", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "setupSession", "output=%s", output)
         return output
 
     def getSessionObject(self, go_request):
@@ -198,7 +201,7 @@ class SwitchClass(object):
                            "topic_data": go_request.get("topic_data"),
                            "his_name": "tbd",
                            })
-        self.debug(True, "setupSessionReply", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "setupSessionReply", "output=%s", output)
         return output
 
     def getSessionData(self, go_request):
@@ -218,7 +221,7 @@ class SwitchClass(object):
                            "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
-        self.debug(True, "getSessionData", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "getSessionData", "output=%s", output)
         return output
 
     def putSessionData(self, go_request):
@@ -249,7 +252,7 @@ class SwitchClass(object):
                            "session_id": session.sessionId(),
                            "res_data": res_data,
                            })
-        self.debug(True, "putSessionData", "output=%s", output)
+        self.debug_(True, self.debugOutput(), "putSessionData", "output=%s", output)
         return output
 
     def keepAlive(self, go_request):
@@ -257,8 +260,12 @@ class SwitchClass(object):
         return None
 
 
-    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        if bool_val:
+    def debug_(self, debug_val, debug_val_, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if debug_val and debug_val_:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def debug(self, debug_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if debug_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
