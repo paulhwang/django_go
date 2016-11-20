@@ -8,6 +8,7 @@ class ConfigClass(object):
         self.theGoObject = go_val
         self.theBoardSize = 19
         self.theHandicapPoint = 0
+        self.debug(True, "init__", "")
 
     def className(self):
         return "ConfigClass"

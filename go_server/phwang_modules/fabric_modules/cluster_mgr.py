@@ -1,31 +1,32 @@
 import go_server.phwang_modules.fabric_modules.cluster
 
-def malloc(fabric_val):
-    return ClusterMgrClass(fabric_val)
+def malloc(fabric_object_val):
+    return ClusterMgrClass(fabric_object_val)
 
 def malloc_cluster(cluster_mgr_val, topic_data_val, session_val):
     return go_server.phwang_modules.fabric_modules.cluster.malloc(cluster_mgr_val, topic_data_val, session_val)
 
 class ClusterMgrClass(object):
-    def __init__(self, fabric_val):
-        self.theFarbricObject = fabric_val
+    def __init__(self, fabric_object_val):
+        self.theFarbricObject = fabric_object_val
         self.theGlobalClusterId = 100
         self.theClusterQueue = self.utilObject().mallocQueue()
+        self.debug(True, "init__", "")
 
     def clusterModuleMalloc(self, topic_data_val, session_val):
         return malloc_cluster(self, topic_data_val, session_val)
 
-    def className(self):
+    def objectName(self):
         return "ClusterMgrClass"
 
     def fabricObject(self):
         return self.theFarbricObject
 
-    def phwangObject(self):
-        return self.fabricObject().phwangObject()
+    def rootObject(self):
+        return self.fabricObject().rootObject()
 
     def utilObject(self):
-        return self.phwangObject().utilObject()
+        return self.rootObject().utilObject()
 
     def globalClusterId(self):
         return self.theGlobalClusterId
@@ -108,7 +109,7 @@ class ClusterMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

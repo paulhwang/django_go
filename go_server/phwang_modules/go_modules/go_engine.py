@@ -13,6 +13,7 @@ class GoEngineClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val
         self.resetEngineObjectData()
+        self.debug(True, "init__", "")
 
     def resetEngineObjectData(self):
         self.theGroupListArray = [None] * 7

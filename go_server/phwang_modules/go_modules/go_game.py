@@ -5,6 +5,7 @@ class GoGameClass(object):
     def __init__(self, go_val):
         self.theGoObject = go_val
         self.resetGameObjectData()
+        self.debug(True, "init__", "")
 
     def resetGameObjectData(self):
         self.theMaxMove = 0

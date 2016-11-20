@@ -13,6 +13,7 @@ class GoPortClass(object):
         self.GO_PROTOCOL_CODE_MOVE_DATA = "Move   ";
         self.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
         self.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
+        self.debug(True, "init__", "")
 
     def className(self):
         return "GoPortClass"

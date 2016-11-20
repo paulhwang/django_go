@@ -12,6 +12,7 @@ class BoardClass(object):
             self.theMarkedBoardArray[i] = [0] * 19
             i += 1
         self.resetBoardObjectData()
+        self.debug(True, "init__", "")
 
     def resetBoardObjectData(self):
         #self.goLog("resetBoardObjectData", "boardSize=" + self.boardSize())

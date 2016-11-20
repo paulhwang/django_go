@@ -21,6 +21,7 @@ class GoGroupListClass(object):
         self.theGroupCount = 0
         self.theIsMarkedDead = 0
         self.theListArray = [0] * 361
+        self.debug(True, "init__", "")
 
     def className(self):
         return "GoGroupListClass"

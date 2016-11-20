@@ -34,8 +34,9 @@ class GoClass(object):
         self.theEngineObject = malloc_engine(self)
         self.theGameObject = malloc_game(self)
         self.thePortObject = malloc_port(self)
+        self.debug(True, "init__", "")
 
-    def className(self):
+    def objectName(self):
         return "GoClass"
 
     def clusterObject(self):
@@ -47,8 +48,8 @@ class GoClass(object):
     def fabricObject(self):
         return self.clusterMgrObject().fabricObject()
 
-    def phwangObject(self):
-        return self.fabricObject().phwangObject()
+    def rootObject(self):
+        return self.fabricObject().rootObject()
 
     def configObject(self):
         return self.theConfigObject
@@ -93,11 +94,15 @@ class GoClass(object):
     def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
         return malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val)
 
+    def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        if bool_val:
+            self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def EMPTY_STONE(self):
         return 0

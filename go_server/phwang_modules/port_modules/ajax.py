@@ -1,24 +1,25 @@
 from django.http import JsonResponse
 import json
 
-def malloc(port_val):
-    return AjaxClass(port_val)
+def malloc(port_object_val):
+    return AjaxClass(port_object_val)
 
 class AjaxClass(object):
-    def __init__(self, port_val):
-        self.thePortObject = port_val
+    def __init__(self, port_object_val):
+        self.thePortObject = port_object_val
+        self.debug(True, "init__", "")
 
-    def className(self):
+    def objectName(self):
         return "AjaxClass"
 
     def portObject(self):
         return self.thePortObject
 
-    def phwangObject(self):
-        return self.portObject().phwangObject()
+    def rootObject(self):
+        return self.portObject().rootObject()
 
     def farbricObject(self):
-        return self.phwangObject().farbricObject()
+        return self.rootObject().farbricObject()
 
     def switchObject(self):
         return self.farbricObject().switchObject()
@@ -72,8 +73,8 @@ class AjaxClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.portObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.portObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

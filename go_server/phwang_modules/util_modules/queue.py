@@ -9,18 +9,19 @@ class QueueClass(object):
         self.theTail = None
         self.theHolderPoolObject = HolderPoolClass(self)
         self.theRing = self.utilObject().mallocRing()
+        #self.debug(True, "init__", "")
 
     def debugRing(self):
         return True
 
-    def className(self):
+    def objectName(self):
         return "QueueClass"
 
     def utilObject(self):
         return self.theUtilObject
 
-    def phwangObject(self):
-        return self.utilObject().phwangObject()
+    def rootObject(self):
+        return self.utilObject().rootObject()
 
     def ring(self):
         return self.theRing
@@ -174,10 +175,10 @@ class QueueClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 class HolderPoolClass(object):
@@ -186,6 +187,7 @@ class HolderPoolClass(object):
         self.theHead = None
         self.theTail = None
         self.theSize = 0
+        #self.debug(True, "init__", "")
 
     def queueObject(self):
         return self.theQueueObject
@@ -193,8 +195,8 @@ class HolderPoolClass(object):
     def utilObject(self):
         return self.queueObject().utilObject()
 
-    def phwangObject(self):
-        return self.utilObject().phwangObject()
+    def rootObject(self):
+        return self.utilObject().rootObject()
 
     def head(self):
         return self.theHead
@@ -262,10 +264,10 @@ class HolderPoolClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().abend(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 class HolderEntryClass(object):

@@ -19,6 +19,7 @@ class PhwangClass(object):
         self.theUtilObject = malloc_util(self)
         self.theFarbricObject = malloc_farbric(self)
         self.thePortObject = malloc_port(self)
+        #self.debug(True, "init__", "")
 
     def className(self):
         return "PhwangClass"

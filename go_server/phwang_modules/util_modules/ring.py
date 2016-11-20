@@ -9,6 +9,7 @@ class RingClass(object):
         self.theSize = 2
         self.theLeft = self.size()
         self.theArray = [None] * self.size()
+        #self.debug(True, "init__", "")
 
     def className(self):
         return "RingClass"

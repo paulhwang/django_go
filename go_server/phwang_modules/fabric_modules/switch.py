@@ -7,6 +7,7 @@ class SwitchClass(object):
     def __init__(self, fabric_val):
         self.theFabricObject = fabric_val
         self.initSwitchTable()
+        self.debug(True, "init__", "")
 
     def defaultLinkUpdateInterval(self):
         return 3000
@@ -22,6 +23,9 @@ class SwitchClass(object):
 
     def fabricObject(self):
         return self.theFabricObject
+
+    def rootObject(self):
+        return self.fabricObject().rootObject()
 
     def linkMgrObject(self):
         return self.fabricObject().linkMgrObject()
@@ -272,8 +276,8 @@ class SwitchClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

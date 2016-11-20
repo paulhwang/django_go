@@ -13,6 +13,7 @@ class SessionMgrClass(object):
         self.theTail = None
         self.theSize = 0
         self.theGlobalSessionId = 1000
+        self.debug(True, "init__", "")
 
     def sessionModuleMalloc(self, session_id_val):
         return malloc_session(self, session_id_val)
@@ -29,14 +30,14 @@ class SessionMgrClass(object):
     def fabricObject(self):
         return self.linkMgrObject().fabricObject()
 
-    def phwangObject(self):
-        return self.fabricObject().phwangObject()
+    def rootObject(self):
+        return self.fabricObject().rootObject()
 
     def clusterMgrObject(self):
         return self.fabricObject().clusterMgrObject()
 
     def utilObject(self):
-        return self.phwangObject().utilObject()
+        return self.rootObject().utilObject()
 
     def globalSessionId(self):
         return self.theGlobalSessionId
@@ -166,7 +167,7 @@ class SessionMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

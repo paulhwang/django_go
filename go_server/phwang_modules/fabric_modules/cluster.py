@@ -16,11 +16,12 @@ class ClusterClass(object):
         self.theNext = None
         self.thePrev = None
         self.createTopic(topic_data_val)
+        self.debug(True, "init__", "topic=%s", self.topicObject().objectName())
 
     def goObjectMalloc(self):
         return go_server.phwang_modules.go_modules.go.malloc(self)
 
-    def className(self):
+    def objectName(self):
         return "ClusterClass"
 
     def clusterMgrObject(self):
@@ -138,7 +139,7 @@ class ClusterClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

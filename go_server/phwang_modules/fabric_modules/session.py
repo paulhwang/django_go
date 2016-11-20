@@ -5,6 +5,7 @@ class SessionClass(object):
     def __init__(self, session_mgr_val, session_id_val):
         self.theSessionMgrObject = session_mgr_val;
         self.resetIt(session_mgr_val, session_id_val)
+        self.debug(True, "init__", "")
 
     def objectName(self):
         return "SessionClass"
@@ -23,6 +24,9 @@ class SessionClass(object):
 
     def fabricObject(self):
         return self.sessionMgrObject().fabricObject()
+
+    def rootObject(self):
+        return self.sessionMgrObject().rootObject()
 
     def utilObject(self):
         return self.sessionMgrObject().utilObject()
@@ -98,7 +102,7 @@ class SessionClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

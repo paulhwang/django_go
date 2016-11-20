@@ -1,21 +1,22 @@
 import go_server.phwang_modules.port_modules.ajax
 
-def malloc(phwang_val):
-    return PortClass(phwang_val)
+def malloc(root_object_val):
+    return PortClass(root_object_val)
 
 def malloc_ajax(port_val):
     return go_server.phwang_modules.port_modules.ajax.malloc(port_val)
 
 class PortClass(object):
-    def __init__(self, phwang_val):
-        self.thePhwangObject = phwang_val
+    def __init__(self, root_object_val):
+        self.theRootObject = root_object_val
         self.theAjaxObject = malloc_ajax(self)
+        self.debug(True, "init__", "")
 
-    def className(self):
+    def objectName(self):
         return "PortClass"
 
-    def phwangObject(self):
-        return self.thePhwangObject
+    def rootObject(self):
+        return self.theRootObject
 
     def ajaxObject(self):
         return self.theAjaxObject
@@ -25,8 +26,8 @@ class PortClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.phwangObject().abend(str1 , str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

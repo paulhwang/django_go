@@ -16,6 +16,7 @@ class GroupClass(object):
         self.theStoneCount = 0;
         self.theExistMatrix = self.createMatrix();
         self.theDeadMatrix = self.createMatrix();
+        self.debug(True, "init__", "")
 
     def createMatrix(self):
         matrix =  [0] * 19

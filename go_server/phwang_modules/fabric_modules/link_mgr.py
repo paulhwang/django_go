@@ -13,21 +13,22 @@ class LinkMgrClass(object):
         self.theHead = None
         self.theTail = None
         self.theSize = 0
+        self.debug(True, "init__", "")
 
     def linkModuleMalloc(self, my_name_val, link_id_val):
         return malloc_link(self, my_name_val, link_id_val)
 
-    def className(self):
+    def objectName(self):
         return "LinkMgrClass"
 
     def fabricObject(self):
         return self.theFabricObject
 
-    def phwangObject(self):
-        return self.fabricObject().phwangObject()
+    def rootObject(self):
+        return self.fabricObject().rootObject()
 
     def utilObject(self):
-        return self.phwangObject().utilObject()
+        return self.rootObject().utilObject()
 
     def globalLinkId(self):
         return self.theGlobalLinkId
@@ -177,7 +178,7 @@ class LinkMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().logit(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.fabricObject().abend(self.className() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)

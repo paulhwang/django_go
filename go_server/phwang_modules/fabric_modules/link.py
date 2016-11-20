@@ -24,6 +24,7 @@ class LinkClass(object):
         self.thePendingSessionSetupQueue = self.utilObject().mallocQueue()
         self.theNameListChanged = True
         self.theSessionMgrObject = malloc_session_mgr(self)
+        self.debug(True, "init__", "")
 
     def linkTimeoutInterval(self):
         return 30.0

@@ -12,6 +12,7 @@ class GoMoveClass(object):
             self.theTurnIndex = turn_val
         else:
             self.moveObjectDecode(str_val)
+        self.debug(True, "init__", "")
 
     def className(self):
         return "GoMoveClass"

@@ -7,6 +7,7 @@ def malloc(phwang_val):
 class UtilClass(object):
     def __init__(self, phwang_val):
         self.thePhwangObject = phwang_val
+        #self.debug(True, "init__", "")
 
     def className(self):
         return "UtilClass"
