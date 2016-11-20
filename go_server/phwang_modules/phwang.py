@@ -74,3 +74,9 @@ class PhwangClass(object):
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         go_server.phwang_modules.util_modules.util.utilAbend("GO:" + str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def LOG_IT(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.phwang_modules.util_modules.util.utilLogit(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+    def ABEND(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
+        go_server.phwang_modules.util_modules.util.utilAbend(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
