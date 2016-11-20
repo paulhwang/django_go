@@ -4,14 +4,14 @@ import go_server.phwang_modules.port_modules.port
 def malloc():
     return RootClass()
 
-def malloc_util(phwang_val):
-    return go_server.phwang_modules.util_modules.util.malloc(phwang_val)
+def malloc_util(root_object_val):
+    return go_server.phwang_modules.util_modules.util.malloc(root_object_val)
 
-def malloc_farbric(phwang_val):
-    return go_server.phwang_modules.fabric_modules.fabric.malloc(phwang_val)
+def malloc_farbric(root_object_val):
+    return go_server.phwang_modules.fabric_modules.fabric.malloc(root_object_val)
 
-def malloc_port(phwang_val):
-    return go_server.phwang_modules.port_modules.port.malloc(phwang_val)
+def malloc_port(root_object_val):
+    return go_server.phwang_modules.port_modules.port.malloc(root_object_val)
 
 class RootClass(object):
     def __init__(self):
