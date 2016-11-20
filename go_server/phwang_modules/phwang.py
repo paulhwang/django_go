@@ -21,26 +21,16 @@ class RootClass(object):
     def __init__(self):
         self.theFarbricObject = malloc_farbric(self)
         self.theAjaxObject = malloc_ajax(self)
-        self.thePortObject = malloc_port(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "RootClass"
-
-    def utilObject(self):
-        return self.theUtilObject
 
     def farbricObject(self):
         return self.theFarbricObject
 
     def ajaxObject(self):
         return self.theAjaxObject
-
-    def portObject(self):
-        return self.thePortObject
-
-    def goObject(self):
-        return self.theGoObject
 
     def mallocQueue(self):
         return go_server.phwang_modules.util_modules.queue.malloc(self)
