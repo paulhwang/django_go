@@ -11,6 +11,9 @@ class SwitchClass(object):
     def defaultLinkUpdateInterval(self):
         return 3000
 
+    def debugInput(self):
+        return False
+
     def debugOutput(self):
         return False
 
@@ -51,9 +54,9 @@ class SwitchClass(object):
     def switchRequest(self, input_val):
         go_request = json.loads(input_val)
         if go_request.get("command") == "get_link_data":
-            self.debug(False, "switchRequest", "input_val=%s", input_val)
+            self.debug_(False, self.debugInput(), "switchRequest", "input_val=%s", input_val)
         else:
-            self.debug(True, "switchRequest", "input_val=%s", input_val)
+            self.debug_(True, self.debugInput(), "switchRequest", "input_val=%s", input_val)
 
         if not go_request:
             self.abend("switchRequest", "null go_request")
