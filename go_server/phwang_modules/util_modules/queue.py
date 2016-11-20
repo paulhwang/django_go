@@ -7,7 +7,7 @@ class QueueClass(object):
         self.theSize = 0
         self.theHead = None
         self.theTail = None
-        if self.debugRing:
+        if self.debugRing():
             self.theRing = self.rootObject().mallocRing()
         self.debug(True, "init__", "")
 
