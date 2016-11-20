@@ -1,22 +1,19 @@
 from django.http import JsonResponse
 import json
 
-def malloc(port_object_val):
-    return AjaxClass(port_object_val)
+def malloc(root_object_val):
+    return AjaxClass(root_object_val)
 
 class AjaxClass(object):
-    def __init__(self, port_object_val):
-        self.thePortObject = port_object_val
+    def __init__(self, root_object_val):
+        self.theRootObject = root_object_val
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "AjaxClass"
 
-    def portObject(self):
-        return self.thePortObject
-
     def rootObject(self):
-        return self.portObject().rootObject()
+        return self.theRootObject
 
     def farbricObject(self):
         return self.rootObject().farbricObject()

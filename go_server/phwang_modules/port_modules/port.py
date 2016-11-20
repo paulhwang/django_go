@@ -9,7 +9,7 @@ def malloc_ajax(port_val):
 class PortClass(object):
     def __init__(self, root_object_val):
         self.theRootObject = root_object_val
-        self.theAjaxObject = malloc_ajax(self)
+        self.theAjaxObject = malloc_ajax(self.rootObject())
         self.debug(True, "init__", "")
 
     def objectName(self):
