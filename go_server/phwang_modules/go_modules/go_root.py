@@ -1,22 +1,22 @@
-import go_server.phwang_modules.fabric_modules.link_mgr
+import go_server.phwang_modules.go_modules.go_mgr
 import go_server.phwang_modules.util_modules.logit
 
 def malloc():
     return GoRootClass()
 
-def malloc_link_mgr(root_object_val):
-    return go_server.phwang_modules.fabric_modules.link_mgr.malloc(root_object_val)
+def malloc_go_mgr(go_root_object_val):
+    return go_server.phwang_modules.go_modules.go_mgr.malloc(go_root_object_val)
 
 class GoRootClass(object):
     def __init__(self):
-        self.theLinkMgrObject = malloc_link_mgr(self)
+        self.theGoMgrObject = malloc_go_mgr(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
-        return "RootClass"
+        return "GoRootClass"
 
-    def linkMgrObject(self):
-        return self.theLinkMgrObject
+    def goMgrObject(self):
+        return self.theGoMgrObject
 
     def mallocQueue(self):
         return go_server.phwang_modules.util_modules.queue.malloc(self)
