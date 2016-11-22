@@ -54,7 +54,7 @@ class GoMgrClass(object):
     def decrementSize(self):
         self.theSize -= 1
 
-    def mallocLink(self, my_name_val):
+    def mallocBase(self, my_name_val):
         link = self.linkModuleMalloc(my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
         self.insertLinkToList(link)

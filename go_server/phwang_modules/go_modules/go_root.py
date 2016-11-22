@@ -21,6 +21,9 @@ class GoRootClass(object):
     def mallocRing(self):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
+    def mallocGoBase(self):
+        return this.theGoMgrObject().mallocBase();
+
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
