@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 import go_server.phwang_modules.util_modules.queue
-import go_server.phwang_modules.root
+import go_server.phwang_modules.fabric_modules.root
 from django.views.decorators.csrf import csrf_exempt
 
-root = go_server.phwang_modules.root.malloc()
+root = go_server.phwang_modules.fabric_modules.root.malloc()
 
 def go_html(request):
     return render(request, "go_django.html")
