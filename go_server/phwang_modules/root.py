@@ -1,4 +1,6 @@
-import go_server.phwang_modules.fabric_modules.fabric
+import go_server.phwang_modules.fabric_modules.link_mgr
+import go_server.phwang_modules.fabric_modules.cluster_mgr
+import go_server.phwang_modules.fabric_modules.switch
 import go_server.phwang_modules.fabric_modules.ajax
 
 def malloc():
