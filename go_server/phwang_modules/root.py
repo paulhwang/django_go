@@ -4,23 +4,37 @@ import go_server.phwang_modules.fabric_modules.ajax
 def malloc():
     return RootClass()
 
-def malloc_farbric(root_object_val):
-    return go_server.phwang_modules.fabric_modules.fabric.malloc(root_object_val)
+def malloc_link_mgr(root_object_val):
+    return go_server.phwang_modules.fabric_modules.link_mgr.malloc(root_object_val)
+
+def malloc_cluster_mgr(root_object_val):
+    return go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(root_object_val)
+
+def malloc_switch(root_object_val):
+    return go_server.phwang_modules.fabric_modules.switch.malloc(root_object_val)
 
 def malloc_ajax(root_object_val):
     return go_server.phwang_modules.fabric_modules.ajax.malloc(root_object_val)
 
 class RootClass(object):
     def __init__(self):
-        self.theFarbricObject = malloc_farbric(self)
+        self.theLinkMgrObject = malloc_link_mgr(self)
+        self.theClusterMgrObject = malloc_cluster_mgr(self)
+        self.theSwitchObject = malloc_switch(self)
         self.theAjaxObject = malloc_ajax(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "RootClass"
 
-    def farbricObject(self):
-        return self.theFarbricObject
+    def linkMgrObject(self):
+        return self.theLinkMgrObject
+
+    def clusterMgrObject(self):
+        return self.theClusterMgrObject
+
+    def switchObject(self):
+        return self.theSwitchObject
 
     def ajaxObject(self):
         return self.theAjaxObject

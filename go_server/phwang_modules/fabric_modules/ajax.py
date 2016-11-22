@@ -15,11 +15,8 @@ class AjaxClass(object):
     def rootObject(self):
         return self.theRootObject
 
-    def farbricObject(self):
-        return self.rootObject().farbricObject()
-
     def switchObject(self):
-        return self.farbricObject().switchObject()
+        return self.rootObject().switchObject()
 
     def processInput(self, request_val):
         if not request_val.is_ajax():

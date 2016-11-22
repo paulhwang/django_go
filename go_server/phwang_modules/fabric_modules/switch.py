@@ -25,10 +25,10 @@ class SwitchClass(object):
         return self.theRootObject
 
     def linkMgrObject(self):
-        return self.rootObject().farbricObject().linkMgrObject()
+        return self.rootObject().linkMgrObject()
 
     def clusterMgrObject(self):
-        return self.rootObject().farbricObject().clusterMgrObject()
+        return self.rootObject().clusterMgrObject()
 
     def linkUpdateInterval(self):
         return self.theLinkUpdateInterval;
