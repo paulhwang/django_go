@@ -1,12 +1,12 @@
 import go_server.phwang_modules.fabric_modules.link
 
 def malloc(go_root_object_val):
-    return GoMgrClass(go_root_object_val)
+    return GoBaseMgrClass(go_root_object_val)
 
 def malloc_link(link_mgr_val, my_name_val, link_id_val):
     return go_server.phwang_modules.fabric_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
 
-class GoMgrClass(object):
+class GoBaseMgrClass(object):
     def __init__(self, go_root_object_val):
         self.theGoRootObject = go_root_object_val
         self.theGlobalLinkId = 10
@@ -19,7 +19,7 @@ class GoMgrClass(object):
         return malloc_link(self, my_name_val, link_id_val)
 
     def objectName(self):
-        return "LinkMgrClass"
+        return "GoBaseMgrClass"
 
     def goRootObject(self):
         return self.theGoRootObject

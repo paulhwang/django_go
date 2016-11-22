@@ -34,6 +34,8 @@ class GoClass(object):
         self.theEngineObject = malloc_engine(self)
         self.theGameObject = malloc_game(self)
         self.thePortObject = malloc_port(self)
+        self.thePrev = None
+        self.theNext = None
         self.debug(True, "init__", "")
 
     def objectName(self):
@@ -62,6 +64,18 @@ class GoClass(object):
 
     def portObject(self):
         return self.thePortObject
+
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
 
     def getOppositeColor(self, color_val):
         if color_val == self.BLACK_STONE():
