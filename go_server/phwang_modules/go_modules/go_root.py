@@ -1,15 +1,12 @@
-import go_server.phwang_modules.go_modules.go_mgr
+import go_server.phwang_modules.go_modules.go_base_mgr
 import go_server.phwang_modules.util_modules.logit
 
 def malloc():
     return GoRootClass()
 
-def malloc_go_mgr(go_root_object_val):
-    return go_server.phwang_modules.go_modules.go_mgr.malloc(go_root_object_val)
-
 class GoRootClass(object):
     def __init__(self):
-        self.theGoMgrObject = malloc_go_mgr(self)
+        self.theGoMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
         self.debug(True, "init__", "")
 
     def objectName(self):

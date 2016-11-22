@@ -1,4 +1,4 @@
-import go_server.phwang_modules.go_modules.go
+import go_server.phwang_modules.go_modules.go_base
 import json
 
 def malloc(cluster_mgr_val, topic_data_val, session_val):
@@ -19,7 +19,7 @@ class ClusterClass(object):
         self.debug(True, "init__", "topic=%s", self.topicObject().objectName())
 
     def goObjectMalloc(self):
-        return go_server.phwang_modules.go_modules.go.malloc(self)
+        return go_server.phwang_modules.go_modules.go_base.malloc(self)
 
     def objectName(self):
         return "ClusterClass"
