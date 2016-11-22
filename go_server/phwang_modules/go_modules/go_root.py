@@ -1,50 +1,22 @@
 import go_server.phwang_modules.fabric_modules.link_mgr
-import go_server.phwang_modules.fabric_modules.cluster_mgr
-import go_server.phwang_modules.fabric_modules.switch
-import go_server.phwang_modules.fabric_modules.ajax
 import go_server.phwang_modules.util_modules.logit
 
-def malloc(go_root_object):
-    return RootClass(go_root_object)
+def malloc():
+    return GoRootClass()
 
 def malloc_link_mgr(root_object_val):
     return go_server.phwang_modules.fabric_modules.link_mgr.malloc(root_object_val)
 
-def malloc_cluster_mgr(root_object_val):
-    return go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(root_object_val)
-
-def malloc_switch(root_object_val):
-    return go_server.phwang_modules.fabric_modules.switch.malloc(root_object_val)
-
-def malloc_ajax(root_object_val):
-    return go_server.phwang_modules.fabric_modules.ajax.malloc(root_object_val)
-
-class RootClass(object):
-    def __init__(self, go_root_object):
-        self.theGoRootObject = go_root_object;
+class GoRootClass(object):
+    def __init__(self):
         self.theLinkMgrObject = malloc_link_mgr(self)
-        self.theClusterMgrObject = malloc_cluster_mgr(self)
-        self.theSwitchObject = malloc_switch(self)
-        self.theAjaxObject = malloc_ajax(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "RootClass"
 
-    def goRootObject(self):
-        return self.theGoRootObject
-
     def linkMgrObject(self):
         return self.theLinkMgrObject
-
-    def clusterMgrObject(self):
-        return self.theClusterMgrObject
-
-    def switchObject(self):
-        return self.theSwitchObject
-
-    def ajaxObject(self):
-        return self.theAjaxObject
 
     def mallocQueue(self):
         return go_server.phwang_modules.util_modules.queue.malloc(self)
