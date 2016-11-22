@@ -45,11 +45,8 @@ class GoClass(object):
     def clusterMgrObject(self):
         return self.clusterObject().clusterMgrObject()
 
-    def fabricObject(self):
-        return self.clusterMgrObject().fabricObject()
-
     def rootObject(self):
-        return self.fabricObject().rootObject()
+        return self.clusterMgrObject().rootObject()
 
     def configObject(self):
         return self.theConfigObject

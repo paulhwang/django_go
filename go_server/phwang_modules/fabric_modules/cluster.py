@@ -27,11 +27,8 @@ class ClusterClass(object):
     def clusterMgrObject(self):
         return self.theClusterMgrObject
 
-    def fabricObject(self):
-        return self.clusterMgrObject().fabricObject()
-
     def rootObject(self):
-        return self.fabricObject().rootObject()
+        return self.clusterMgrObject().rootObject()
 
     def utilObject(self):
         return self.clusterMgrObject().utilObject()
