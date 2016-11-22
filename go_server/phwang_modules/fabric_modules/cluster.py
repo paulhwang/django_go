@@ -66,11 +66,19 @@ class ClusterClass(object):
     def setNext(self, val):
         self.theNext = val
 
+    def baseId(self):
+        return self.theBaseId
+
+    def setBaseId(self, val):
+        self.theBaseId = val
+
     def createTopic(self, data_val):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
         if data.get("title") == "go":
             self.setTopicObject(self.goObjectMalloc())
+            self.setBaseId(self.rootObject().mallocBase())
+            self.debug(True, "createTopic", "base_id=%d", self.baseId())
 
     def addAdditionalSession(self, session_val):
         self.theSessionArray[self.sessionArrayLength()] = session_val

@@ -9,7 +9,7 @@ def malloc_link(link_mgr_val, my_name_val, link_id_val):
 class GoBaseMgrClass(object):
     def __init__(self, go_root_object_val):
         self.theGoRootObject = go_root_object_val
-        self.theGlobalLinkId = 10
+        self.theGlobaBaseId = 10
         self.theHead = None
         self.theTail = None
         self.theSize = 0
@@ -27,11 +27,11 @@ class GoBaseMgrClass(object):
     def utilObject(self):
         return self.rootObject().utilObject()
 
-    def globalLinkId(self):
-        return self.theGlobalLinkId
+    def globaBaseId(self):
+        return self.theGlobaBaseId
 
-    def incrementGlobalLinkId(self):
-        self.theGlobalLinkId += 1
+    def incrementGlobalBaseId(self):
+        self.theGlobaBaseId += 1
 
     def head(self):
         return self.theHead
@@ -55,11 +55,10 @@ class GoBaseMgrClass(object):
         self.theSize -= 1
 
     def mallocBase(self, my_name_val):
-        link = self.linkModuleMalloc(my_name_val, self.globalLinkId())
-        self.incrementGlobalLinkId()
-        self.insertLinkToList(link)
-        self.setNameListChanged()
-        return link
+        base = self.linkModuleMalloc(my_name_val, self.globaBaseId())
+        self.incrementGlobalBaseId()
+        self.insertLinkToList(base)
+        return base.baseId()
 
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)

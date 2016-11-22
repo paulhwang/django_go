@@ -4,6 +4,9 @@ import go_server.phwang_modules.util_modules.logit
 def malloc():
     return GoRootClass()
 
+def malloc_base():
+    return 123
+
 class GoRootClass(object):
     def __init__(self):
         self.theGoMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
