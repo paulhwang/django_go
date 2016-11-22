@@ -1,11 +1,11 @@
 import json
 
-def malloc(fabric_val):
-    return SwitchClass(fabric_val)
+def malloc(root_object_val):
+    return SwitchClass(root_object_val)
 
 class SwitchClass(object):
-    def __init__(self, fabric_val):
-        self.theFabricObject = fabric_val
+    def __init__(self, root_object_val):
+        self.theRootObject = root_object_val
         self.initSwitchTable()
         self.debug(True, "init__", "")
 
@@ -21,20 +21,14 @@ class SwitchClass(object):
     def objectName(self):
         return "SwitchClass"
 
-    def fabricObject(self):
-        return self.theFabricObject
-
     def rootObject(self):
-        return self.fabricObject().rootObject()
+        return self.theRootObject
 
     def linkMgrObject(self):
-        return self.fabricObject().linkMgrObject()
+        return self.rootObject().farbricObject().linkMgrObject()
 
     def clusterMgrObject(self):
-        return self.fabricObject().clusterMgrObject()
-
-    def sessionMgrObject(self):
-        return self.fabricObject().sessionMgrObject()
+        return self.rootObject().farbricObject().clusterMgrObject()
 
     def linkUpdateInterval(self):
         return self.theLinkUpdateInterval;

@@ -19,7 +19,7 @@ class FibreClass(object):
         self.theRootObject = root_object_val
         self.theLinkMgrObject = malloc_link_mgr(self.rootObject())
         self.theClusterMgrObject = malloc_cluster_mgr(self.rootObject())
-        self.theSwitchObject = malloc_switch(self)
+        self.theSwitchObject = malloc_switch(self.rootObject())
         self.debug(True, "init__", "")
 
     def objectName(self):
