@@ -6,7 +6,7 @@ import go_server.phwang_modules.go_modules.go_port
 import go_server.phwang_modules.go_modules.go_move
 
 def malloc(cluster_object_val):
-    return GoClass(cluster_object_val)
+    return GoBaseObject(cluster_object_val)
 
 def malloc_config(go_val):
     return go_server.phwang_modules.go_modules.go_config.malloc(go_val)
@@ -26,7 +26,7 @@ def malloc_port(go_val):
 def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
     return go_server.phwang_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
-class GoClass(object):
+class GoBaseObject(object):
     def __init__(self, cluster_object_val):
         self.theClusterObject = cluster_object_val
         self.theConfigObject = malloc_config(self)
@@ -39,7 +39,7 @@ class GoClass(object):
         self.debug(True, "init__", "")
 
     def objectName(self):
-        return "GoClass"
+        return "GoBaseObject"
 
     def clusterObject(self):
         return self.theClusterObject
