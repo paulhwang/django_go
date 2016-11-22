@@ -28,10 +28,10 @@ class SessionMgrClass(object):
         return self.linkObject().linkMgrObject()
 
     def fabricObject(self):
-        return self.linkMgrObject().fabricObject()
+        return self.rootObject().fabricObject()
 
     def rootObject(self):
-        return self.fabricObject().rootObject()
+        return self.linkMgrObject().rootObject()
 
     def clusterMgrObject(self):
         return self.fabricObject().clusterMgrObject()
