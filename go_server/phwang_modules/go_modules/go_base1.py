@@ -29,11 +29,11 @@ def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
 class GoBaseObject(object):
     def __init__(self, base_mgr_object_val):
         self.theBaseMgrObject = base_mgr_object_val;
-        #self.theConfigObject = malloc_config(self)
-        #self.theBoardObject = malloc_board(self)
-        #self.theEngineObject = malloc_engine(self)
-        #self.theGameObject = malloc_game(self)
-        #self.thePortObject = malloc_port(self)
+        self.theConfigObject = malloc_config(self)
+        self.theBoardObject = malloc_board(self)
+        self.theEngineObject = malloc_engine(self)
+        self.theGameObject = malloc_game(self)
+        self.thePortObject = malloc_port(self)
         self.theBaseId = self.baseMgrObject().globalBaseId()
         self.thePrev = None
         self.theNext = None
