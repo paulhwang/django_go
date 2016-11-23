@@ -5,12 +5,11 @@ import go_server.phwang_modules.fabric_modules.ajax
 import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.go_modules.go_root
 
-def malloc(go_root_object):
-    return RootClass(go_root_object)
+def malloc():
+    return the_root_object
 
 class RootClass(object):
-    def __init__(self, go_root_object):
-        self.theGoRootObject = go_root_object;
+    def __init__(self):
         self.theLinkMgrObject = go_server.phwang_modules.fabric_modules.link_mgr.malloc(self)
         self.theClusterMgrObject = go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(self)
         self.theSwitchObject = go_server.phwang_modules.fabric_modules.switch.malloc(self)
@@ -19,9 +18,6 @@ class RootClass(object):
 
     def objectName(self):
         return "RootClass"
-
-    def goRootObject(self):
-        return self.theGoRootObject
 
     def linkMgrObject(self):
         return self.theLinkMgrObject
@@ -59,3 +55,5 @@ class RootClass(object):
 
     def ABEND(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         go_server.phwang_modules.util_modules.logit.utilAbend(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+the_root_object = RootClass()
