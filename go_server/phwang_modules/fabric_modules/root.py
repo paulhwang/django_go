@@ -5,8 +5,8 @@ import go_server.phwang_modules.fabric_modules.ajax
 import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.go_modules.go_root
 
-def root_object():
-    return the_root_object
+def process_ajax_input(request_val):
+    return the_root_object.ajaxObject().processInput(request_val)
 
 class RootClass(object):
     def __init__(self):

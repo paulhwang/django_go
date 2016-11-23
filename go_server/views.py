@@ -9,7 +9,7 @@ def go_html(request):
 
 @csrf_exempt
 def go_ajax(request):
-    return go_server.phwang_modules.fabric_modules.root.root_object().ajaxObject().processInput(request)
+    return go_server.phwang_modules.fabric_modules.root.process_ajax_input(request)
 
 def hello_entry(request):
     return HttpResponse("Hello there!")
