@@ -60,6 +60,7 @@ class GoBaseMgrClass(object):
     def receiveData(self, base_id_val, data_val):
         self.debug(True, "receiveData", "data=%s", data_val);
         base = self.searchBaseByBaseId(base_id_val)
+        base.portObject().receiveStringData(data_val)
 
     def transmitData(self, base_id_val):
         base = self.searchBaseByBaseId(base_id_val)

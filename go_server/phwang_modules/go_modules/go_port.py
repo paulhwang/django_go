@@ -49,6 +49,8 @@ class GoPortClass(object):
         self.transmitData(json_data);
 
     def transmitData(self, data_val):
+        if self.goObject().objectName() == "GoBaseObject":
+            return
         self.clusterObject().enqueueTransmitData(data_val)
         self.clusterObject().processTransmitData()
 
