@@ -29,12 +29,12 @@ def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
 class GoBaseObject(object):
     def __init__(self, base_mgr_object_val):
         self.theBaseMgrObject = base_mgr_object_val;
+        self.theBaseId = self.baseMgrObject().globalBaseId()
         self.theConfigObject = malloc_config(self)
         self.theBoardObject = malloc_board(self)
         self.theEngineObject = malloc_engine(self)
         self.theGameObject = malloc_game(self)
         self.thePortObject = malloc_port(self)
-        self.theBaseId = self.baseMgrObject().globalBaseId()
         self.thePrev = None
         self.theNext = None
         self.debug(True, "init__", "")
@@ -65,9 +65,6 @@ class GoBaseObject(object):
 
     def baseId(self):
         return self.theBaseId
-
-    def baseId1(self):
-        return "123456"
 
     def prev(self):
         return self.thePrev
@@ -120,10 +117,10 @@ class GoBaseObject(object):
         self.goAbend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def goLogit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().LOG_IT(self.baseId1() + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goRootObject().LOG_IT(str(self.baseId()) + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def goAbend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().ABEND(self.baseId() + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goRootObject().ABEND(str(self.baseId()) + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def EMPTY_STONE(self):
         return 0
