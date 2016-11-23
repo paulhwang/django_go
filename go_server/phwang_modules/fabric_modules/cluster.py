@@ -130,19 +130,19 @@ class ClusterClass(object):
             data = self.dequeueReceiveData()
             if not data:
                 return
-            self.receiveStringData(data)
+            self.receiveData(data)
 
     def enqueAndPocessReceiveData(self, data_val):
         self.debug(False, "enqueAndPocessReceiveData", data_val)
         self.enqueueReceiveData(data_val)
         self.processReceiveData()
 
-    def receiveStringData(self, str_val):
-        self.topicObject().portObject().receiveStringData(str_val)
+    def receiveData(self, data_val):
+        self.topicObject().portObject().receiveStringData(data_val)
 
-        self.rootObject().topicReceiveData(self.topicBaseId())
+        self.rootObject().topicReceiveData(self.topicBaseId(), data_val)
         data = self.rootObject().topicTransmitData(self.topicBaseId())
-        self.debug(True, "processReceiveData", "data=%s", data)
+        self.debug(True, "receiveData", "data=%s", data)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

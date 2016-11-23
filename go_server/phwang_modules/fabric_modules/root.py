@@ -41,8 +41,8 @@ class RootClass(object):
     def topicMallocBase(self):
         return go_server.phwang_modules.go_modules.go_root.malloc_base()
 
-    def topicReceiveData(self, base_id_val):
-        go_server.phwang_modules.go_modules.go_root.receive_data(base_id_val)
+    def topicReceiveData(self, base_id_val, data_val):
+        go_server.phwang_modules.go_modules.go_root.receive_data(base_id_val, data_val)
 
     def topicTransmitData(self, base_id_val):
         return go_server.phwang_modules.go_modules.go_root.transmit_data(base_id_val)

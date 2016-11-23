@@ -4,8 +4,8 @@ import go_server.phwang_modules.go_modules.go_base_mgr
 def malloc_base():
     return the_go_root_object.mallocBase()
 
-def receive_data(base_id_val):
-    the_go_root_object.receiveData(base_id_val)
+def receive_data(base_id_val, data_val):
+    the_go_root_object.receiveData(base_id_val, data_val)
 
 def transmit_data(base_id_val):
     return the_go_root_object.transmitData(base_id_val)
@@ -30,8 +30,8 @@ class GoRootClass(object):
     def mallocBase(self):
         return self.goBaseMgrObject().mallocBase();
 
-    def receiveData(self, base_id_val):
-        self.goBaseMgrObject().receiveData(base_id_val)
+    def receiveData(self, base_id_val, data_val):
+        self.goBaseMgrObject().receiveData(base_id_val, data_val)
 
     def transmitData(self, base_id_val):
         return self.goBaseMgrObject().transmitData(base_id_val)
