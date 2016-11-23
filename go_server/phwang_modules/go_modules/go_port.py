@@ -5,7 +5,7 @@ def malloc(base_object_val):
 
 class GoPortClass(object):
     def __init__(self, base_object_val):
-        self.theGoObject = base_object_val;
+        self.theBaseObject = base_object_val;
         self.GO_PROTOCOL_CODE_SIZE = 7;
         self.GO_PROTOCOL_CODE_PROPOSE = "Propose";
         self.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -19,7 +19,7 @@ class GoPortClass(object):
         return "GoPortClass"
 
     def goObject(self):
-        return self.theGoObject
+        return self.theBaseObject
 
     def clusterObject(self):
         return self.goObject().clusterObject()

@@ -3,7 +3,7 @@ def malloc(base_object_val):
 
 class GoGameClass(object):
     def __init__(self, base_object_val):
-        self.theGoObject = base_object_val
+        self.theBaseObject = base_object_val
         self.resetGameObjectData()
         self.debug(False, "init__", "")
 
@@ -22,7 +22,7 @@ class GoGameClass(object):
         return "GoGameClass"
 
     def goObject(self):
-        return self.theGoObject
+        return self.theBaseObject
 
     def engineObject(self):
         return self.goObject().engineObject()

@@ -3,7 +3,7 @@ def malloc(base_object_val):
 
 class BoardClass(object):
     def __init__(self, base_object_val):
-        self.theGoObject = base_object_val
+        self.theBaseObject = base_object_val
         self.theBoardArray = [0] * 19
         self.theMarkedBoardArray = [0] * 19
         i = 0
@@ -28,7 +28,7 @@ class BoardClass(object):
         return "BoardClass"
 
     def goObject(self):
-        return self.theGoObject
+        return self.theBaseObject
 
     def configObject(self):
         return self.goObject().configObject();

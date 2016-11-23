@@ -5,7 +5,7 @@ def malloc(base_object_val):
 
 class ConfigClass(object):
     def __init__(self, base_object_val):
-        self.theGoObject = base_object_val
+        self.theBaseObject = base_object_val
         self.theBoardSize = 19
         self.theHandicapPoint = 0
         self.debug(True, "init__", "")
@@ -14,7 +14,7 @@ class ConfigClass(object):
         return "ConfigClass"
 
     def goObject(self):
-        return self.theGoObject
+        return self.theBaseObject
 
     def boardSize(self):
         return self.theBoardSize

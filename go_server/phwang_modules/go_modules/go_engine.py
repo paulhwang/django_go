@@ -11,7 +11,7 @@ class GoEngineClass(object):
         return True
 
     def __init__(self, base_object_val):
-        self.theGoObject = base_object_val
+        self.theBaseObject = base_object_val
         self.resetEngineObjectData()
         self.debug(False, "init__", "")
 
@@ -44,7 +44,7 @@ class GoEngineClass(object):
         return "GoEngineClass"
 
     def goObject(self):
-        return self.theGoObject
+        return self.theBaseObject
 
     def boardObject(self):
         return self.goObject().boardObject()
