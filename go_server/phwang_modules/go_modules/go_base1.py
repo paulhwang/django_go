@@ -5,8 +5,8 @@ import go_server.phwang_modules.go_modules.go_game
 import go_server.phwang_modules.go_modules.go_port
 import go_server.phwang_modules.go_modules.go_move
 
-def malloc(cluster_object_val):
-    return GoBaseObject(cluster_object_val)
+def malloc(base_mgr_object_val):
+    return GoBaseObject(base_mgr_object_val)
 
 def malloc_config(go_val):
     return go_server.phwang_modules.go_modules.go_config.malloc(go_val)
@@ -27,28 +27,26 @@ def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
     return go_server.phwang_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoBaseObject(object):
-    def __init__(self, cluster_object_val):
-        self.theClusterObject = cluster_object_val
-        self.theConfigObject = malloc_config(self)
-        self.theBoardObject = malloc_board(self)
-        self.theEngineObject = malloc_engine(self)
-        self.theGameObject = malloc_game(self)
-        self.thePortObject = malloc_port(self)
+    def __init__(self, base_mgr_object_val):
+        self.theBaseMgrObject = base_mgr_object_val;
+        #self.theConfigObject = malloc_config(self)
+        #self.theBoardObject = malloc_board(self)
+        #self.theEngineObject = malloc_engine(self)
+        #self.theGameObject = malloc_game(self)
+        #self.thePortObject = malloc_port(self)
+        self.theBaseId = self.baseMgrObject().globalBaseId()
         self.thePrev = None
         self.theNext = None
-        self.debug(True, "init__", "")
+        self.debug(False, "init__", "")
 
     def objectName(self):
         return "GoBaseObject"
 
-    def clusterObject(self):
-        return self.theClusterObject
+    def baseMgrObject(self):
+        return self.theBaseMgrObject
 
-    def clusterMgrObject(self):
-        return self.clusterObject().clusterMgrObject()
-
-    def rootObject(self):
-        return self.clusterMgrObject().rootObject()
+    def goRootObject(self):
+        return self.baseMgrObject().goRootObject()
 
     def configObject(self):
         return self.theConfigObject
@@ -64,6 +62,9 @@ class GoBaseObject(object):
 
     def portObject(self):
         return self.thePortObject
+
+    def baseId(self):
+        return self.theBaseId
 
     def prev(self):
         return self.thePrev

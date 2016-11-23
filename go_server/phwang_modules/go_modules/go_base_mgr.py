@@ -1,15 +1,12 @@
-import go_server.phwang_modules.fabric_modules.link
+import go_server.phwang_modules.go_modules.go_base1
 
 def malloc(go_root_object_val):
     return GoBaseMgrClass(go_root_object_val)
 
-def malloc_link(link_mgr_val, my_name_val, link_id_val):
-    return go_server.phwang_modules.fabric_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
-
 class GoBaseMgrClass(object):
     def __init__(self, go_root_object_val):
         self.theGoRootObject = go_root_object_val
-        self.theGlobaBaseId = 10
+        self.theGlobalBaseId = 123
         self.theHead = None
         self.theTail = None
         self.theSize = 0
@@ -27,11 +24,11 @@ class GoBaseMgrClass(object):
     def utilObject(self):
         return self.rootObject().utilObject()
 
-    def globaBaseId(self):
-        return self.theGlobaBaseId
+    def globalBaseId(self):
+        return self.theGlobalBaseId
 
     def incrementGlobalBaseId(self):
-        self.theGlobaBaseId += 1
+        self.theGlobalBaseId += 1
 
     def head(self):
         return self.theHead
@@ -54,8 +51,8 @@ class GoBaseMgrClass(object):
     def decrementSize(self):
         self.theSize -= 1
 
-    def mallocBase(self, my_name_val):
-        base = self.linkModuleMalloc(my_name_val, self.globaBaseId())
+    def mallocBase(self):
+        base = go_server.phwang_modules.go_modules.go_base1.malloc(self)
         self.incrementGlobalBaseId()
         self.insertLinkToList(base)
         return base.baseId()
