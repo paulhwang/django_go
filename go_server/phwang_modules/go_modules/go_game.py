@@ -14,27 +14,27 @@ class GoGameClass(object):
         self.resetGameObjectPartialData()
 
     def resetGameObjectPartialData(self):
-        self.theNextColor = self.goObject().BLACK_STONE()
+        self.theNextColor = self.baseObject().BLACK_STONE()
         self.thePassReceived = False
         self.theGameIsOver = False
 
     def objectName(self):
         return "GoGameClass"
 
-    def goObject(self):
+    def baseObject(self):
         return self.theBaseObject
 
     def engineObject(self):
-        return self.goObject().engineObject()
+        return self.baseObject().engineObject()
 
     def configObject(self):
-        return self.goObject().configObject()
+        return self.baseObject().configObject()
 
     def boardObject(self):
-        return self.goObject().boardObject()
+        return self.baseObject().boardObject()
 
     def portObject(self):
-        return self.goObject().portObject()
+        return self.baseObject().portObject()
 
     def passReceived(self):
         return self.thePassReceived
@@ -94,7 +94,7 @@ class GoGameClass(object):
         self.clearPassReceived()
         self.insertMoveToMoveList(move_val)
         self.engineObject().enterWar(move_val)
-        self.setNextColor(self.goObject().getOppositeColor(move_val.myColor()))
+        self.setNextColor(self.baseObject().getOppositeColor(move_val.myColor()))
 
     def insertMoveToMoveList(self, move_val):
         self.setMovesArray(self.totalMoves(), move_val)
@@ -205,7 +205,7 @@ class GoGameClass(object):
 
         if not self.passReceived():
             self.setPassReceived()
-            self.setNextColor(self.goObject().getOppositeColor(self.nextColor()))
+            self.setNextColor(self.baseObject().getOppositeColor(self.nextColor()))
             return
 
         self.setGameIsOver()
@@ -231,11 +231,11 @@ class GoGameClass(object):
         while i < self.totalMoves():
             move = self.movesArray(i)
             self.engineObject().enterWar(move)
-            self.setNextColor(self.goObject().getOppositeColor(move.myColor()))
+            self.setNextColor(self.baseObject().getOppositeColor(move.myColor()))
             i += 1
 
     def resetGameObjectPartialData(self):
-        self.theNextColor = self.goObject().BLACK_STONE()
+        self.theNextColor = self.baseObject().BLACK_STONE()
         self.thePassReceived = False
         self.theGameIsOver = False
 
@@ -244,8 +244,8 @@ class GoGameClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

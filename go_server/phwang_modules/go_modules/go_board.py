@@ -20,18 +20,18 @@ class BoardClass(object):
         while i < self.boardSize():
             j = 0
             while j < self.boardSize():
-                self.setBoardArray(i, j, self.goObject().EMPTY_STONE())
+                self.setBoardArray(i, j, self.baseObject().EMPTY_STONE())
                 j += 1
             i += 1
 
     def objectName(self):
         return "BoardClass"
 
-    def goObject(self):
+    def baseObject(self):
         return self.theBaseObject
 
     def configObject(self):
-        return self.goObject().configObject();
+        return self.baseObject().configObject();
 
     def boardSize(self):
         return self.configObject().boardSize()
@@ -53,20 +53,20 @@ class BoardClass(object):
         while i < self.boardSize():
             j = 0
             while j < self.boardSize():
-                self.setMarkedBoardArray(i, j, self.goObject().EMPTY_STONE())
+                self.setMarkedBoardArray(i, j, self.baseObject().EMPTY_STONE())
                 j += 1
             i += 1
 
     def addStoneToBoard(self, x_val, y_val, color_val):
-        if self.goObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()) == 0:
+        if self.baseObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()) == 0:
             self.abend("addStoneToBoard", "x=%i y=%i", x_val, y_val)
             return
         self.setBoardArray(x_val, y_val, color_val)
 
     def isEmptySpace(self, x_val, y_val):
-        if not self.goObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()):
+        if not self.baseObject().isValidCoordinates(x_val, y_val, self.configObject().boardSize()):
             return False
-        if self.boardArray(x_val, y_val) != self.goObject().EMPTY_STONE():
+        if self.boardArray(x_val, y_val) != self.baseObject().EMPTY_STONE():
             return False
         return True
 
@@ -87,10 +87,10 @@ class BoardClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 

@@ -17,8 +17,8 @@ class GoEngineClass(object):
 
     def resetEngineObjectData(self):
         self.theGroupListArray = [None] * 7
-        self.theGroupListArray[1] = malloc_group_list(self, 1, self.goObject().BLACK_STONE(), 0, 0, 0)
-        self.theGroupListArray[2] = malloc_group_list(self, 2, self.goObject().WHITE_STONE(), 0, 0, 0)
+        self.theGroupListArray[1] = malloc_group_list(self, 1, self.baseObject().BLACK_STONE(), 0, 0, 0)
+        self.theGroupListArray[2] = malloc_group_list(self, 2, self.baseObject().WHITE_STONE(), 0, 0, 0)
         self.resetMarkedGroupLists()
         self.resetEmptyGroupLists()
 
@@ -28,14 +28,14 @@ class GoEngineClass(object):
         self.theWhiteCaptureStones = 0
 
     def resetMarkedGroupLists(self):
-        self.theGroupListArray[3] = malloc_group_list(self, 3, self.goObject().BLACK_STONE(), 1, "black", "gray")
-        self.theGroupListArray[4] = malloc_group_list(self, 4, self.goObject().WHITE_STONE(), 1, "white", "gray")
+        self.theGroupListArray[3] = malloc_group_list(self, 3, self.baseObject().BLACK_STONE(), 1, "black", "gray")
+        self.theGroupListArray[4] = malloc_group_list(self, 4, self.baseObject().WHITE_STONE(), 1, "white", "gray")
         self.boardObject().resetMarkedBoardObjectData()
 
     def resetEmptyGroupLists(self):
-        self.theGroupListArray[0] = malloc_group_list(self, 0, self.goObject().EMPTY_STONE(), 0, 0, 0)
-        self.theGroupListArray[5] = malloc_group_list(self, 5, self.goObject().EMPTY_STONE(), 0, 0, "black")
-        self.theGroupListArray[6] = malloc_group_list(self, 6, self.goObject().EMPTY_STONE(), 0, 0, "white")
+        self.theGroupListArray[0] = malloc_group_list(self, 0, self.baseObject().EMPTY_STONE(), 0, 0, 0)
+        self.theGroupListArray[5] = malloc_group_list(self, 5, self.baseObject().EMPTY_STONE(), 0, 0, "black")
+        self.theGroupListArray[6] = malloc_group_list(self, 6, self.baseObject().EMPTY_STONE(), 0, 0, "white")
 
     def malloc_group_list(self):
         return go_server.go_folder.go_group_lsit.malloc(self)
@@ -43,17 +43,17 @@ class GoEngineClass(object):
     def objectName(self):
         return "GoEngineClass"
 
-    def goObject(self):
+    def baseObject(self):
         return self.theBaseObject
 
     def boardObject(self):
-        return self.goObject().boardObject()
+        return self.baseObject().boardObject()
 
     def configObject(self):
-        return self.goObject().configObject()
+        return self.baseObject().configObject()
 
     def gameObject(self):
-        return self.goObject().gameObject()
+        return self.baseObject().gameObject()
 
     def boardSize(self):
         return self.configObject().boardSize()
@@ -180,10 +180,10 @@ class GoEngineClass(object):
             self.removeDeadGroup(group)
 
         if dead_count != 0:
-            if move_val.myColor() == self.goObject().BLACK_STONE():
+            if move_val.myColor() == self.baseObject().BLACK_STONE():
                 self.addBlackCaptureStones(dead_count)
             else:
-                if move_val.myColor() == self.goObject().WHITE_STONE():
+                if move_val.myColor() == self.baseObject().WHITE_STONE():
                     self.addWhiteCaptureStones(dead_count)
                 else:
                     self.abend("enterWar", "color=%i", move_val.myColor())
@@ -193,10 +193,10 @@ class GoEngineClass(object):
     def insertStoneToGroupList(self, move_val):
         g_list = 0
 
-        if move_val.myColor() == self.goObject().BLACK_STONE():
+        if move_val.myColor() == self.baseObject().BLACK_STONE():
             g_list = self.blackGroupList()
         else:
-            if move_val.myColor() == self.goObject().WHITE_STONE():
+            if move_val.myColor() == self.baseObject().WHITE_STONE():
                 g_list = self.whiteGroupList()
             else:
                 self.abend("insertStoneToGroupList", "color=%i", move_val.myColor())
@@ -235,7 +235,7 @@ class GoEngineClass(object):
         return count
 
     def killOtherColorGroup(self, group, x, y):
-        if not self.goObject().isValidCoordinates(x, y, self.boardSize()):
+        if not self.baseObject().isValidCoordinates(x, y, self.boardSize()):
             return 0
 
         if self.boardObject().boardArray(x, y) != group.hisColor():
@@ -259,7 +259,7 @@ class GoEngineClass(object):
 
     def removeDeadGroup(self, group):
         group.removeDeadStoneFromBoard();
-        if group.myColor() == self.goObject().BLACK_STONE():
+        if group.myColor() == self.baseObject().BLACK_STONE():
             self.blackGroupList().removeOneDeadGroup(group);
         else:
             self.whiteGroupList().removeOneDeadGroup(group);
@@ -276,7 +276,7 @@ class GoEngineClass(object):
 
     def getGroupByCoordinate(self, x_val, y_val, color_val):
         self.debug(False, "GoEngineObject.getGroupByCoordinate", color_val);
-        if (color_val == self.goObject().BLACK_STONE()) or (color_val == self.goObject().MARKED_DEAD_BLACK_STONE()):
+        if (color_val == self.baseObject().BLACK_STONE()) or (color_val == self.baseObject().MARKED_DEAD_BLACK_STONE()):
             g_list = self.blackGroupList()
         else:
             g_list = self.whiteGroupList()
@@ -323,8 +323,8 @@ class GoEngineClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

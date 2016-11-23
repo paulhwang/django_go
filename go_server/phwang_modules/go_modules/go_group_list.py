@@ -11,10 +11,10 @@ class GoGroupListClass(object):
         self.theEngineObject = engine_val
         self.theIndexNumber = index_val
         self.theMyColor = color_val;
-        if self.myColor() == self.goObject().EMPTY_STONE():
-            self.theHisColor = self.goObject().EMPTY_STONE()
+        if self.myColor() == self.baseObject().EMPTY_STONE():
+            self.theHisColor = self.baseObject().EMPTY_STONE()
         else:
-            self.theHisColor = self.goObject().getOppositeColor(self.myColor())
+            self.theHisColor = self.baseObject().getOppositeColor(self.myColor())
         self.theIsDead = dead_val
         self.theBigStoneColor = big_stone_val
         self.theSmallStoneColor = small_stone_val
@@ -32,8 +32,8 @@ class GoGroupListClass(object):
     def engineObject(self):
         return self.theEngineObject
 
-    def goObject(self):
-        return self.engineObject().goObject()
+    def baseObject(self):
+        return self.engineObject().baseObject()
 
     def myColor(self):
         return self.theMyColor;
@@ -137,10 +137,10 @@ class GoGroupListClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 

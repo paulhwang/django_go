@@ -3,7 +3,7 @@ def malloc(str_val, x_val, y_val, color_val, turn_val, base_object_val):
 
 class GoMoveClass(object):
     def __init__(self, str_val, x_val, y_val, color_val, turn_val, base_object_val):
-        self.theGoObject = base_object_val;
+        self.theBaseObject = base_object_val;
 
         if not str_val:
             self.theX = x_val
@@ -17,8 +17,8 @@ class GoMoveClass(object):
     def objectName(self):
         return "GoMoveClass"
 
-    def goObject(self):
-        return self.theGoObject
+    def baseObject(self):
+        return self.theBaseObject
 
     def xX(self):
         return self.theX;
@@ -49,9 +49,9 @@ class GoMoveClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 

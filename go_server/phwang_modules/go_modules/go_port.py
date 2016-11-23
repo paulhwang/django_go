@@ -18,20 +18,20 @@ class GoPortClass(object):
     def objectName(self):
         return "GoPortClass"
 
-    def goObject(self):
+    def baseObject(self):
         return self.theBaseObject
 
     def clusterObject(self):
-        return self.goObject().clusterObject()
+        return self.baseObject().clusterObject()
 
     def engineObject(self):
-        return self.goObject().engineObject()
+        return self.baseObject().engineObject()
 
     def gameObject(self):
-        return self.goObject().gameObject()
+        return self.baseObject().gameObject()
 
     def boardObject(self):
-        return self.goObject().boardObject()
+        return self.baseObject().boardObject()
 
     def thansmitBoardData(self):
         board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
@@ -49,7 +49,7 @@ class GoPortClass(object):
         self.transmitData(json_data);
 
     def transmitData(self, data_val):
-        if self.goObject().objectName() == "GoBaseObject":
+        if self.baseObject().objectName() == "GoBaseObject":
             return
         self.clusterObject().enqueueTransmitData(data_val)
         self.clusterObject().processTransmitData()
@@ -81,14 +81,14 @@ class GoPortClass(object):
             x += (str_val.charAt(1) - ord('0'))
             y = (str_val.charAt(2) - ord('0')) * 10
             y += (str_val.charAt(3) - ord('0'))
-            if str_val.charAt(4) - ord('0') != self.goObject().MARK_DEAD_STONE_DIFF():
+            if str_val.charAt(4) - ord('0') != self.baseObject().MARK_DEAD_STONE_DIFF():
                 self.abend("aMoveIsPlayed", "game is over")
                 return
             self.engineObject().markDeadGroup(x, y)
             self.engineObject().abendEngine()
             self.thansmitBoardData()
         else:
-            move = self.goObject().mallocMove(str_val, 0, 0, 0, 0, self.goObject())
+            move = self.baseObject().mallocMove(str_val, 0, 0, 0, 0, self.baseObject())
             self.gameObject().addNewMoveAndFight(move)
             self.thansmitBoardData()
 
@@ -101,8 +101,8 @@ class GoPortClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 

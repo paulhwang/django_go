@@ -9,10 +9,10 @@ class GroupClass(object):
         self.theGroupListObject = group_list_val
         self.theIndexNumber = self.groupListObject().groupCount();
         self.theMyColor = self.groupListObject().myColor();
-        if self.myColor() == self.goObject().EMPTY_STONE():
-            self.theHisColor = self.goObject().EMPTY_STONE()
+        if self.myColor() == self.baseObject().EMPTY_STONE():
+            self.theHisColor = self.baseObject().EMPTY_STONE()
         else:
-            self.theHisColor = self.goObject().getOppositeColor(self.myColor());
+            self.theHisColor = self.baseObject().getOppositeColor(self.myColor());
         self.theStoneCount = 0;
         self.theExistMatrix = self.createMatrix();
         self.theDeadMatrix = self.createMatrix();
@@ -38,14 +38,14 @@ class GroupClass(object):
     def engineObject(self):
         return self.groupListObject().engineObject()
 
-    def goObject(self):
-        return self.engineObject().goObject()
+    def baseObject(self):
+        return self.engineObject().baseObject()
 
     def boardObject(self):
-        return self.goObject().boardObject()
+        return self.baseObject().boardObject()
 
     def configObject(self):
-        return self.goObject().configObject()
+        return self.baseObject().configObject()
 
     def boardSize(self):
         return self.configObject().boardSize()
@@ -139,8 +139,8 @@ class GroupClass(object):
             j = self.minY()
             while j <= self.maxY():
                 if self.existMatrix(i, j):
-                    #goObject().goLog("isCandidateGroup", "(%i,%i) (%i,%i)", x_val, y_val, i, j)
-                    if self.goObject().isNeighborStone(i, j, x_val, y_val):
+                    #baseObject().goLog("isCandidateGroup", "(%i,%i) (%i,%i)", x_val, y_val, i, j)
+                    if self.baseObject().isNeighborStone(i, j, x_val, y_val):
                         return True
                 j += 1
             i += 1
@@ -200,7 +200,7 @@ class GroupClass(object):
             j = self.minY();
             while j <= self.maxY():
                 if self.existMatrix(i, j):
-                    self.boardObject().setBoardArray(i, j, self.goObject().EMPTY_STONE());
+                    self.boardObject().setBoardArray(i, j, self.baseObject().EMPTY_STONE());
                     self.debug(False, "removeDeadStoneFromBoard", "(%i,%i)", i, j);
                 j += 1;
             i += 1;
@@ -232,10 +232,10 @@ class GroupClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().logit(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.baseObject().abend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 
 
