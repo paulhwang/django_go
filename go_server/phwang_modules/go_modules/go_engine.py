@@ -1,7 +1,7 @@
 import go_server.phwang_modules.go_modules.go_group_list
 
-def malloc(go_val):
-    return GoEngineClass(go_val)
+def malloc(base_object_val):
+    return GoEngineClass(base_object_val)
 
 def malloc_group_list(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
     return go_server.phwang_modules.go_modules.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
@@ -10,8 +10,8 @@ class GoEngineClass(object):
     def debugEngine(self):
         return True
 
-    def __init__(self, go_val):
-        self.theGoObject = go_val
+    def __init__(self, base_object_val):
+        self.theGoObject = base_object_val
         self.resetEngineObjectData()
         self.debug(False, "init__", "")
 

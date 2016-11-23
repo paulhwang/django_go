@@ -1,9 +1,9 @@
-def malloc(go_val):
-    return BoardClass(go_val)
+def malloc(base_object_val):
+    return BoardClass(base_object_val)
 
 class BoardClass(object):
-    def __init__(self, go_val):
-        self.theGoObject = go_val
+    def __init__(self, base_object_val):
+        self.theGoObject = base_object_val
         self.theBoardArray = [0] * 19
         self.theMarkedBoardArray = [0] * 19
         i = 0

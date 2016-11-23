@@ -1,9 +1,9 @@
-def malloc(go_val):
-    return GoGameClass(go_val)
+def malloc(base_object_val):
+    return GoGameClass(base_object_val)
 
 class GoGameClass(object):
-    def __init__(self, go_val):
-        self.theGoObject = go_val
+    def __init__(self, base_object_val):
+        self.theGoObject = base_object_val
         self.resetGameObjectData()
         self.debug(False, "init__", "")
 

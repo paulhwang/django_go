@@ -1,9 +1,9 @@
-def malloc(str_val, x_val, y_val, color_val, turn_val, go_val):
-    return GoMoveClass(str_val, x_val, y_val, color_val, turn_val, go_val)
+def malloc(str_val, x_val, y_val, color_val, turn_val, base_object_val):
+    return GoMoveClass(str_val, x_val, y_val, color_val, turn_val, base_object_val)
 
 class GoMoveClass(object):
-    def __init__(self, str_val, x_val, y_val, color_val, turn_val, go_val):
-        self.theGoObject = go_val;
+    def __init__(self, str_val, x_val, y_val, color_val, turn_val, base_object_val):
+        self.theGoObject = base_object_val;
 
         if not str_val:
             self.theX = x_val
