@@ -64,6 +64,9 @@ class GoBaseObject(object):
         return self.thePortObject
 
     def baseId(self):
+        return self.theBaseId
+
+    def baseId1(self):
         return "123456"
 
     def prev(self):
@@ -117,7 +120,7 @@ class GoBaseObject(object):
         self.goAbend(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def goLogit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().LOG_IT(self.baseId() + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.goRootObject().LOG_IT(self.baseId1() + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def goAbend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         self.goRootObject().ABEND(self.baseId() + " " + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
