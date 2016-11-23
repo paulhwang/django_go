@@ -5,7 +5,7 @@ import go_server.phwang_modules.fabric_modules.root
 import go_server.phwang_modules.go_modules.go_root
 from django.views.decorators.csrf import csrf_exempt
 
-go_root = go_server.phwang_modules.go_modules.go_root.malloc()
+#go_root = go_server.phwang_modules.go_modules.go_root.malloc()
 root = go_server.phwang_modules.fabric_modules.root.malloc()
 
 def go_html(request):
