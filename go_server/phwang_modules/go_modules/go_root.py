@@ -1,9 +1,6 @@
 import go_server.phwang_modules.go_modules.go_base_mgr
 import go_server.phwang_modules.util_modules.logit
 
-def malloc():
-    return GoRootClass()
-
 def malloc_base():
     return 123
 
