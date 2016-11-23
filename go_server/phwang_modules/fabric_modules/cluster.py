@@ -15,6 +15,7 @@ class ClusterClass(object):
         self.theTransmitQueue = self.rootObject().mallocQueue()
         self.theNext = None
         self.thePrev = None
+        self.theTopicBaseId = 0
         self.createTopic(topic_data_val)
         self.debug(True, "init__", "topic=%s", self.topicObject().objectName())
 
@@ -66,19 +67,19 @@ class ClusterClass(object):
     def setNext(self, val):
         self.theNext = val
 
-    def baseId(self):
-        return self.theBaseId
+    def topicBaseId(self):
+        return self.theTopicBaseId
 
-    def setBaseId(self, val):
-        self.theBaseId = val
+    def setTopicBaseId(self, val):
+        self.theTopicBaseId = val
 
     def createTopic(self, data_val):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
         if data.get("title") == "go":
             self.setTopicObject(self.goObjectMalloc())
-            self.setBaseId(self.rootObject().mallocBase())
-            self.debug(True, "createTopic", "base_id=%d", self.baseId())
+            self.setTopicBaseId(self.rootObject().topicMallocBase())
+            self.debug(True, "createTopic", "base_id=%d", self.topicBaseId())
 
     def addAdditionalSession(self, session_val):
         self.theSessionArray[self.sessionArrayLength()] = session_val
@@ -138,6 +139,10 @@ class ClusterClass(object):
 
     def receiveStringData(self, str_val):
         self.topicObject().portObject().receiveStringData(str_val)
+
+        self.rootObject().topicReceiveData(self.topicBaseId())
+        data = self.rootObject().topicTransmitData(self.topicBaseId())
+        self.debug(True, "processReceiveData", "data=%s", data)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

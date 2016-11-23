@@ -38,8 +38,14 @@ class RootClass(object):
     def mallocRing(self):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
-    def mallocBase(self):
+    def topicMallocBase(self):
         return go_server.phwang_modules.go_modules.go_root.malloc_base()
+
+    def topicReceiveData(self, base_id_val):
+        go_server.phwang_modules.go_modules.go_root.receive_data(base_id_val)
+
+    def topicTransmitData(self, base_id_val):
+        return go_server.phwang_modules.go_modules.go_root.transmit_data(base_id_val)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

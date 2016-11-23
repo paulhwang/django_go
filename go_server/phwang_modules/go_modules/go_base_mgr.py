@@ -57,6 +57,15 @@ class GoBaseMgrClass(object):
         self.insertLinkToList(base)
         return base.baseId()
 
+    def receiveData(self, base_id_val):
+        base = self.searchBaseByBaseId(base_id_val)
+
+    def transmitData(self, base_id_val):
+        base = self.searchBaseByBaseId(base_id_val)
+        if not base:
+            return None
+        return base.baseId()
+
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)
 
@@ -109,13 +118,13 @@ class GoBaseMgrClass(object):
             link = link.next()
         return None
 
-    def searchLinkByLinkId(self, link_id_val):
-        self.debug(False, "searchLinkByLinkId id=%i", link_id_val)
-        link = self.head()
-        while link:
-            if (link.linkId() == link_id_val):
-                return link
-            link = link.next()
+    def searchBaseByBaseId(self, base_id_val):
+        self.debug(False, "searchBaseByBaseId id=%i", base_id_val)
+        base = self.head()
+        while base:
+            if (base.baseId() == base_id_val):
+                return base
+            base = base.next()
         return None
 
     def searchLinkByName(self, my_name_val):

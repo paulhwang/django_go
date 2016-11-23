@@ -4,16 +4,22 @@ import go_server.phwang_modules.go_modules.go_base_mgr
 def malloc_base():
     return the_go_root_object.mallocBase()
 
+def receive_data(base_id_val):
+    the_go_root_object.receiveData(base_id_val)
+
+def transmit_data(base_id_val):
+    return the_go_root_object.transmitData(base_id_val)
+
 class GoRootClass(object):
     def __init__(self):
-        self.theGoMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
+        self.theGoBaseMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "GoRootClass"
 
-    def goMgrObject(self):
-        return self.theGoMgrObject
+    def goBaseMgrObject(self):
+        return self.theGoBaseMgrObject
 
     def mallocQueue(self):
         return go_server.phwang_modules.util_modules.queue.malloc(self)
@@ -22,7 +28,13 @@ class GoRootClass(object):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
     def mallocBase(self):
-        return self.goMgrObject().mallocBase();
+        return self.goBaseMgrObject().mallocBase();
+
+    def receiveData(self, base_id_val):
+        self.goBaseMgrObject().receiveData(base_id_val)
+
+    def transmitData(self, base_id_val):
+        return self.goBaseMgrObject().transmitData(base_id_val)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
