@@ -1,4 +1,3 @@
-import go_server.phwang_modules.go_modules.go_base
 import json
 
 def malloc(cluster_mgr_val, topic_data_val, session_val):
