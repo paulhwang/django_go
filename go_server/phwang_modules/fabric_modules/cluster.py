@@ -17,7 +17,7 @@ class ClusterClass(object):
         self.thePrev = None
         self.theTopicBaseId = 0
         self.createTopic(topic_data_val)
-        self.debug(True, "init__", "topic=%s", self.topicObject().objectName())
+        self.debug(True, "init__", "topic base_id=%d", self.topicBaseId())
 
     def goObjectMalloc(self):
         return go_server.phwang_modules.go_modules.go_base.malloc(self)
@@ -77,7 +77,7 @@ class ClusterClass(object):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
         if data.get("title") == "go":
-            self.setTopicObject(self.goObjectMalloc())
+            #self.setTopicObject(self.goObjectMalloc())
             self.setTopicBaseId(self.rootObject().topicMallocBase())
             self.debug(True, "createTopic", "base_id=%d", self.topicBaseId())
 
