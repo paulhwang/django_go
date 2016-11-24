@@ -1,9 +1,9 @@
 import go_server.phwang_modules.util_modules.logit
 
 def malloc():
-    return BaseMgrClass()
+    return ListMgrClass()
 
-class BaseMgrClass(object):
+class ListMgrClass(object):
     def __init__(self):
         self.theGlobalBaseId = 123
         self.theHead = None
@@ -12,7 +12,7 @@ class BaseMgrClass(object):
         self.debug(True, "init__", "")
 
     def objectName(self):
-        return "BaseMgrClass"
+        return "ListMgrClass"
 
     def globalBaseId(self):
         return self.theGlobalBaseId
