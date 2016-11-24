@@ -46,10 +46,7 @@ class GoBaseObject(object):
         return self.theBaseMgrObject
 
     def rootObject(self):
-        return self.baseMgrObject().goRootObject()
-
-    def goRootObject(self):
-        return self.baseMgrObject().goRootObject()
+        return self.baseMgrObject().rootObject()
 
     def configObject(self):
         return self.theConfigObject
@@ -120,10 +117,10 @@ class GoBaseObject(object):
         self.ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def LOG_IT(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().LOG_IT(str(self.baseId()) + ":" + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().LOG_IT(str(self.baseId()) + ":" + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def ABEND(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().ABEND(str(self.baseId()) + ":" + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().ABEND(str(self.baseId()) + ":" + str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def EMPTY_STONE(self):
         return 0

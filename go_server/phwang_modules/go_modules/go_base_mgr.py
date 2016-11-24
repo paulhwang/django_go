@@ -5,7 +5,7 @@ def malloc(go_root_object_val):
 
 class GoBaseMgrClass(object):
     def __init__(self, go_root_object_val):
-        self.theGoRootObject = go_root_object_val
+        self.theRootObject = go_root_object_val
         self.theGlobalBaseId = 123
         self.theHead = None
         self.theTail = None
@@ -18,8 +18,8 @@ class GoBaseMgrClass(object):
     def objectName(self):
         return "GoBaseMgrClass"
 
-    def goRootObject(self):
-        return self.theGoRootObject
+    def rootObject(self):
+        return self.theRootObject
 
     def utilObject(self):
         return self.rootObject().utilObject()
@@ -182,7 +182,7 @@ class GoBaseMgrClass(object):
             self.logit(str1, str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def logit(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().LOG_IT(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def abend(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        self.goRootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.rootObject().ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
