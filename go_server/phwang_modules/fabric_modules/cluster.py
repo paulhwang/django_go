@@ -76,9 +76,8 @@ class ClusterClass(object):
         self.debug(False, "createTopic", data_val)
         data = json.loads(data_val)
         if data.get("title") == "go":
-            #self.setTopicObject(self.goObjectMalloc())
             self.setTopicBaseId(self.rootObject().topicMallocBase())
-            self.debug(True, "createTopic", "base_id=%d", self.topicBaseId())
+            self.debug(False, "createTopic", "base_id=%d", self.topicBaseId())
 
     def addAdditionalSession(self, session_val):
         self.theSessionArray[self.sessionArrayLength()] = session_val
@@ -108,17 +107,6 @@ class ClusterClass(object):
             self.debug(False, "dequeueReceiveData", "queue is empty")
         return data
 
-    def processTransmitData(self):
-        return;
-        while True:
-            data = self.dequeueTransmitData()
-            if not data:
-                return
-            i = 0
-            while i < self.sessionArrayLength():
-                self.sessionArray(i).enqueueTransmitData(data)
-                i += 1
-
     def processSetupTopicData(self, json_data_val):
         self.debug(False, "processSetupTopicData", "data=%s", json_data_val)
         topic_data = json.loads(json_data_val)
@@ -138,11 +126,9 @@ class ClusterClass(object):
         self.processReceiveData()
 
     def receiveData(self, data_val):
-        #self.topicObject().portObject().receiveStringData(data_val)
-
         self.rootObject().topicReceiveData(self.topicBaseId(), data_val)
         data = self.rootObject().topicTransmitData(self.topicBaseId())
-        self.debug(True, "receiveData", "data=%s", data)
+        self.debug(False, "receiveData", "data=%s", data)
         i = 0
         while i < self.sessionArrayLength():
             self.sessionArray(i).enqueueTransmitData(data)

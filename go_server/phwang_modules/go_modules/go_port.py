@@ -25,9 +25,6 @@ class GoPortClass(object):
     def rootObject(self):
         return self.baseObject().rootObject()
 
-    def clusterObject(self):
-        return self.baseObject().clusterObject()
-
     def engineObject(self):
         return self.baseObject().engineObject()
 
@@ -42,8 +39,7 @@ class GoPortClass(object):
 
     def thansmitBoardData(self):
         board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
-        self.debug(False, "transmitBoardData", "data=%s", board_data);
-        json_data = json.dumps({
+        data = json.dumps({
                        "board_data": board_data,
                        "next_color": self.gameObject().nextColor(),
                        "last_dead_stone": self.engineObject().lastDeadStone(),
@@ -53,20 +49,12 @@ class GoPortClass(object):
                        "white_score": self.engineObject().whiteScoreString(),
                        "final_score": self.engineObject().finalScoreString(),
                    });
-        self.transmitData(json_data);
-
-    def transmitData(self, data_val):
-        self.debug(True, "transmitData", self.baseObject().objectName())
-        if self.baseObject().objectName() == "GoBaseObject":
-            self.transmitQueue().enQueue(data_val)
-            self.debug(True, "transmitData", data_val)
-            return
-        self.clusterObject().enqueueTransmitData(data_val)
-        self.clusterObject().processTransmitData()
+        self.debug(False, "transmitData", data)
+        self.transmitQueue().enQueue(data)
 
     def dequeueTransmitData(self):
         data = self.transmitQueue().deQueue()
-        self.debug(True, "dequeueTransmitData", data)
+        self.debug(False, "dequeueTransmitData", data)
         return data
 
     def receiveStringData(self, str_val):
