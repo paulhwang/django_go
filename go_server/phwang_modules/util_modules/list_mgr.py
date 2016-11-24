@@ -51,9 +51,9 @@ class ListMgrClass(object):
         self.incrementGlobalId()
         return self.globalId()
 
-    def insertBaseToList(self, link_val):
+    def insertEntryToList(self, link_val):
         if not link_val:
-            self.abend("insertBaseToList", "null link_val")
+            self.abend("insertEntryToList", "null link_val")
             return
 
         self.abendIt()
@@ -71,12 +71,12 @@ class ListMgrClass(object):
             self.setTail(link_val)
         self.abendIt()
 
-    def deleteBaseFromList(self, link_val):
+    def deleteEntryFromList(self, link_val):
         if self.size() <= 0:
-            self.abend("deleteBaseFromList", "size=%i", self.size())
+            self.abend("deleteEntryFromList", "size=%i", self.size())
             return
         if not self.linkExistInTheList(link_val):
-            self.abend("deleteBaseFromList", "linkExistInTheList is false")
+            self.abend("deleteEntryFromList", "linkExistInTheList is false")
             return
 
         self.abendIt()
@@ -100,11 +100,11 @@ class ListMgrClass(object):
             link = link.next()
         return None
 
-    def searchBaseByBaseId(self, base_id_val):
-        self.debug(False, "searchBaseByBaseId id=%i", base_id_val)
+    def searchEntryById(self, base_id_val):
+        self.debug(False, "searchEntryById id=%i", base_id_val)
         base = self.head()
         while base:
-            if (base.baseId() == base_id_val):
+            if (base.entryId() == base_id_val):
                 return base
             base = base.next()
         return None

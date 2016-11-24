@@ -63,6 +63,9 @@ class GoBaseObject(object):
     def baseId(self):
         return self.theBaseId
 
+    def entryId(self):
+        return self.baseId()
+
     def prev(self):
         return self.thePrev
 
