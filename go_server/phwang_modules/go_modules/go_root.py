@@ -12,14 +12,14 @@ def transmit_data(base_id_val):
 
 class GoRootClass(object):
     def __init__(self):
-        self.theGoBaseMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
+        self.theBaseMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "GoRootClass"
 
-    def goBaseMgrObject(self):
-        return self.theGoBaseMgrObject
+    def baseMgrObject(self):
+        return self.theBaseMgrObject
 
     def mallocQueue(self):
         return go_server.phwang_modules.util_modules.queue.malloc(self)
@@ -28,13 +28,20 @@ class GoRootClass(object):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
     def mallocBase(self):
-        return self.goBaseMgrObject().mallocBase();
+        return self.baseMgrObject().mallocBase();
 
     def receiveData(self, base_id_val, data_val):
-        self.goBaseMgrObject().receiveData(base_id_val, data_val)
+        self.debug(False, "receiveData", "data=%s", data_val)
+        base = self.baseMgrObject().searchBaseByBaseId(base_id_val)
+        if not base:
+            return
+        base.portObject().receiveStringData(data_val)
 
     def transmitData(self, base_id_val):
-        return self.goBaseMgrObject().transmitData(base_id_val)
+        base = self.baseMgrObject().searchBaseByBaseId(base_id_val)
+        if not base:
+            return None
+        return base.portObject().dequeueTransmitData()
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
