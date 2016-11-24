@@ -1,11 +1,10 @@
 import go_server.phwang_modules.util_modules.logit
 
-def malloc(go_root_object_val):
-    return BaseMgrClass(go_root_object_val)
+def malloc():
+    return BaseMgrClass()
 
 class BaseMgrClass(object):
-    def __init__(self, go_root_object_val):
-        self.theRootObject = go_root_object_val
+    def __init__(self):
         self.theGlobalBaseId = 123
         self.theHead = None
         self.theTail = None
@@ -14,12 +13,6 @@ class BaseMgrClass(object):
 
     def objectName(self):
         return "BaseMgrClass"
-
-    def rootObject(self):
-        return self.theRootObject
-
-    def utilObject(self):
-        return self.rootObject().utilObject()
 
     def globalBaseId(self):
         return self.theGlobalBaseId

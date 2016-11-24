@@ -13,7 +13,7 @@ def transmit_data(base_id_val):
 
 class GoRootClass(object):
     def __init__(self):
-        self.theBaseMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc(self)
+        self.theBaseMgrObject = go_server.phwang_modules.go_modules.go_base_mgr.malloc()
         self.debug(True, "init__", "")
 
     def objectName(self):
