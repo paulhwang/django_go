@@ -5,7 +5,7 @@ def malloc():
 
 class ListMgrClass(object):
     def __init__(self):
-        self.theGlobalBaseId = 123
+        self.theGlobalId = 100
         self.theHead = None
         self.theTail = None
         self.theSize = 0
@@ -40,6 +40,16 @@ class ListMgrClass(object):
 
     def decrementSize(self):
         self.theSize -= 1
+
+    def globalId(self):
+        return self.theGlobalId
+
+    def incrementGlobalId(self):
+        self.theGlobalId += 1
+
+    def allocId(self):
+        self.incrementGlobalId()
+        return self.globalId()
 
     def insertBaseToList(self, link_val):
         if not link_val:
