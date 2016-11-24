@@ -1,5 +1,6 @@
 import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.go_modules.go_base_mgr
+import go_server.phwang_modules.go_modules.go_base
 
 def malloc_base():
     return the_go_root_object.mallocBase()

@@ -1,9 +1,7 @@
-import go_server.phwang_modules.go_modules.go_base
-
 def malloc(go_root_object_val):
-    return GoBaseMgrClass(go_root_object_val)
+    return BaseMgrClass(go_root_object_val)
 
-class GoBaseMgrClass(object):
+class BaseMgrClass(object):
     def __init__(self, go_root_object_val):
         self.theRootObject = go_root_object_val
         self.theGlobalBaseId = 123
@@ -12,11 +10,8 @@ class GoBaseMgrClass(object):
         self.theSize = 0
         self.debug(True, "init__", "")
 
-    def linkModuleMalloc(self, my_name_val, link_id_val):
-        return malloc_link(self, my_name_val, link_id_val)
-
     def objectName(self):
-        return "GoBaseMgrClass"
+        return "BaseMgrClass"
 
     def rootObject(self):
         return self.theRootObject
@@ -50,9 +45,6 @@ class GoBaseMgrClass(object):
 
     def decrementSize(self):
         self.theSize -= 1
-
-    def freeLink(self, link_val):
-        self.deleteLinkFromList(link_val)
 
     def insertBaseToList(self, link_val):
         if not link_val:
