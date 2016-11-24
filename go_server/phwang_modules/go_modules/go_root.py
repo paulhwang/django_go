@@ -29,7 +29,7 @@ class GoRootClass(object):
 
     def mallocBase(self):
         #base = require("../go_modules/go_base.js").malloc(self, self.baseMgrObject().globalBaseId());
-        base = go_server.phwang_modules.go_modules.go_base.malloc(self.baseMgrObject(), self.baseMgrObject().globalBaseId())
+        base = go_server.phwang_modules.go_modules.go_base.malloc(self, self.baseMgrObject().globalBaseId())
         self.baseMgrObject().incrementGlobalBaseId()
         self.baseMgrObject().insertBaseToList(base)
         self.debug(True, "mallocBase", "base_id=%d", base.baseId())
