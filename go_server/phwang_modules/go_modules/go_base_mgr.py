@@ -57,23 +57,12 @@ class GoBaseMgrClass(object):
         self.insertLinkToList(base)
         return base.baseId()
 
-    def receiveData(self, base_id_val, data_val):
-        self.debug(True, "receiveData", "data=%s", data_val);
-        base = self.searchBaseByBaseId(base_id_val)
-        base.portObject().receiveStringData(data_val)
-
-    def transmitData(self, base_id_val):
-        base = self.searchBaseByBaseId(base_id_val)
-        if not base:
-            return None
-        return base.portObject().dequeueTransmitData();
-
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)
 
-    def insertLinkToList(self, link_val):
+    def insertBaseToList(self, link_val):
         if not link_val:
-            self.abend("enQueue", "null link_val")
+            self.abend("insertBaseToList", "null link_val")
             return
 
         self.abendIt()
@@ -91,12 +80,12 @@ class GoBaseMgrClass(object):
             self.setTail(link_val)
         self.abendIt()
 
-    def deleteLinkFromList(self, link_val):
+    def deleteBaseFromList(self, link_val):
         if self.size() <= 0:
-            self.abend("deleteLinkFromList", "size=%i", self.size())
+            self.abend("deleteBaseFromList", "size=%i", self.size())
             return
         if not self.linkExistInTheList(link_val):
-            self.abend("deleteLinkFromList", "linkExistInTheList is false")
+            self.abend("deleteBaseFromList", "linkExistInTheList is false")
             return
 
         self.abendIt()

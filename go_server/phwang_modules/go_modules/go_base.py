@@ -5,8 +5,8 @@ import go_server.phwang_modules.go_modules.go_game
 import go_server.phwang_modules.go_modules.go_port
 import go_server.phwang_modules.go_modules.go_move
 
-def malloc(base_mgr_object_val):
-    return GoBaseObject(base_mgr_object_val)
+def malloc(base_mgr_object_val, base_id_val):
+    return GoBaseObject(base_mgr_object_val, base_id_val)
 
 def malloc_config(go_val):
     return go_server.phwang_modules.go_modules.go_config.malloc(go_val)
@@ -27,9 +27,9 @@ def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
     return go_server.phwang_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoBaseObject(object):
-    def __init__(self, base_mgr_object_val):
+    def __init__(self, base_mgr_object_val, base_id_val):
         self.theBaseMgrObject = base_mgr_object_val;
-        self.theBaseId = self.baseMgrObject().globalBaseId()
+        self.theBaseId = base_id_val
         self.theConfigObject = malloc_config(self)
         self.theBoardObject = malloc_board(self)
         self.theEngineObject = malloc_engine(self)

@@ -28,7 +28,12 @@ class GoRootClass(object):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
     def mallocBase(self):
-        return self.baseMgrObject().mallocBase();
+        #base = require("../go_modules/go_base.js").malloc(self, self.baseMgrObject().globalBaseId());
+        base = go_server.phwang_modules.go_modules.go_base.malloc(self.baseMgrObject(), self.baseMgrObject().globalBaseId())
+        self.baseMgrObject().incrementGlobalBaseId()
+        self.baseMgrObject().insertBaseToList(base)
+        self.debug(True, "mallocBase", "base_id=%d", base.baseId())
+        return base.baseId()
 
     def receiveData(self, base_id_val, data_val):
         self.debug(False, "receiveData", "data=%s", data_val)
