@@ -1,4 +1,4 @@
-import go_server.phwang_modules.go_modules.go_base1
+import go_server.phwang_modules.go_modules.go_base
 
 def malloc(go_root_object_val):
     return GoBaseMgrClass(go_root_object_val)
@@ -52,7 +52,7 @@ class GoBaseMgrClass(object):
         self.theSize -= 1
 
     def mallocBase(self):
-        base = go_server.phwang_modules.go_modules.go_base1.malloc(self)
+        base = go_server.phwang_modules.go_modules.go_base.malloc(self)
         self.incrementGlobalBaseId()
         self.insertLinkToList(base)
         return base.baseId()
