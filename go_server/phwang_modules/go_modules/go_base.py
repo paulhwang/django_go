@@ -1,40 +1,15 @@
-import go_server.phwang_modules.go_modules.go_config
-import go_server.phwang_modules.go_modules.go_board
-import go_server.phwang_modules.go_modules.go_engine
-import go_server.phwang_modules.go_modules.go_game
-import go_server.phwang_modules.go_modules.go_port
-import go_server.phwang_modules.go_modules.go_move
-
 def malloc(root_object_val, base_id_val):
     return GoBaseObject(root_object_val, base_id_val)
-
-def malloc_config(go_val):
-    return go_server.phwang_modules.go_modules.go_config.malloc(go_val)
-
-def malloc_board(go_val):
-    return go_server.phwang_modules.go_modules.go_board.malloc(go_val)
-
-def malloc_engine(go_val):
-    return go_server.phwang_modules.go_modules.go_engine.malloc(go_val)
-
-def malloc_game(go_val):
-    return go_server.phwang_modules.go_modules.go_game.malloc(go_val)
-
-def malloc_port(go_val):
-    return go_server.phwang_modules.go_modules.go_port.malloc(go_val)
-
-def malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val):
-    return go_server.phwang_modules.go_modules.go_move.malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
 class GoBaseObject(object):
     def __init__(self, root_object_val, base_id_val):
         self.theRootObject = root_object_val;
         self.theBaseId = base_id_val
-        self.theConfigObject = malloc_config(self)
-        self.theBoardObject = malloc_board(self)
-        self.theEngineObject = malloc_engine(self)
-        self.theGameObject = malloc_game(self)
-        self.thePortObject = malloc_port(self)
+        self.theConfigObject = self.rootObject().importObject().importConfig().malloc(self)
+        self.theBoardObject = self.rootObject().importObject().importBoard().malloc(self)
+        self.theEngineObject = self.rootObject().importObject().importEngine().malloc(self)
+        self.theGameObject = self.rootObject().importObject().importGame().malloc(self)
+        self.thePortObject = self.rootObject().importObject().importPort().malloc(self)
         self.thePrev = None
         self.theNext = None
         self.debug(True, "init__", "")
@@ -104,7 +79,7 @@ class GoBaseObject(object):
         return (0 <= coordinate_val) and (coordinate_val < board_size_val)
 
     def mallocMove(self, str_val, x_val, y_val, color_val, turn_val, go_val):
-        return malloc_move(str_val, x_val, y_val, color_val, turn_val, go_val)
+        return self.rootObject().importObject().importMove().malloc(str_val, x_val, y_val, color_val, turn_val, go_val)
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:

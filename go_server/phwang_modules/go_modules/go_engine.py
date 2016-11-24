@@ -1,10 +1,5 @@
-import go_server.phwang_modules.go_modules.go_group_list
-
 def malloc(base_object_val):
     return GoEngineClass(base_object_val)
-
-def malloc_group_list(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val):
-    return go_server.phwang_modules.go_modules.go_group_list.malloc(engine_val, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
 class GoEngineClass(object):
     def debugEngine(self):
@@ -17,8 +12,8 @@ class GoEngineClass(object):
 
     def resetEngineObjectData(self):
         self.theGroupListArray = [None] * 7
-        self.theGroupListArray[1] = malloc_group_list(self, 1, self.baseObject().BLACK_STONE(), 0, 0, 0)
-        self.theGroupListArray[2] = malloc_group_list(self, 2, self.baseObject().WHITE_STONE(), 0, 0, 0)
+        self.theGroupListArray[1] = self.malloc_group_list(1, self.baseObject().BLACK_STONE(), 0, 0, 0)
+        self.theGroupListArray[2] = self.malloc_group_list(2, self.baseObject().WHITE_STONE(), 0, 0, 0)
         self.resetMarkedGroupLists()
         self.resetEmptyGroupLists()
 
@@ -28,23 +23,26 @@ class GoEngineClass(object):
         self.theWhiteCaptureStones = 0
 
     def resetMarkedGroupLists(self):
-        self.theGroupListArray[3] = malloc_group_list(self, 3, self.baseObject().BLACK_STONE(), 1, "black", "gray")
-        self.theGroupListArray[4] = malloc_group_list(self, 4, self.baseObject().WHITE_STONE(), 1, "white", "gray")
+        self.theGroupListArray[3] = self.malloc_group_list(3, self.baseObject().BLACK_STONE(), 1, "black", "gray")
+        self.theGroupListArray[4] = self.malloc_group_list(4, self.baseObject().WHITE_STONE(), 1, "white", "gray")
         self.boardObject().resetMarkedBoardObjectData()
 
     def resetEmptyGroupLists(self):
-        self.theGroupListArray[0] = malloc_group_list(self, 0, self.baseObject().EMPTY_STONE(), 0, 0, 0)
-        self.theGroupListArray[5] = malloc_group_list(self, 5, self.baseObject().EMPTY_STONE(), 0, 0, "black")
-        self.theGroupListArray[6] = malloc_group_list(self, 6, self.baseObject().EMPTY_STONE(), 0, 0, "white")
+        self.theGroupListArray[0] = self.malloc_group_list(0, self.baseObject().EMPTY_STONE(), 0, 0, 0)
+        self.theGroupListArray[5] = self.malloc_group_list(5, self.baseObject().EMPTY_STONE(), 0, 0, "black")
+        self.theGroupListArray[6] = self.malloc_group_list(6, self.baseObject().EMPTY_STONE(), 0, 0, "white")
 
-    def malloc_group_list(self):
-        return go_server.go_folder.go_group_lsit.malloc(self)
+    def malloc_group_list(self, index_val, color_val, dead_val, big_stone_val, small_stone_val):
+        return self.rootObject().importObject().importGroupList().malloc(self, index_val, color_val, dead_val, big_stone_val, small_stone_val)
 
     def objectName(self):
         return "GoEngineClass"
 
     def baseObject(self):
         return self.theBaseObject
+
+    def rootObject(self):
+        return self.baseObject().rootObject()
 
     def boardObject(self):
         return self.baseObject().boardObject()

@@ -1,6 +1,16 @@
 import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.util_modules.list_mgr
+import go_server.phwang_modules.util_modules.queue
+import go_server.phwang_modules.util_modules.ring
 import go_server.phwang_modules.go_modules.go_base
+import go_server.phwang_modules.go_modules.go_config
+import go_server.phwang_modules.go_modules.go_board
+import go_server.phwang_modules.go_modules.go_engine
+import go_server.phwang_modules.go_modules.go_game
+import go_server.phwang_modules.go_modules.go_port
+import go_server.phwang_modules.go_modules.go_move
+import go_server.phwang_modules.go_modules.go_group_list
+import go_server.phwang_modules.go_modules.go_group
 
 def malloc(root_object_val):
     return ImportObject(root_object_val)
@@ -16,28 +26,28 @@ class ImportObject (object):
         return go_server.phwang_modules.go_modules.go_base
 
     def importConfig(self):
-        return require("./go_config.js");
+        return go_server.phwang_modules.go_modules.go_config
 
     def importMove(self):
-        return require("./go_move.js");
+        return go_server.phwang_modules.go_modules.go_move
 
     def importBoard(self):
-        return require("./go_board.js");
+        return go_server.phwang_modules.go_modules.go_board
 
     def importGame(self):
-        return require("./go_game.js");
+        return go_server.phwang_modules.go_modules.go_game
 
     def importPort(self):
-        return require("./go_port.js");
+        return go_server.phwang_modules.go_modules.go_port
 
     def importEngine(self):
-        return require("./go_engine.js");
+        return go_server.phwang_modules.go_modules.go_engine
 
     def importGroup(self):
-        return require("./go_group.js");
+        return go_server.phwang_modules.go_modules.go_group
 
     def importGroupList(self):
-        return require("./go_group_list.js");
+        return go_server.phwang_modules.go_modules.go_group_list
 
     def importListMgr(self):
         return go_server.phwang_modules.util_modules.list_mgr
@@ -46,7 +56,7 @@ class ImportObject (object):
         return go_server.phwang_modules.util_modules.logit
 
     def mallocQueue(self):
-        return require("../util_modules/queue.js").malloc(self.rootObject());
+        return go_server.phwang_modules.util_modules.queue.malloc(self.rootObject())
 
     def mallocRing(self):
-        return require("../util_modules/ring.js").malloc(self.rootObject());
+        return go_server.phwang_modules.util_modules.ring.malloc(self.rootObject())
