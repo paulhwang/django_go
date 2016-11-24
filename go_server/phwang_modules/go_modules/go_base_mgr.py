@@ -51,12 +51,6 @@ class GoBaseMgrClass(object):
     def decrementSize(self):
         self.theSize -= 1
 
-    def mallocBase(self):
-        base = go_server.phwang_modules.go_modules.go_base.malloc(self)
-        self.incrementGlobalBaseId()
-        self.insertLinkToList(base)
-        return base.baseId()
-
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)
 
