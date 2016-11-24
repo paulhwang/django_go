@@ -1,6 +1,7 @@
 import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.util_modules.list_mgr
 import go_server.phwang_modules.go_modules.go_base
+import go_server.phwang_modules.go_modules.go_import
 
 def malloc_base():
     return the_go_root_object.mallocBase()
@@ -13,11 +14,15 @@ def transmit_data(base_id_val):
 
 class GoRootClass(object):
     def __init__(self):
-        self.theBaseMgrObject = go_server.phwang_modules.util_modules.list_mgr.malloc()
+        self.theImportObject = go_server.phwang_modules.go_modules.go_import.malloc(self)
+        self.theBaseMgrObject = self.importObject().importListMgr().malloc()
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "GoRootClass"
+
+    def importObject(self):
+        return self.theImportObject
 
     def baseMgrObject(self):
         return self.theBaseMgrObject
@@ -30,7 +35,7 @@ class GoRootClass(object):
 
     def mallocBase(self):
         base_id = self.baseMgrObject().allocId()
-        base = go_server.phwang_modules.go_modules.go_base.malloc(self, base_id)
+        base = self.importObject().importBase().malloc(self, base_id)
         self.baseMgrObject().insertEntryToList(base)
         self.debug(True, "mallocBase", "base_id=%d", base_id)
         return base_id
@@ -59,10 +64,10 @@ class GoRootClass(object):
         self.ABEND(self.objectName() + "." + str1 + "() ", str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def LOG_IT(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.phwang_modules.util_modules.logit.utilLogit(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.importObject().importLogit().utilLogit(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
     def ABEND(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-        go_server.phwang_modules.util_modules.logit.utilAbend(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+        self.importObject().importLogit().utilAbend(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
 
 the_go_root_object = GoRootClass()
 
