@@ -5,7 +5,6 @@ def malloc(base_object_val):
 
 class GoPortClass(object):
     def __init__(self, base_object_val):
-        self.theBaseObject = base_object_val;
         self.GO_PROTOCOL_CODE_SIZE = 7;
         self.GO_PROTOCOL_CODE_PROPOSE = "Propose";
         self.GO_PROTOCOL_CODE_ACCEPT = "Accept ";
@@ -13,6 +12,8 @@ class GoPortClass(object):
         self.GO_PROTOCOL_CODE_MOVE_DATA = "Move   ";
         self.GO_PROTOCOL_CODE_SPECIAL_MOVE = "Special";
         self.GO_PROTOCOL_CODE_BOARD_DATA = "Board  ";
+        self.theBaseObject = base_object_val;
+        self.theTransmitQueue = self.rootObject().mallocQueue()
         self.debug(False, "init__", "")
 
     def objectName(self):
@@ -20,6 +21,9 @@ class GoPortClass(object):
 
     def baseObject(self):
         return self.theBaseObject
+
+    def rootObject(self):
+        return self.baseObject().rootObject()
 
     def clusterObject(self):
         return self.baseObject().clusterObject()
@@ -32,6 +36,9 @@ class GoPortClass(object):
 
     def boardObject(self):
         return self.baseObject().boardObject()
+
+    def transmitQueue(self):
+        return self.theTransmitQueue
 
     def thansmitBoardData(self):
         board_data = self.GO_PROTOCOL_CODE_BOARD_DATA + self.boardObject().encodeBoard();
@@ -50,6 +57,7 @@ class GoPortClass(object):
 
     def transmitData(self, data_val):
         if self.baseObject().objectName() == "GoBaseObject":
+            self.transmitQueue().enQueue(data_val)
             return
         self.clusterObject().enqueueTransmitData(data_val)
         self.clusterObject().processTransmitData()

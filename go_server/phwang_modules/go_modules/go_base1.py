@@ -45,6 +45,9 @@ class GoBaseObject(object):
     def baseMgrObject(self):
         return self.theBaseMgrObject
 
+    def rootObject(self):
+        return self.baseMgrObject().goRootObject()
+
     def goRootObject(self):
         return self.baseMgrObject().goRootObject()
 
