@@ -56,11 +56,18 @@ class GoPortClass(object):
         self.transmitData(json_data);
 
     def transmitData(self, data_val):
+        self.debug(True, "transmitData", self.baseObject().objectName())
         if self.baseObject().objectName() == "GoBaseObject":
             self.transmitQueue().enQueue(data_val)
+            self.debug(True, "transmitData", data_val)
             return
         self.clusterObject().enqueueTransmitData(data_val)
         self.clusterObject().processTransmitData()
+
+    def dequeueTransmitData(self):
+        data = self.transmitQueue().deQueue()
+        self.debug(True, "dequeueTransmitData", data)
+        return data
 
     def receiveStringData(self, str_val):
         self.debug(False, "receiveStringData", str_val)

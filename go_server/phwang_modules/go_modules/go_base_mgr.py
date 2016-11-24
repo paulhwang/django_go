@@ -66,7 +66,7 @@ class GoBaseMgrClass(object):
         base = self.searchBaseByBaseId(base_id_val)
         if not base:
             return None
-        return base.baseId()
+        return base.portObject().dequeueTransmitData();
 
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)

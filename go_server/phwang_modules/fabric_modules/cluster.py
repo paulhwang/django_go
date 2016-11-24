@@ -110,6 +110,7 @@ class ClusterClass(object):
         return data
 
     def processTransmitData(self):
+        return;
         while True:
             data = self.dequeueTransmitData()
             if not data:
@@ -138,11 +139,15 @@ class ClusterClass(object):
         self.processReceiveData()
 
     def receiveData(self, data_val):
-        self.topicObject().portObject().receiveStringData(data_val)
+        #self.topicObject().portObject().receiveStringData(data_val)
 
         self.rootObject().topicReceiveData(self.topicBaseId(), data_val)
         data = self.rootObject().topicTransmitData(self.topicBaseId())
         self.debug(True, "receiveData", "data=%s", data)
+        i = 0
+        while i < self.sessionArrayLength():
+            self.sessionArray(i).enqueueTransmitData(data)
+            i += 1
 
     def debug(self, bool_val, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         if bool_val:
