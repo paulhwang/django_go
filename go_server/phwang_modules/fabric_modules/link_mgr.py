@@ -3,9 +3,6 @@ import go_server.phwang_modules.fabric_modules.link
 def malloc(root_object_val):
     return LinkMgrClass(root_object_val)
 
-def malloc_link(link_mgr_val, my_name_val, link_id_val):
-    return go_server.phwang_modules.fabric_modules.link.malloc(link_mgr_val, my_name_val, link_id_val)
-
 class LinkMgrClass(object):
     def __init__(self, root_object_val):
         self.theRootObject = root_object_val
@@ -14,9 +11,6 @@ class LinkMgrClass(object):
         self.theTail = None
         self.theSize = 0
         self.debug(True, "init__", "")
-
-    def linkModuleMalloc(self, my_name_val, link_id_val):
-        return malloc_link(self, my_name_val, link_id_val)
 
     def objectName(self):
         return "LinkMgrClass"
