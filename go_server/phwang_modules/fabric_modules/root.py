@@ -13,10 +13,10 @@ def process_ajax_input(request_val):
 class RootClass(object):
     def __init__(self):
         self.theImportObject = go_server.phwang_modules.fabric_modules.imports.malloc(self)
-        self.theLinkMgrObject = go_server.phwang_modules.fabric_modules.link_mgr.malloc(self)
-        self.theClusterMgrObject = go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(self)
-        self.theSwitchObject = go_server.phwang_modules.fabric_modules.switch.malloc(self)
-        self.theAjaxObject = go_server.phwang_modules.fabric_modules.ajax.malloc(self)
+        self.theLinkMgrObject = self.importObject().importLinkMgr().malloc(self)
+        self.theClusterMgrObject = self.importObject().importClusterMgr().malloc(self)
+        self.theSwitchObject = self.importObject().importSwitch().malloc(self)
+        self.theAjaxObject = self.importObject().importAjax().malloc(self)
         self.debug(True, "init__", "")
 
     def objectName(self):

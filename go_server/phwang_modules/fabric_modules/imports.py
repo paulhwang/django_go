@@ -2,6 +2,11 @@ import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.util_modules.list_mgr
 import go_server.phwang_modules.util_modules.queue
 import go_server.phwang_modules.util_modules.ring
+import go_server.phwang_modules.fabric_modules.link_mgr
+import go_server.phwang_modules.fabric_modules.cluster_mgr
+import go_server.phwang_modules.fabric_modules.switch
+import go_server.phwang_modules.fabric_modules.ajax
+import go_server.phwang_modules.fabric_modules.imports
 
 def malloc(root_object_val):
     return ImportObject(root_object_val)
@@ -13,8 +18,17 @@ class ImportObject (object):
     def rootObject(self):
         return self.theRootObject
 
-    def importListMgr(self):
-        return go_server.phwang_modules.util_modules.list_mgr
+    def importSwitch(self):
+        return go_server.phwang_modules.fabric_modules.switch
+
+    def importAjax(self):
+        return go_server.phwang_modules.fabric_modules.ajax
+
+    def importLinkMgr(self):
+        return go_server.phwang_modules.fabric_modules.link_mgr
+
+    def importClusterMgr(self):
+        return go_server.phwang_modules.fabric_modules.cluster_mgr
 
     def importLogit(self):
         return go_server.phwang_modules.util_modules.logit
