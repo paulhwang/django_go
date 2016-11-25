@@ -5,15 +5,12 @@ class GoBaseObject(object):
     def __init__(self, root_object_val, base_id_val):
         self.theRootObject = root_object_val;
         self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(base_id_val)
-        self.theBaseId = base_id_val
         self.theConfigObject = self.rootObject().importObject().importConfig().malloc(self)
         self.theBoardObject = self.rootObject().importObject().importBoard().malloc(self)
         self.theEngineObject = self.rootObject().importObject().importEngine().malloc(self)
         self.theGameObject = self.rootObject().importObject().importGame().malloc(self)
         self.thePortObject = self.rootObject().importObject().importPort().malloc(self)
-        self.thePrev = None
-        self.theNext = None
-        self.debug(True, "init__", "")
+        self.debug(True, "init__", "baseId=%d", self.baseId())
 
     def objectName(self):
         return "GoBaseObject"
@@ -40,10 +37,7 @@ class GoBaseObject(object):
         return self.thePortObject
 
     def baseId(self):
-        return self.theBaseId
-
-    def entryId(self):
-        return self.baseId()
+        return self.jointObject().entryId()
 
     def getOppositeColor(self, color_val):
         if color_val == self.BLACK_STONE():

@@ -119,7 +119,7 @@ class ListMgrClass(object):
         self.debug(False, "searchId",  "id=%i", id_val)
         entry = self.head()
         while entry:
-            if (entry.entryId() == id_val):
+            if (entry.jointObject().entryId() == id_val):
                 return entry
             entry = entry.next()
         return None
