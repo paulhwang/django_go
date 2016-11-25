@@ -1,34 +1,14 @@
 import go_server.phwang_modules.util_modules.logit
 
+def malloc_mgr(host_object_val, global_id_val):
+    return ListMgrClass(host_object_val, global_id_val)
+
 def malloc_joint(entry_id_val):
     return ListjointClass(entry_id_val)
 
-def malloc_mgr(global_id_val):
-    return ListMgrClass(global_id_val)
-
-class ListjointClass(object):
-    def __init__(self, entry_id_val):
-        self.theEntryId = entry_id_val
-        self.thePrev = None
-        self.theNext = None
-
-    def entryId(self):
-        return self.theEntryId
-
-    def prev(self):
-        return self.thePrev
-
-    def setPrev(self, val):
-        self.thePrev = val
-
-    def next(self):
-        return self.theNext
-
-    def setNext(self, val):
-        self.theNext = val
-
 class ListMgrClass(object):
-    def __init__(self, global_id_val):
+    def __init__(self, host_object_val, global_id_val):
+        self.theHostObject = host_object_val;
         self.theGlobalId = global_id_val
         self.theHead = None
         self.theTail = None
@@ -37,6 +17,9 @@ class ListMgrClass(object):
 
     def objectName(self):
         return "ListMgrClass"
+
+    def hostObject(self):
+        return self.host_object_val
 
     def globalId(self):
         return self.theGlobalId
@@ -196,3 +179,24 @@ class ListMgrClass(object):
 
     def ABEND(self, str1, str2, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
         go_server.phwang_modules.util_modules.logit.utilAbend(str1 + str2, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+
+class ListjointClass(object):
+    def __init__(self, entry_id_val):
+        self.theEntryId = entry_id_val
+        self.thePrev = None
+        self.theNext = None
+
+    def entryId(self):
+        return self.theEntryId
+
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
