@@ -19,14 +19,11 @@ class SessionMgrClass(object):
     def linkObject(self):
         return self.theLinkObject
 
-    def linkMgrObject(self):
-        return self.linkObject().linkMgrObject()
-
     def fabricObject(self):
         return self.rootObject().fabricObject()
 
     def rootObject(self):
-        return self.linkMgrObject().rootObject()
+        return self.linkObject().rootObject()
 
     def clusterMgrObject(self):
         return self.fabricObject().clusterMgrObject()

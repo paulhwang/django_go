@@ -1,12 +1,12 @@
 import threading
 import json
 
-def malloc(link_mgr_val, my_name_val, link_id_val):
-    return LinkClass(link_mgr_val, my_name_val, link_id_val)
+def malloc(root_object_val, my_name_val, link_id_val):
+    return LinkClass(root_object_val, my_name_val, link_id_val)
 
 class LinkClass(object):
-    def __init__(self, link_mgr_val, my_name_val, link_id_val):
-        self.theLinkMgrObject = link_mgr_val;
+    def __init__(self, root_object_val, my_name_val, link_id_val):
+        self.theRootObject = root_object_val;
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
         self.theKeepAliveTimer = None
@@ -26,11 +26,8 @@ class LinkClass(object):
     def objectName(self):
         return "LinkClass"
 
-    def linkMgrObject(self):
-        return self.theLinkMgrObject
-
     def rootObject(self):
-        return self.linkMgrObject().rootObject()
+        return self.theRootObject
 
     def sessionMgrObject(self):
         return self.theSessionMgrObject
