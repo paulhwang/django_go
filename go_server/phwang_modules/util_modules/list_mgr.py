@@ -1,7 +1,31 @@
 import go_server.phwang_modules.util_modules.logit
 
+def malloc_joine(entry_id_val):
+    return ListMgrClass(entry_id_val)
+
 def malloc_mgr(global_id_val):
     return ListMgrClass(global_id_val)
+
+class ListjointClass(object):
+    def __init__(self, entry_id_val):
+        self.theEntryId = entry_id_val
+        self.thePrev = None
+        self.theNext = None
+
+    def entryId(self):
+        return self.theEntryId
+
+    def prev(self):
+        return self.thePrev
+
+    def setPrev(self, val):
+        self.thePrev = val
+
+    def next(self):
+        return self.theNext
+
+    def setNext(self, val):
+        self.theNext = val
 
 class ListMgrClass(object):
     def __init__(self, global_id_val):
