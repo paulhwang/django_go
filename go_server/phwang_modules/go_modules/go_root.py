@@ -1,6 +1,3 @@
-import go_server.phwang_modules.util_modules.logit
-import go_server.phwang_modules.util_modules.list_mgr
-import go_server.phwang_modules.go_modules.go_base
 import go_server.phwang_modules.go_modules.go_import
 
 def malloc_base():
