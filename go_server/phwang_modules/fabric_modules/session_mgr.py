@@ -123,20 +123,6 @@ class SessionMgrClass(object):
             session = session.next()
         return False
 
-    def getPendingSessionData(self):
-        data = []
-        i = 0
-        session = self.head()
-        while session:
-            if session.transmitQueue().size() > 0:
-                data.append(session.sessionId())
-                i += 1
-            session = session.next();
-        if i == 0:
-            return None
-        else:
-            return data
-
     def abendIt(self):
         i = 0;
         session = self.head()

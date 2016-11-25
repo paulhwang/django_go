@@ -106,7 +106,18 @@ class LinkClass(object):
         return self.sessionMgrObject().mallocSession()
 
     def getPendingSessionData(self):
-        return self.sessionMgrObject().getPendingSessionData()
+        data = []
+        i = 0
+        session = self.sessionMgrObject().head()
+        while session:
+            if session.transmitQueue().size() > 0:
+                data.append(session.sessionId())
+                i += 1
+            session = session.next();
+        if i == 0:
+            return None
+        else:
+            return data
 
     def getPendingSessionSetup(self):
         return self.pendingSessionSetupQueue().deQueue();
