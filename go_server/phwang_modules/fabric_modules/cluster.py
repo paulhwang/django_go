@@ -1,11 +1,11 @@
 import json
 
-def malloc(cluster_mgr_val, topic_data_val, session_val):
-    return ClusterClass(cluster_mgr_val, topic_data_val, session_val)
+def malloc(root_object_val, topic_data_val, session_val):
+    return ClusterClass(root_object_val, topic_data_val, session_val)
 
 class ClusterClass(object):
-    def __init__(self, cluster_mgr_val, topic_data_val, session_val):
-        self.theClusterMgrObject = cluster_mgr_val
+    def __init__(self, root_object_val, topic_data_val, session_val):
+        self.theRootObject = root_object_val
         session_val.setClusterObject(self)
         self.theSessionArray = [None] * 2
         self.theSessionArray[0] = session_val
@@ -24,14 +24,11 @@ class ClusterClass(object):
     def objectName(self):
         return "ClusterClass"
 
-    def clusterMgrObject(self):
-        return self.theClusterMgrObject
-
     def rootObject(self):
-        return self.clusterMgrObject().rootObject()
+        return self.theRootObject
 
     def utilObject(self):
-        return self.clusterMgrObject().utilObject()
+        return self.theRootObject().utilObject()
 
     def topicObject(self):
         return self.theTopicObject

@@ -9,7 +9,7 @@ class ClusterMgrClass(object):
         self.debug(True, "init__", "")
 
     def clusterModuleMalloc(self, topic_data_val, session_val):
-        return self.rootObject().importObject().importCluster().malloc(self, topic_data_val, session_val)
+        return self.rootObject().importObject().importCluster().malloc(self.rootObject(), topic_data_val, session_val)
 
     def objectName(self):
         return "ClusterMgrClass"
