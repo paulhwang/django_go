@@ -7,6 +7,7 @@ def malloc(root_object_val, my_name_val, link_id_val):
 class LinkClass(object):
     def __init__(self, root_object_val, my_name_val, link_id_val):
         self.theRootObject = root_object_val;
+        self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(link_id_val)
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
         self.theKeepAliveTimer = None
@@ -28,6 +29,9 @@ class LinkClass(object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def jointObject(self):
+        return self.theJointObject
 
     def sessionMgrObject(self):
         return self.theSessionMgrObject

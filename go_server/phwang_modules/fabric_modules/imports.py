@@ -46,6 +46,9 @@ class ImportObject (object):
     def importCluster(self):
         return go_server.phwang_modules.fabric_modules.cluster
 
+    def importListMgr(self):
+        return go_server.phwang_modules.util_modules.list_mgr
+
     def importLogit(self):
         return go_server.phwang_modules.util_modules.logit
 

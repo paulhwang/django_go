@@ -6,6 +6,7 @@ def malloc(root_object_val, topic_data_val, session_val):
 class ClusterClass(object):
     def __init__(self, root_object_val, topic_data_val, session_val):
         self.theRootObject = root_object_val
+        self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(999)
         session_val.setClusterObject(self)
         self.theSessionArray = [None] * 2
         self.theSessionArray[0] = session_val
@@ -26,6 +27,9 @@ class ClusterClass(object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def jointObject(self):
+        return self.theJointObject
 
     def utilObject(self):
         return self.theRootObject().utilObject()

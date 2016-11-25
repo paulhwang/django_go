@@ -4,6 +4,7 @@ def malloc(link_object_val, session_id_val):
 class SessionClass(object):
     def __init__(self, link_object_val, session_id_val):
         self.theLinkObject = link_object_val;
+        self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(session_id_val)
         self.resetIt(link_object_val, session_id_val)
         self.debug(True, "init__", "")
 
@@ -12,6 +13,10 @@ class SessionClass(object):
 
     def linkObject(self):
         return self.theLinkObject
+
+    def jointObject(self):
+        return self.theJointObject
+
     def clusterObject(self):
         return self.theClusterObject
 
