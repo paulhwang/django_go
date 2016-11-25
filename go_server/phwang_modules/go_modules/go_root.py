@@ -37,8 +37,8 @@ class GoRootClass(object):
         base_id = self.baseMgrObject().allocId()
         base = self.importObject().importBase().malloc(self, base_id)
         self.baseMgrObject().insertEntry(base)
-        self.debug(True, "mallocBase", "base_id=%d", base_id)
-        return base_id
+        self.debug(True, "mallocBase", "base_id=%d", base.baseId())
+        return base.baseId()
 
     def receiveData(self, base_id_val, data_val):
         self.debug(False, "receiveData", "data=%s", data_val)
