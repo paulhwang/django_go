@@ -11,7 +11,7 @@ class SessionMgrClass(object):
         self.debug(True, "init__", "")
 
     def sessionModuleMalloc(self, session_id_val):
-        return self.rootObject().importObject().importSession().malloc(self, session_id_val)
+        return self.rootObject().importObject().importSession().malloc(self.linkObject(), session_id_val)
 
     def objectName(self):
         return "SessionMgrClass"

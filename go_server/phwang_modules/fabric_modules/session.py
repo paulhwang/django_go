@@ -1,21 +1,17 @@
-def malloc(session_mgr_val, session_id_val):
-    return SessionClass(session_mgr_val, session_id_val)
+def malloc(link_object_val, session_id_val):
+    return SessionClass(link_object_val, session_id_val)
 
 class SessionClass(object):
-    def __init__(self, session_mgr_val, session_id_val):
-        self.theSessionMgrObject = session_mgr_val;
-        self.resetIt(session_mgr_val, session_id_val)
+    def __init__(self, link_object_val, session_id_val):
+        self.theLinkObject = link_object_val;
+        self.resetIt(link_object_val, session_id_val)
         self.debug(True, "init__", "")
 
     def objectName(self):
         return "SessionClass"
 
-    def sessionMgrObject(self):
-        return self.theSessionMgrObject
-
     def linkObject(self):
-        return self.sessionMgrObject().linkObject()
-
+        return self.theLinkObject
     def clusterObject(self):
         return self.theClusterObject
 
@@ -23,13 +19,13 @@ class SessionClass(object):
         self.theClusterObject = val
 
     def fabricObject(self):
-        return self.sessionMgrObject().fabricObject()
+        return self.linkObject().fabricObject()
 
     def rootObject(self):
-        return self.sessionMgrObject().rootObject()
+        return self.linkObject().rootObject()
 
     def utilObject(self):
-        return self.sessionMgrObject().utilObject()
+        return self.linkObject().utilObject()
 
     def sessionId(self):
         return self.theSessionId
@@ -76,8 +72,8 @@ class SessionClass(object):
     def setNext(self, val):
         self.theNext = val
 
-    def resetIt(self, session_mgr_val, session_id_val):
-        self.theSessionMgrObject = session_mgr_val
+    def resetIt(self, link_object_val, session_id_val):
+        self.theLinkObject = link_object_val
         self.theSessionId = session_id_val
         self.theHisSession = None
         self.up_seq = 0
