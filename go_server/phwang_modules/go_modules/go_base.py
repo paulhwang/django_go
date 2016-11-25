@@ -4,6 +4,7 @@ def malloc(root_object_val, base_id_val):
 class GoBaseObject(object):
     def __init__(self, root_object_val, base_id_val):
         self.theRootObject = root_object_val;
+        self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(base_id_val)
         self.theBaseId = base_id_val
         self.theConfigObject = self.rootObject().importObject().importConfig().malloc(self)
         self.theBoardObject = self.rootObject().importObject().importBoard().malloc(self)
@@ -19,6 +20,9 @@ class GoBaseObject(object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def jointObject(self):
+        return self.theJointObject
 
     def configObject(self):
         return self.theConfigObject

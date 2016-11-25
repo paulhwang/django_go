@@ -1,7 +1,7 @@
 import go_server.phwang_modules.util_modules.logit
 
-def malloc_joine(entry_id_val):
-    return ListMgrClass(entry_id_val)
+def malloc_joint(entry_id_val):
+    return ListjointClass(entry_id_val)
 
 def malloc_mgr(global_id_val):
     return ListMgrClass(global_id_val)
