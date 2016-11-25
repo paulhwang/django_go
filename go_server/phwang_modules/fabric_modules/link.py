@@ -1,19 +1,14 @@
 import threading
 import json
-import go_server.phwang_modules.fabric_modules.session_mgr
 
 def malloc(link_mgr_val, my_name_val, link_id_val):
     return LinkClass(link_mgr_val, my_name_val, link_id_val)
-
-def malloc_session_mgr(link_val):
-    return self.rootObject().importObject().importSession().malloc(link_val)
 
 class LinkClass(object):
     def __init__(self, link_mgr_val, my_name_val, link_id_val):
         self.theLinkMgrObject = link_mgr_val;
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
-
         self.theKeepAliveTimer = None
         self.thePrev = None
         self.theNext = None
