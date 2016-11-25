@@ -7,7 +7,6 @@ import go_server.phwang_modules.fabric_modules.link
 import go_server.phwang_modules.fabric_modules.cluster_mgr
 import go_server.phwang_modules.fabric_modules.cluster
 import go_server.phwang_modules.fabric_modules.switch
-import go_server.phwang_modules.fabric_modules.session_mgr
 import go_server.phwang_modules.fabric_modules.session
 import go_server.phwang_modules.fabric_modules.ajax
 import go_server.phwang_modules.fabric_modules.imports
@@ -33,9 +32,6 @@ class ImportObject (object):
 
     def importLink(self):
         return go_server.phwang_modules.fabric_modules.link
-
-    def importSessionMgr(self):
-        return go_server.phwang_modules.fabric_modules.session_mgr
 
     def importSession(self):
         return go_server.phwang_modules.fabric_modules.session
