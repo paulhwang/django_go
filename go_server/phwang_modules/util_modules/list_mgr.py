@@ -1,11 +1,11 @@
 import go_server.phwang_modules.util_modules.logit
 
-def malloc():
-    return ListMgrClass()
+def malloc_mgr(global_id_val):
+    return ListMgrClass(global_id_val)
 
 class ListMgrClass(object):
-    def __init__(self):
-        self.theGlobalId = 100
+    def __init__(self, global_id_val):
+        self.theGlobalId = global_id_val
         self.theHead = None
         self.theTail = None
         self.theSize = 0
@@ -14,11 +14,11 @@ class ListMgrClass(object):
     def objectName(self):
         return "ListMgrClass"
 
-    def globalBaseId(self):
-        return self.theGlobalBaseId
+    def globalId(self):
+        return self.theGlobalId
 
-    def incrementGlobalBaseId(self):
-        self.theGlobalBaseId += 1
+    def incrementGlobalId(self):
+        self.theGlobalId += 1
 
     def head(self):
         return self.theHead

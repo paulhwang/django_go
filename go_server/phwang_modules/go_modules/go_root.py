@@ -15,7 +15,7 @@ def transmit_data(base_id_val):
 class GoRootClass(object):
     def __init__(self):
         self.theImportObject = go_server.phwang_modules.go_modules.go_import.malloc(self)
-        self.theBaseMgrObject = self.importObject().importListMgr().malloc()
+        self.theBaseMgrObject = self.importObject().importListMgr().malloc_mgr(100)
         self.debug(True, "init__", "")
 
     def objectName(self):
