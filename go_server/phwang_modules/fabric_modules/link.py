@@ -6,7 +6,7 @@ def malloc(link_mgr_val, my_name_val, link_id_val):
     return LinkClass(link_mgr_val, my_name_val, link_id_val)
 
 def malloc_session_mgr(link_val):
-    return go_server.phwang_modules.fabric_modules.session_mgr.malloc(link_val)
+    return self.rootObject().importObject().importSession().malloc(link_val)
 
 class LinkClass(object):
     def __init__(self, link_mgr_val, my_name_val, link_id_val):
@@ -22,7 +22,7 @@ class LinkClass(object):
         self.theReceiveQueue = self.rootObject().mallocQueue()
         self.thePendingSessionSetupQueue = self.rootObject().mallocQueue()
         self.theNameListChanged = True
-        self.theSessionMgrObject = malloc_session_mgr(self)
+        self.theSessionMgrObject = self.rootObject().importObject().importSessionMgr().malloc(self)
         self.debug(True, "init__", "")
 
     def linkTimeoutInterval(self):
