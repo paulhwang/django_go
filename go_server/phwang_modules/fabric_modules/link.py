@@ -7,7 +7,7 @@ def malloc(root_object_val, my_name_val, link_id_val):
 class LinkClass(object):
     def __init__(self, root_object_val, my_name_val, link_id_val):
         self.theRootObject = root_object_val;
-        self.theJointObject = self.importObject().importListMgr().malloc_joint(link_id_val)
+        self.theJointObject = self.importListMgr().malloc_joint(link_id_val)
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
         self.theGlobalSessionId = 1000
@@ -19,7 +19,7 @@ class LinkClass(object):
         self.theReceiveQueue = self.importObject().mallocQueue()
         self.thePendingSessionSetupQueue = self.importObject().mallocQueue()
         self.theNameListChanged = True
-        self.theSessionMgrObject = self.importObject().importListMgr().malloc_mgr(self, 100)
+        self.theSessionMgrObject = self.importListMgr().malloc_mgr(self, 100)
         self.debug(True, "init__", "")
 
     def linkTimeoutInterval(self):
@@ -31,11 +31,14 @@ class LinkClass(object):
     def rootObject(self):
         return self.theRootObject
 
+    def jointObject(self):
+        return self.theJointObject
+
     def importObject(self):
         return self.rootObject().importObject()
 
-    def jointObject(self):
-        return self.theJointObject
+    def importListMgr(self):
+        return self.importObject().importListMgr()
 
     def sessionMgrObject(self):
         return self.theSessionMgrObject
@@ -121,12 +124,12 @@ class LinkClass(object):
     def getPendingSessionData(self):
         data = []
         i = 0
-        session = self.importObject().importListMgr().head(self.sessionMgrObject())
+        session = self.importListMgr().head(self.sessionMgrObject())
         while session:
             if session.transmitQueue().size() > 0:
                 data.append(session.sessionId())
                 i += 1
-            session = self.importObject().importListMgr().next(session)
+            session = self.importListMgr().next(session)
         if i == 0:
             return None
         else:
