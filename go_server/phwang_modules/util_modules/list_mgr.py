@@ -75,9 +75,9 @@ class ListMgrClass(object):
         self.incrementGlobalId()
         return self.globalId()
 
-    def insertEntryToList(self, link_val):
+    def insertEntry(self, link_val):
         if not link_val:
-            self.abend("insertEntryToList", "null link_val")
+            self.abend("insertEntry", "null link_val")
             return
 
         self.abendIt()
@@ -95,12 +95,12 @@ class ListMgrClass(object):
             self.setTail(link_val)
         self.abendIt()
 
-    def deleteEntryFromList(self, link_val):
+    def deleteEntry(self, link_val):
         if self.size() <= 0:
-            self.abend("deleteEntryFromList", "size=%i", self.size())
+            self.abend("deleteEntry", "size=%i", self.size())
             return
         if not self.linkExistInTheList(link_val):
-            self.abend("deleteEntryFromList", "linkExistInTheList is false")
+            self.abend("deleteEntry", "linkExistInTheList is false")
             return
 
         self.abendIt()
@@ -115,6 +115,15 @@ class ListMgrClass(object):
         self.decrementSize()
         self.abendIt()
 
+    def searchId(self, id_val):
+        self.debug(False, "searchId",  "id=%i", id_val)
+        entry = self.head()
+        while entry:
+            if (entry.entryId() == id_val):
+                return entry
+            entry = entry.next()
+        return None
+
     def searchLinkByNameAndLinkId(self, my_name_val, link_id_val):
         self.debug(False, "searchLinkByNameAndLinkId name=%s id=%i", my_name_val, link_id_val)
         link = self.head()
@@ -122,15 +131,6 @@ class ListMgrClass(object):
             if (link.linkId() == link_id_val) and (link.myName() == my_name_val):
                 return link
             link = link.next()
-        return None
-
-    def searchEntryById(self, base_id_val):
-        self.debug(False, "searchEntryById id=%i", base_id_val)
-        base = self.head()
-        while base:
-            if (base.entryId() == base_id_val):
-                return base
-            base = base.next()
         return None
 
     def searchLinkByName(self, my_name_val):

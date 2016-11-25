@@ -36,19 +36,19 @@ class GoRootClass(object):
     def mallocBase(self):
         base_id = self.baseMgrObject().allocId()
         base = self.importObject().importBase().malloc(self, base_id)
-        self.baseMgrObject().insertEntryToList(base)
+        self.baseMgrObject().insertEntry(base)
         self.debug(True, "mallocBase", "base_id=%d", base_id)
         return base_id
 
     def receiveData(self, base_id_val, data_val):
         self.debug(False, "receiveData", "data=%s", data_val)
-        base = self.baseMgrObject().searchEntryById(base_id_val)
+        base = self.baseMgrObject().searchId(base_id_val)
         if not base:
             return
         base.portObject().receiveStringData(data_val)
 
     def transmitData(self, base_id_val):
-        base = self.baseMgrObject().searchEntryById(base_id_val)
+        base = self.baseMgrObject().searchId(base_id_val)
         if not base:
             return None
         return base.portObject().dequeueTransmitData()
