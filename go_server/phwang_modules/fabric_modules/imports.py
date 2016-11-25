@@ -27,6 +27,9 @@ class ImportObject (object):
     def importLinkMgr(self):
         return go_server.phwang_modules.fabric_modules.link_mgr
 
+    def importLink(self):
+        return go_server.phwang_modules.fabric_modules.link
+
     def importClusterMgr(self):
         return go_server.phwang_modules.fabric_modules.cluster_mgr
 

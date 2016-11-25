@@ -55,7 +55,7 @@ class LinkMgrClass(object):
         self.theSize -= 1
 
     def mallocLink(self, my_name_val):
-        link = self.linkModuleMalloc(my_name_val, self.globalLinkId())
+        link = self.rootObject().importObject().importLink().malloc(self, my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
         self.insertLinkToList(link)
         self.setNameListChanged()
