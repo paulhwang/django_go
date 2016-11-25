@@ -65,18 +65,6 @@ class SessionClass(object):
     def receiveRing(self):
         return self.theReceiveRing;
 
-    def prev(self):
-        return self.thePrev
-
-    def setPrev(self, val):
-        self.thePrev = val
-
-    def next(self):
-        return self.theNext
-
-    def setNext(self, val):
-        self.theNext = val
-
     def resetIt(self, link_object_val, session_id_val):
         self.theLinkObject = link_object_val
         self.theSessionId = session_id_val
@@ -85,8 +73,6 @@ class SessionClass(object):
         self.down_seq = 0
         self.theReceiveQueue = self.rootObject().importObject().mallocQueue()
         self.theTransmitQueue = self.rootObject().importObject().mallocQueue()
-        self.thePrev = None
-        self.theNext = None
 
     def enqueueTransmitData(self, data_val):
         self.debug(False, "enqueueTransmitData", data_val)

@@ -19,7 +19,7 @@ class LinkClass(object):
         self.theReceiveQueue = self.rootObject().importObject().mallocQueue()
         self.thePendingSessionSetupQueue = self.rootObject().importObject().mallocQueue()
         self.theNameListChanged = True
-        self.theSessionMgrObject = self.rootObject().importObject().importSessionMgr().malloc(self)
+        self.theSessionMgrObject = self.rootObject().importObject().importListMgr().malloc_mgr(self, 100)
         self.debug(True, "init__", "")
 
     def linkTimeoutInterval(self):
@@ -107,23 +107,23 @@ class LinkClass(object):
         return t
 
     def searchSessionBySessionId(self, session_id_val):
-        return self.sessionMgrObject().searchSessionBySessionId(session_id_val)
+        return self.sessionMgrObject().searchId(session_id_val)
 
     def mallocSession(self):
         session = self.rootObject().importObject().importSession().malloc(self, self.globalSessionId())
         self.incrementGlobalSessionId()
-        self.sessionMgrObject().insertSessionToList(session)
+        self.sessionMgrObject().insertEntry(session)
         return session
 
     def getPendingSessionData(self):
         data = []
         i = 0
-        session = self.sessionMgrObject().head()
+        session = self.rootObject().importObject().importListMgr().head(self.sessionMgrObject())
         while session:
             if session.transmitQueue().size() > 0:
                 data.append(session.sessionId())
                 i += 1
-            session = session.next();
+            session = self.rootObject().importObject().importListMgr().next(session)
         if i == 0:
             return None
         else:

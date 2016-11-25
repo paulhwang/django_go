@@ -6,6 +6,18 @@ def malloc_mgr(host_object_val, global_id_val):
 def malloc_joint(entry_id_val):
     return ListjointClass(entry_id_val)
 
+def head(list_mgr_val):
+    if list_mgr_val == None:
+        return None
+    return list_mgr_val.head()
+
+def next(host_object_val):
+    if host_object_val == None:
+        return None
+    if host_object_val.jointObject().next() == None:
+        return None
+    return host_object_val.jointObject().next().hostObject()
+
 class ListMgrClass(object):
     def __init__(self, host_object_val, global_id_val):
         self.theHostObject = host_object_val;
