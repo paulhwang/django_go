@@ -7,11 +7,7 @@ class SessionMgrClass(object):
         self.theHead = None
         self.theTail = None
         self.theSize = 0
-        self.theGlobalSessionId = 1000
         self.debug(True, "init__", "")
-
-    def sessionModuleMalloc(self, session_id_val):
-        return self.rootObject().importObject().importSession().malloc(self.linkObject(), session_id_val)
 
     def objectName(self):
         return "SessionMgrClass"
@@ -30,12 +26,6 @@ class SessionMgrClass(object):
 
     def utilObject(self):
         return self.rootObject().utilObject()
-
-    def globalSessionId(self):
-        return self.theGlobalSessionId
-
-    def incrementGlobalSessionId(self):
-        self.theGlobalSessionId += 1
 
     def head(self):
         return self.theHead
@@ -57,12 +47,6 @@ class SessionMgrClass(object):
 
     def decrementSize(self):
         self.theSize -= 1
-
-    def mallocSession(self):
-        session = self.sessionModuleMalloc(self.globalSessionId())
-        self.incrementGlobalSessionId()
-        self.insertSessionToList(session)
-        return session
 
     def freeSession(self, session_val):
         self.deleteSessionFromList(session_val)

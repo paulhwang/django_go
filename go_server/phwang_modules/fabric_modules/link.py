@@ -10,6 +10,7 @@ class LinkClass(object):
         self.theJointObject = self.rootObject().importObject().importListMgr().malloc_joint(link_id_val)
         self.theMyName = my_name_val
         self.theLinkId = link_id_val
+        self.theGlobalSessionId = 1000
         self.theKeepAliveTimer = None
         self.thePrev = None
         self.theNext = None
@@ -50,6 +51,12 @@ class LinkClass(object):
 
     def setMyName(self, val):
         self.theMyName = val
+
+    def globalSessionId(self):
+        return self.theGlobalSessionId
+
+    def incrementGlobalSessionId(self):
+        self.theGlobalSessionId += 1
 
     def keepAliveTimer(self):
         return self.theKeepAliveTimer
@@ -103,7 +110,10 @@ class LinkClass(object):
         return self.sessionMgrObject().searchSessionBySessionId(session_id_val)
 
     def mallocSession(self):
-        return self.sessionMgrObject().mallocSession()
+        session = self.rootObject().importObject().importSession().malloc(self, self.globalSessionId())
+        self.incrementGlobalSessionId()
+        self.sessionMgrObject().insertSessionToList(session)
+        return session
 
     def getPendingSessionData(self):
         data = []
