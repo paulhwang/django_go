@@ -34,10 +34,9 @@ class GoRootClass(object):
         return go_server.phwang_modules.util_modules.ring.malloc(self)
 
     def mallocBase(self):
-        base_id = self.baseMgrObject().allocId()
-        base = self.importObject().importBase().malloc(self, base_id)
+        base = self.importObject().importBase().malloc(self, self.baseMgrObject().allocId())
         self.baseMgrObject().insertEntry(base)
-        self.debug(True, "mallocBase", "base_id=%d", base.baseId())
+        self.debug(False, "mallocBase", "baseId=%d", base.baseId())
         return base.baseId()
 
     def receiveData(self, base_id_val, data_val):
