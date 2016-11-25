@@ -11,8 +11,8 @@ class ClusterClass(object):
         self.theSessionArray = [None] * 2
         self.theSessionArray[0] = session_val
         self.theSessionArrayLength = 1
-        self.theReceiveQueue = self.rootObject().mallocQueue()
-        self.theTransmitQueue = self.rootObject().mallocQueue()
+        self.theReceiveQueue = self.rootObject().importObject().mallocQueue()
+        self.theTransmitQueue = self.rootObject().importObject().mallocQueue()
         self.theNext = None
         self.thePrev = None
         self.theTopicBaseId = 0

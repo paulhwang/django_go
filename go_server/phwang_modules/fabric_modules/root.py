@@ -31,12 +31,6 @@ class RootClass(object):
     def ajaxObject(self):
         return self.theAjaxObject
 
-    def mallocQueue(self):
-        return go_server.phwang_modules.util_modules.queue.malloc(self)
-
-    def mallocRing(self):
-        return go_server.phwang_modules.util_modules.ring.malloc(self)
-
     def topicMallocBase(self):
         return go_server.phwang_modules.go_modules.go_root.malloc_base()
 

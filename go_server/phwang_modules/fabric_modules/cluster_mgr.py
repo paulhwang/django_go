@@ -5,7 +5,7 @@ class ClusterMgrClass(object):
     def __init__(self, root_object_val):
         self.theRootObject = root_object_val
         self.theGlobalClusterId = 100
-        self.theClusterQueue = self.rootObject().mallocQueue()
+        self.theClusterQueue = self.rootObject().importObject().mallocQueue()
         self.debug(True, "init__", "")
 
     def clusterModuleMalloc(self, topic_data_val, session_val):
