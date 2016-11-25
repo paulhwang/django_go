@@ -37,8 +37,14 @@ class ImportObject (object):
     def importSessionMgr(self):
         return go_server.phwang_modules.fabric_modules.session_mgr
 
+    def importSession(self):
+        return go_server.phwang_modules.fabric_modules.session
+
     def importClusterMgr(self):
         return go_server.phwang_modules.fabric_modules.cluster_mgr
+
+    def importCluster(self):
+        return go_server.phwang_modules.fabric_modules.cluster
 
     def importLogit(self):
         return go_server.phwang_modules.util_modules.logit

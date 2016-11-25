@@ -1,10 +1,5 @@
-import go_server.phwang_modules.fabric_modules.session
-
 def malloc(link_val):
     return SessionMgrClass(link_val)
-
-def malloc_session(session_mgr_val, session_id_val):
-    return go_server.phwang_modules.fabric_modules.session.malloc(session_mgr_val, session_id_val)
 
 class SessionMgrClass(object):
     def __init__(self, link_val):
@@ -16,7 +11,7 @@ class SessionMgrClass(object):
         self.debug(True, "init__", "")
 
     def sessionModuleMalloc(self, session_id_val):
-        return malloc_session(self, session_id_val)
+        return self.rootObject().importObject().importSession().malloc(self, session_id_val)
 
     def objectName(self):
         return "SessionMgrClass"
