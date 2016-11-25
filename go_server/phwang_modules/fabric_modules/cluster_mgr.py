@@ -1,10 +1,5 @@
-import go_server.phwang_modules.fabric_modules.cluster
-
 def malloc(root_object_val):
     return ClusterMgrClass(root_object_val)
-
-def malloc_cluster(cluster_mgr_val, topic_data_val, session_val):
-    return go_server.phwang_modules.fabric_modules.cluster.malloc(cluster_mgr_val, topic_data_val, session_val)
 
 class ClusterMgrClass(object):
     def __init__(self, root_object_val):
@@ -14,7 +9,7 @@ class ClusterMgrClass(object):
         self.debug(True, "init__", "")
 
     def clusterModuleMalloc(self, topic_data_val, session_val):
-        return malloc_cluster(self, topic_data_val, session_val)
+        return self.rootObject().importObject().importCluster().malloc(self, topic_data_val, session_val)
 
     def objectName(self):
         return "ClusterMgrClass"
