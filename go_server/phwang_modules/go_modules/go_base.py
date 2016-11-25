@@ -45,18 +45,6 @@ class GoBaseObject(object):
     def entryId(self):
         return self.baseId()
 
-    def prev(self):
-        return self.thePrev
-
-    def setPrev(self, val):
-        self.thePrev = val
-
-    def next(self):
-        return self.theNext
-
-    def setNext(self, val):
-        self.theNext = val
-
     def getOppositeColor(self, color_val):
         if color_val == self.BLACK_STONE():
             return self.WHITE_STONE()

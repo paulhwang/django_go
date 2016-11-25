@@ -84,14 +84,14 @@ class ListMgrClass(object):
 
         self.incrementSize()
         if not self.head():
-            link_val.setPrev(None)
-            link_val.setNext(None)
+            link_val.jointObject().setPrev(None)
+            link_val.jointObject().setNext(None)
             self.setHead(link_val)
             self.setTail(link_val)
         else:
-            self.tail().setNext(link_val)
-            link_val.setPrev(self.tail())
-            link_val.setNext(None)
+            self.tail().jointObject().setNext(link_val)
+            link_val.jointObject().setPrev(self.tail())
+            link_val.jointObject().setNext(None)
             self.setTail(link_val)
         self.abendIt()
 
@@ -104,14 +104,14 @@ class ListMgrClass(object):
             return
 
         self.abendIt()
-        if link_val.prev():
-            link_val.prev().setNext(link_val.next())
+        if link_val.jointObject().prev():
+            link_val.jointObject().prev().jointObject().setNext(link_val.next())
         else:
-            self.setHead(link_val.next())
-        if link_val.next():
-            link_val.next().setPrev(link_val.prev())
+            self.setHead(link_val.jointObject().next())
+        if link_val.jointObject().next():
+            link_val.jointObject().next().jointObject().setPrev(link_val.jointObject().prev())
         else:
-            self.setTail(link_val.prev())
+            self.setTail(link_val.jointObject().prev())
         self.decrementSize()
         self.abendIt()
 
@@ -168,7 +168,7 @@ class ListMgrClass(object):
         i = 0;
         link = self.head()
         while link:
-            link = link.next()
+            link = link.jointObject().next()
             i += 1
         if i != self.size():
             self.abend("abendIt", "head: size=%i i=%i", self.size(), i)
@@ -176,7 +176,7 @@ class ListMgrClass(object):
         i = 0
         link = self.tail()
         while link:
-            link = link.prev()
+            link = link.jointObject().prev()
             i += 1
         if i != self.size():
             self.abend("abendIt", "tail: size=%i i=%i", self.size(), i)
