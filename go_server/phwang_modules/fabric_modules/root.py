@@ -5,12 +5,14 @@ import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.util_modules.queue
 import go_server.phwang_modules.fabric_modules.ajax
 import go_server.phwang_modules.go_modules.go_root
+import go_server.phwang_modules.fabric_modules.imports
 
 def process_ajax_input(request_val):
     return the_root_object.ajaxObject().processInput(request_val)
 
 class RootClass(object):
     def __init__(self):
+        self.theImportObject = go_server.phwang_modules.fabric_modules.imports.malloc(self)
         self.theLinkMgrObject = go_server.phwang_modules.fabric_modules.link_mgr.malloc(self)
         self.theClusterMgrObject = go_server.phwang_modules.fabric_modules.cluster_mgr.malloc(self)
         self.theSwitchObject = go_server.phwang_modules.fabric_modules.switch.malloc(self)
@@ -22,6 +24,9 @@ class RootClass(object):
 
     def linkMgrObject(self):
         return self.theLinkMgrObject
+
+    def importObject(self):
+        return self.theImportObject
 
     def clusterMgrObject(self):
         return self.theClusterMgrObject
