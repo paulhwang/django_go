@@ -3,11 +3,6 @@ import go_server.phwang_modules.util_modules.logit
 def malloc_mgr(host_object_val, global_id_val):
     return ListMgrClass(host_object_val, global_id_val)
 
-def malloc_mgr_(host_object_val, global_id_val, name_val):
-    list_mgr = ListMgrClass(host_object_val, global_id_val)
-    list_mgr.setName(name_val)
-    return list_mgr
-
 def malloc_joint(entry_id_val):
     return ListjointClass(entry_id_val)
 
@@ -70,12 +65,6 @@ class ListMgrClass(object):
 
     def incrementGlobalId(self):
         self.theGlobalId += 1
-
-    def name(self):
-        return self.theName
-
-    def setName(self, val):
-        self.theName = val
 
     def allocId(self):
         self.incrementGlobalId()
