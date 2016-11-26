@@ -41,9 +41,6 @@ class LinkMgrClass(object):
     def decrementSize(self):
         self.theSize -= 1
 
-    def freeLink(self, link_val):
-        self.deleteLinkFromList(link_val)
-
     def insertLinkToList(self, link_val):
         if not link_val:
             self.abend("enQueue", "null link_val")
@@ -118,20 +115,6 @@ class LinkMgrClass(object):
                 return True
             link = link.next()
         return False
-
-    def setNameListChanged(self):
-        link = self.head()
-        while link:
-            link.setNameListChanged()
-            link = link.next()
-
-    def getNameList(self):
-        name_array = []
-        link = self.head()
-        while link:
-            name_array.append(link.myName())
-            link = link.next()
-        return name_array
 
     def abendIt(self):
         i = 0;

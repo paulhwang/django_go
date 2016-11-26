@@ -140,7 +140,7 @@ class SwitchClass(object):
 
         link.clearNameListChanged()
         output = json.dumps({"link_id": link.linkId(),
-                                "name_list": self.linkMgrObject().getNameList(),
+                                "name_list": self.baseObject().getNameList(),
                                 });
         self.debug_(True, self.debugOutput(), "getNameList", "output=%s", output)
         return output

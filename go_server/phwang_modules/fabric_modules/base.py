@@ -29,21 +29,21 @@ class BaseClass(object):
         link = self.rootObject().importObject().importLink().malloc(self.rootObject(), my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
         self.linkMgrObject().insertLinkToList(link)
-        self.linkMgrObject().setNameListChanged()
+        self.setNameListChanged()
         return link
 
     def freeLink(self, link_val):
         self.linkMgrObject().deleteLinkFromList(link_val)
 
     def setNameListChanged(self):
-        link = self.head()
+        link = self.linkMgrObject().head()
         while link:
             link.setNameListChanged()
             link = link.next()
 
     def getNameList(self):
         name_array = []
-        link = self.head()
+        link = self.linkMgrObject().head()
         while link:
             name_array.append(link.myName())
             link = link.next()
