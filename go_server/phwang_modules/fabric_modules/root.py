@@ -7,6 +7,7 @@ def process_ajax_input(request_val):
 class RootClass(object):
     def __init__(self):
         self.theImportObject = go_server.phwang_modules.fabric_modules.imports.malloc(self)
+        self.theBaseObject = self.importObject().importBase().malloc(self)
         self.theLinkMgrObject = self.importObject().importLinkMgr().malloc(self)
         self.theClusterMgrObject = self.importObject().importClusterMgr().malloc(self)
         self.theSwitchObject = self.importObject().importSwitch().malloc(self)
@@ -15,6 +16,9 @@ class RootClass(object):
 
     def objectName(self):
         return "RootClass"
+
+    def baseObject(self):
+        return self.theBaseObject
 
     def linkMgrObject(self):
         return self.theLinkMgrObject

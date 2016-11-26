@@ -2,6 +2,7 @@ import go_server.phwang_modules.util_modules.logit
 import go_server.phwang_modules.util_modules.list_mgr
 import go_server.phwang_modules.util_modules.queue
 import go_server.phwang_modules.util_modules.ring
+import go_server.phwang_modules.fabric_modules.base
 import go_server.phwang_modules.fabric_modules.link_mgr
 import go_server.phwang_modules.fabric_modules.link
 import go_server.phwang_modules.fabric_modules.cluster_mgr
@@ -20,6 +21,9 @@ class ImportObject (object):
 
     def rootObject(self):
         return self.theRootObject
+
+    def importBase(self):
+        return go_server.phwang_modules.fabric_modules.base
 
     def importSwitch(self):
         return go_server.phwang_modules.fabric_modules.switch
