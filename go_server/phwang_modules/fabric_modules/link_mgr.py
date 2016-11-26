@@ -6,7 +6,6 @@ def malloc(root_object_val):
 class LinkMgrClass(object):
     def __init__(self, root_object_val):
         self.theRootObject = root_object_val
-        self.theGlobalLinkId = 10
         self.theHead = None
         self.theTail = None
         self.theSize = 0
@@ -20,12 +19,6 @@ class LinkMgrClass(object):
 
     def utilObject(self):
         return self.rootObject().utilObject()
-
-    def globalLinkId(self):
-        return self.theGlobalLinkId
-
-    def incrementGlobalLinkId(self):
-        self.theGlobalLinkId += 1
 
     def head(self):
         return self.theHead

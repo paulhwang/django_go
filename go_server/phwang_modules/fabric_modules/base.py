@@ -35,13 +35,13 @@ class BaseClass(object):
     def freeLink(self, link_val):
         self.linkMgrObject().deleteLinkFromList(link_val)
 
-    def setNameListChanged_________(self):
+    def setNameListChanged(self):
         link = self.head()
         while link:
             link.setNameListChanged()
             link = link.next()
 
-    def getNameList____________(self):
+    def getNameList(self):
         name_array = []
         link = self.head()
         while link:
