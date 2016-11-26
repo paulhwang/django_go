@@ -5,6 +5,7 @@ class BaseClass(object):
     def __init__(self, root_object_val):
         self.theRootObject = root_object_val
         self.theGlobalLinkId = 10
+        self.theNameListChanged = False
         self.debug(True, "init__", "")
 
     def objectName(self):
@@ -28,7 +29,7 @@ class BaseClass(object):
     def mallocLink(self, my_name_val):
         link = self.rootObject().importObject().importLink().malloc(self.rootObject(), my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
-        self.linkMgrObject().insertLinkToList(link)
+        self.linkMgrObject().insertEntry(link)
         self.setNameListChanged()
         return link
 

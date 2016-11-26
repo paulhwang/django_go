@@ -3,7 +3,6 @@ import go_server.phwang_modules.util_modules.list_mgr
 import go_server.phwang_modules.util_modules.queue
 import go_server.phwang_modules.util_modules.ring
 import go_server.phwang_modules.fabric_modules.base
-import go_server.phwang_modules.fabric_modules.link_mgr
 import go_server.phwang_modules.fabric_modules.link
 import go_server.phwang_modules.fabric_modules.cluster_mgr
 import go_server.phwang_modules.fabric_modules.cluster
@@ -30,9 +29,6 @@ class ImportObject (object):
 
     def importAjax(self):
         return go_server.phwang_modules.fabric_modules.ajax
-
-    def importLinkMgr(self):
-        return go_server.phwang_modules.fabric_modules.link_mgr
 
     def importLink(self):
         return go_server.phwang_modules.fabric_modules.link

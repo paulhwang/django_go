@@ -183,7 +183,7 @@ class SwitchClass(object):
         return output
 
     def getSessionObject(self, go_request):
-        link = self.linkMgrObject().searchLinkByLinkId(go_request.get("link_id"))
+        link = self.linkMgrObject().searchId(go_request.get("link_id"))
         if not link:
             self.logit("getSessionObject", "link not found: link_id=%i", go_request.gt("link_id"))
             return None

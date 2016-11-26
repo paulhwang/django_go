@@ -8,7 +8,7 @@ class RootClass(object):
     def __init__(self):
         self.theImportObject = go_server.phwang_modules.fabric_modules.imports.malloc(self)
         self.theBaseObject = self.importObject().importBase().malloc(self)
-        self.theLinkMgrObject = self.importObject().importLinkMgr().malloc(self)
+        self.theLinkMgrObject = self.importObject().importListMgr().malloc_mgr(self, 0)
         self.theClusterMgrObject = self.importObject().importClusterMgr().malloc(self)
         self.theSwitchObject = self.importObject().importSwitch().malloc(self)
         self.theAjaxObject = self.importObject().importAjax().malloc(self)
