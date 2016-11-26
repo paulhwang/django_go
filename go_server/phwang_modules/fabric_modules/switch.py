@@ -30,6 +30,9 @@ class SwitchClass(object):
     def linkMgrObject(self):
         return self.rootObject().linkMgrObject()
 
+    def clusterBaseObject(self):
+        return self.rootObject().clusterBaseObject()
+
     def clusterMgrObject(self):
         return self.rootObject().clusterMgrObject()
 
@@ -154,7 +157,7 @@ class SwitchClass(object):
         if not session:
             return None
 
-        cluster = self.clusterMgrObject().mallocCluster(go_request.get("topic_data"), session)
+        cluster = self.clusterBaseObject().mallocCluster(go_request.get("topic_data"), session)
         if not cluster:
             return None
 

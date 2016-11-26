@@ -4,7 +4,7 @@ import go_server.phwang_modules.util_modules.queue
 import go_server.phwang_modules.util_modules.ring
 import go_server.phwang_modules.fabric_modules.base
 import go_server.phwang_modules.fabric_modules.link
-import go_server.phwang_modules.fabric_modules.cluster_mgr
+import go_server.phwang_modules.fabric_modules.cluster_base
 import go_server.phwang_modules.fabric_modules.cluster
 import go_server.phwang_modules.fabric_modules.switch
 import go_server.phwang_modules.fabric_modules.session
@@ -36,8 +36,8 @@ class ImportObject (object):
     def importSession(self):
         return go_server.phwang_modules.fabric_modules.session
 
-    def importClusterMgr(self):
-        return go_server.phwang_modules.fabric_modules.cluster_mgr
+    def importClusterBase(self):
+        return go_server.phwang_modules.fabric_modules.cluster_base
 
     def importCluster(self):
         return go_server.phwang_modules.fabric_modules.cluster

@@ -9,7 +9,8 @@ class RootClass(object):
         self.theImportObject = go_server.phwang_modules.fabric_modules.imports.malloc(self)
         self.theBaseObject = self.importObject().importBase().malloc(self)
         self.theLinkMgrObject = self.importObject().importListMgr().malloc_mgr(self, 0)
-        self.theClusterMgrObject = self.importObject().importClusterMgr().malloc(self)
+        self.theClusterBaseObject = self.importObject().importClusterBase().malloc(self)
+        self.theClusterMgrObject = self.importObject().importListMgr().malloc_mgr(self, 0)
         self.theSwitchObject = self.importObject().importSwitch().malloc(self)
         self.theAjaxObject = self.importObject().importAjax().malloc(self)
         self.debug(True, "init__", "")
@@ -25,6 +26,9 @@ class RootClass(object):
 
     def importObject(self):
         return self.theImportObject
+
+    def clusterBaseObject(self):
+        return self.theClusterBaseObject
 
     def clusterMgrObject(self):
         return self.theClusterMgrObject
