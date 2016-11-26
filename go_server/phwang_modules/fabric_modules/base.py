@@ -16,6 +16,9 @@ class BaseClass(object):
     def utilObject(self):
         return self.rootObject().utilObject()
 
+    def linkMgrObject(self):
+        return self.rootObject().linkMgrObject()
+
     def globalLinkId(self):
         return self.theGlobalLinkId
 
@@ -25,20 +28,20 @@ class BaseClass(object):
     def mallocLink(self, my_name_val):
         link = self.rootObject().importObject().importLink().malloc(self.rootObject(), my_name_val, self.globalLinkId())
         self.incrementGlobalLinkId()
-        self.insertLinkToList(link)
-        self.setNameListChanged()
+        self.linkMgrObject().insertLinkToList(link)
+        self.linkMgrObject().setNameListChanged()
         return link
 
     def freeLink(self, link_val):
-        self.deleteLinkFromList(link_val)
+        self.linkMgrObject().deleteLinkFromList(link_val)
 
-    def setNameListChanged(self):
+    def setNameListChanged_________(self):
         link = self.head()
         while link:
             link.setNameListChanged()
             link = link.next()
 
-    def getNameList(self):
+    def getNameList____________(self):
         name_array = []
         link = self.head()
         while link:

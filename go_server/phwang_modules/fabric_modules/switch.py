@@ -24,6 +24,9 @@ class SwitchClass(object):
     def rootObject(self):
         return self.theRootObject
 
+    def baseObject(self):
+        return self.rootObject().baseObject()
+
     def linkMgrObject(self):
         return self.rootObject().linkMgrObject()
 
@@ -68,7 +71,7 @@ class SwitchClass(object):
             return None
 
     def setupLink(self, go_request):
-        link = self.linkMgrObject().mallocLink(go_request.get("my_name"))
+        link = self.baseObject().mallocLink(go_request.get("my_name"))
         if not link:
             self.abend("setupLink", "null link")
             return None

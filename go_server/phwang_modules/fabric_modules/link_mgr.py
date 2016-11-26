@@ -48,13 +48,6 @@ class LinkMgrClass(object):
     def decrementSize(self):
         self.theSize -= 1
 
-    def mallocLink(self, my_name_val):
-        link = self.rootObject().importObject().importLink().malloc(self.rootObject(), my_name_val, self.globalLinkId())
-        self.incrementGlobalLinkId()
-        self.insertLinkToList(link)
-        self.setNameListChanged()
-        return link
-
     def freeLink(self, link_val):
         self.deleteLinkFromList(link_val)
 
