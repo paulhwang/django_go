@@ -33,4 +33,5 @@ def utilLogit(str12, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8
 
 
 def utilAbend(str12, str3 = "", str4 = "", str5 = "", str6 = "", str7 = "", str8 = "", str9 = "", str10 = "", str11 = ""):
-    utilLogit("Abend " + str12, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+    utilLogit("***abend: " + str12, str3, str4, str5, str6, str7, str8, str9, str10, str11)
+    logger.error("***abend: ", junk)
